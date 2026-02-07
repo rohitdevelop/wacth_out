@@ -11,7 +11,7 @@ const page = () => {
           Aliquid minus provident reiciendis libero nulla temporibus, explicabo
           amet eligendi dignissimos eos soluta, ab reprehenderit, eius molestiae
           unde recusandae incidunt a excepturi! Neque at repudiandae est ullam
-          odit.cbnvcn
+          odit.cbnvcncbcv
         </p>
       </div>
     </div>
