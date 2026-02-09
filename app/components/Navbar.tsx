@@ -43,11 +43,11 @@ const Navbar = () => {
           </h1>
 
           {/* DESKTOP MENU */}
-          <ul className="hidden md:flex space-x-6 font-medium">
+          <ul className="hidden md:flex space-x-3 font-medium">
             {["Home", "Shop", "Sell", "About", "Contact"].map((item) => (
               <li
                 key={item}
-                className="relative px-4 py-2 text-gray-200 overflow-hidden group cursor-pointer"
+                className="relative px-2 py-2 text-gray-200 overflow-hidden group cursor-pointer"
               >
                 <span className="relative z-10 transition-all duration-300 group-hover:-translate-y-12 inline-block">
                   {item}
