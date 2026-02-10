@@ -71,54 +71,33 @@ const Home = () => {
         </div>
       </section>
 
- <section className="min-h-screen">
-  {/* Section 1 */}
-  <div className="flex flex-col lg:flex-row items-center">
-    
-    {/* Left — Spline */}
-    <div className="w-full lg:w-1/2 h-[70vh] ">
-      <Spline scene="https://prod.spline.design/G4Hgw7ruqJepTCl9/scene.splinecode" />
-    </div>
+      <section className="min-h-screen text-center flex flex-col justify-center items-center">
+        {/* Section 1 */}
+        <div className="flex flex-col lg:flex-row items-center w-7xl">
+          <div className="w-full lg:w-1/2 h-[70vh] ">
+            <Spline scene="https://prod.spline.design/G4Hgw7ruqJepTCl9/scene.splinecode" />
+          </div>
 
-    {/* Right — Text */}
-    <div className="w-full lg:w-1/2 px-8 lg:px-16 py-10">
-      <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-        Timeless Precision Watches
-      </h2>
+          <div className="w-full lg:w-1/2 px-8 lg:px-16 py-10">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              Timeless Precision Watches
+            </h2>
 
-      <p className="text-lg text-gray-600 leading-relaxed">
-        Experience the perfect blend of innovation, craftsmanship, and luxury.
-        Our premium watch collection is designed for those who value precision,
-        performance, and timeless elegance. Every detail is carefully engineered
-        to deliver unmatched comfort and sophisticated style for everyday wear.
-      </p>
-    </div>
-  </div>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Experience the perfect blend of innovation, craftsmanship, and
+              luxury. Our premium watch collection is designed for those who
+              value precision, performance, and timeless elegance. Every detail
+              is carefully engineered to deliver unmatched comfort and
+              sophisticated style for everyday wear.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  {/* Section 2 */}
-<div className="flex flex-col lg:flex-row items-center w-full min-h-screen bg-black ">
 
-  {/* Left — Text */}
-  <div className="w-full lg:w-1/2 px-8 lg:px-16 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
-    <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-      Designed for Modern Lifestyle
-    </h2>
 
-    <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-      Crafted with premium materials and advanced technology, our watches are
-      built to complement both professional and casual lifestyles. Elevate
-      your presence with a design that speaks confidence, durability, and
-      refined aesthetics.
-    </p>
-  </div>
 
-  {/* Right — Spline */}
-  <div className="w-full lg:w-1/2 h-[70vh] lg:h-screen flex items-center justify-center">
-    <Spline scene="https://prod.spline.design/YI3wyyAfwxlBhqqb/scene.splinecode" />
-  </div>
-</div>
-
-</section>
+ 
 
 
 
@@ -138,25 +117,53 @@ const Home = () => {
 
 
 
- {/* <footer>
-         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam
-          excepturi similique porro. Quod officia hic obcaecati soluta
-          inventore, consequuntur perspiciatis nulla aliquam voluptates esse
-          facere alias nesciunt labore accusamus amet quas praesentium ullam.
-          Modi obcaecati atque suscipit quam nesciunt dolor nam nostrum minima
-          tenetur error accusamus eveniet rem vel, totam deserunt explicabo
-          dignissimos dicta illum repellat iusto. Quod dolores aspernatur
-          debitis ducimus odio neque. Vitae laboriosam numquam incidunt, rerum
-          quisquam pariatur, ut culpa laborum eaque voluptatibus architecto
-          cupiditate vel?
-        </p>
 
-        <img
-          src="https://media.istockphoto.com/id/177547733/photo/wrist-watch.jpg?s=612x612&w=0&k=20&c=XwYy2SHk68baSF-iK104tAHEm2Jio5idYnriPYmkgHI="
-          className="w-full h-96 object-cover "
+
+
+
+
+
+      <footer className="relative bg-black overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-rfrom-transparent via-[#00ff00] to-transparent opacity-50"></div>
+
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 opacity-20">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+          linear-gradient(#00ff00 1px, transparent 1px),
+          linear-gradient(90deg, #00ff00 1px, transparent 1px)
+        `,
+              backgroundSize: "50px 50px",
+            }}
+          />
+        </div>
+
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px]
+                  bg-[#00ff00] opacity-5 blur-[150px] rounded-full"
         />
-  </footer> */}
+
+        {/* Massive Background Text */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+          <h1
+            className="text-[10vw] lg:text-[15vw] font-black 
+                   text-transparent bg-clip-text bg-gradient-to-b
+                   from-white/10 to-transparent select-none 
+                   whitespace-nowrap"
+          >
+            ArventoChrono
+          </h1>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-12"></div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-rfrom-transparent via-[#00ff00] to-transparent opacity-50"></div>
+      </footer>
     </div>
   );
 };
