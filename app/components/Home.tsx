@@ -6,6 +6,7 @@ import Footer from "./Home/Footer";
 import Hero from "./Home/Hero";
 import Product from "./Home/Product";
 import Category from "./Home/Category";
+import Video from "./Home/Video";
 const Home = () => {
   return (
     <div className="bg-black text-white min-h-screen flex flex-col pt-24">
@@ -15,7 +16,7 @@ const Home = () => {
       <Product />
  <Category />
        {/* make a your spline sections make it more batter ............................. */}
-
+<Video/>
       <Footer />
     </div>
   );
