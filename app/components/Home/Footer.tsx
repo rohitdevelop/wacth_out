@@ -63,8 +63,8 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Shop</h3>
             <ul className="space-y-3 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Men's Watches</a></li>
-              <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Women's Watches</a></li>
+              <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Men Watches</a></li>
+              <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Women Watches</a></li>
               <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Limited Edition</a></li>
               <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">New Arrivals</a></li>
               <li><a href="#" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Sale</a></li>
