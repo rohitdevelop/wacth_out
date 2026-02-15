@@ -37,11 +37,8 @@ const Information = () => {
           </div>
 
           <div className="h-[200px] overflow-hidden rounded-xl">
-            <img
-              src="https://images.pexels.com/photos/34341284/pexels-photo-34341284.jpeg"
-              alt="img4"
-              className="w-full h-full object-cover"
-            />
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsRYhIY26pCgMlmwJHn63aqo9TLNFBIsGBbw&amp;s"   className="w-full h-full object-cover"             alt="img4"
+         ></img>
           </div>
 
           <div className="col-span-2 h-[200px] overflow-hidden rounded-xl">
@@ -66,7 +63,7 @@ const Information = () => {
 
           <div className="h-[200px] overflow-hidden rounded-xl">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTJCo4rz9vNJl0j09E5p4O9Mt6KMnl1UurbpqKk9hoyg"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7zEhy-aNYn8bwFLaQ6Qm5lI9uDBSa1hJ_9w&amp;s" 
               alt="img6"
               className="w-full h-full object-cover"
             />
@@ -74,7 +71,7 @@ const Information = () => {
 
           <div className="row-span-2 h-[420px] overflow-hidden rounded-xl">
             <video
-              src="/videos/watch-home.mp4"
+              src="/videos/watch-home2.mp4"
               autoPlay
               loop
               muted
@@ -84,8 +81,7 @@ const Information = () => {
           </div>
 
           <div className="h-[200px] overflow-hidden rounded-xl">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTJCo4rz9vNJl0j09E5p4O9Mt6KMnl1UurbpqKk9hoyg"
+            <img src="https://cdn.prod.website-files.com/63b937f7cb69a848fab5e097/675aabc6b7168d05ec87c646_6615321c02cdb7f7495b767d_Number%25201.jpeg" 
               alt="img7"
               className="w-full h-full object-cover"
             />
@@ -95,11 +91,47 @@ const Information = () => {
       </div>
     </section>
 
-    <section>
-        <div className="max-w-7xl mx-auto px-6 py-12">
-            
-        </div>
-    </section>
+<section className="relative w-full h-[1100px]">
+
+  {/* Background Image */}
+  <img
+    src="https://www.lepage.fr/75894-zoom_default/hublot-big-bang-unico-dark-green-ceramic-automatic-watch-skeleton-dial-orange-rubber-strap-42-mm.jpg"
+    alt="Luxury Watch"
+    className="absolute inset-0 w-full h-full pt-10 object-cover"
+  />
+
+  {/* Dark Overlay */}
+ 
+  {/* Content */}
+  <div className="relative z-10 pt-5 h-full text-center text-white px-6">
+
+ <div className="absolute inset-0 pointer-events-none overflow-hidden">
+  <h1
+    className="text-[8rem] sm:text-[10rem] md:text-[10rem] font-extrabold whitespace-nowrap text-white"
+    style={{ letterSpacing: "-0.05em" }}
+  >
+    TIME IS LUXURY
+  </h1>
+</div>
+
+    <div className="flex flex-col items-center justify-center mt-[700px]">
+
+ <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl">
+      Discover precision, elegance and timeless craftsmanship.
+      Elevate your style with iconic performance.
+    </p>
+
+    <button className="mt-15 px-8 py-3 font-semibold tracking-wider bg-white  text-black hover:bg-gray-200">
+      SHOP NOW
+    </button>
+    </div>
+
+  </div>
+ 
+   
+ 
+</section>
+
        </div>
   );
 };
