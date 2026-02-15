@@ -34,3 +34,8 @@ const Hero = () => {
 }
 
 export default Hero
+
+
+{/* <img src="https://www.luxurybazaar.com/grey-market/wp-content/uploads/2024/05/Green-Hublot-Big-Bang-Unico-Saxem-1024x768.jpg"  alt="img1" className="w-full h-full object-cover" /> */}
+
+// <img src="https://www.lepage.fr/75894-zoom_default/hublot-big-bang-unico-dark-green-ceramic-automatic-watch-skeleton-dial-orange-rubber-strap-42-mm.jpg" alt="img1" className="w-full h-full object-cover" />

@@ -260,111 +260,223 @@
 
 
 
-"use client"
-import React, { useEffect, useState } from "react"
+// "use client"
+// import React, { useEffect, useState } from "react"
+
+// const categories = [
+//   { id: 1, title: "Luxury Watches", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30" },
+//   { id: 2, title: "Smart Watches", img: "https://images.unsplash.com/photo-1511732351157-1865efcb7b7e" },
+//   { id: 3, title: "Classic Edition", img: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5" },
+//   { id: 4, title: "Sport Series", img: "https://images.unsplash.com/photo-1526045612212-70caf35c14df" },
+//   { id: 5, title: "Minimal Design", img: "https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6" },
+//   { id: 6, title: "Limited Edition", img: "https://images.unsplash.com/photo-1484704849700-f032a568e944" },
+// ]
+
+// export default function Category() {
+//   const [current, setCurrent] = useState(0)
+
+//   // ✅ Auto Slide
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCurrent((prev) => (prev + 1) % categories.length)
+//     }, 4000)
+
+//     return () => clearInterval(interval)
+//   }, [])
+
+//   const prevSlide = () => {
+//     setCurrent((prev) =>
+//       prev === 0 ? categories.length - 1 : prev - 1
+//     )
+//   }
+
+//   const nextSlide = () => {
+//     setCurrent((prev) => (prev + 1) % categories.length)
+//   }
+
+//   const prevIndex =
+//     current === 0 ? categories.length - 1 : current - 1
+//   const nextIndex =
+//     (current + 1) % categories.length
+
+//   return (
+//     <section className="bg-black py-16 text-white overflow-hidden">
+//       <div className="max-w-6xl mx-auto px-4">
+
+//         {/* Heading */}
+//         <div className="text-center mb-12">
+//           <h2 className="text-4xl font-bold">
+//             Explore Categories
+//           </h2>
+//         </div>
+
+//         {/* Carousel */}
+//         <div className="relative flex items-center justify-center h-[450px]">
+
+//           {/* Left Card */}
+//           <div
+//             onClick={prevSlide}
+//             className="hidden md:block absolute left-0 cursor-pointer opacity-40 hover:opacity-70 transition-all duration-500"
+//           >
+//             <img
+//               src={`${categories[prevIndex].img}?auto=format&fit=crop&w=800&q=80`}
+//               alt=""
+//               className="w-[200px] h-[300px] object-cover rounded-xl"
+//             />
+//           </div>
+
+//           {/* Center Card */}
+//           <div className="z-20 transition-all duration-700 ease-in-out">
+//             <img
+//               src={`${categories[current].img}?auto=format&fit=crop&w=1000&q=90`}
+//               alt=""
+//               className="w-[320px] md:w-[400px] h-[400px] object-cover rounded-2xl shadow-2xl"
+//             />
+//             <h3 className="text-center text-2xl mt-4 font-semibold">
+//               {categories[current].title}
+//             </h3>
+//           </div>
+
+//           {/* Right Card */}
+//           <div
+//             onClick={nextSlide}
+//             className="hidden md:block absolute right-0 cursor-pointer opacity-40 hover:opacity-70 transition-all duration-500"
+//           >
+//             <img
+//               src={`${categories[nextIndex].img}?auto=format&fit=crop&w=800&q=80`}
+//               alt=""
+//               className="w-[200px] h-[300px] object-cover rounded-xl"
+//             />
+//           </div>
+
+//           {/* Arrows */}
+//           <button
+//             onClick={prevSlide}
+//             className="absolute left-2 md:left-6 bg-white/10 p-3 rounded-full"
+//           >
+//             ◀
+//           </button>
+
+//           <button
+//             onClick={nextSlide}
+//             className="absolute right-2 md:right-6 bg-white/10 p-3 rounded-full"
+//           >
+//             ▶
+//           </button>
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+"use client";
+
+import React from "react";
 
 const categories = [
-  { id: 1, title: "Luxury Watches", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30" },
-  { id: 2, title: "Smart Watches", img: "https://images.unsplash.com/photo-1511732351157-1865efcb7b7e" },
-  { id: 3, title: "Classic Edition", img: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5" },
-  { id: 4, title: "Sport Series", img: "https://images.unsplash.com/photo-1526045612212-70caf35c14df" },
-  { id: 5, title: "Minimal Design", img: "https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6" },
-  { id: 6, title: "Limited Edition", img: "https://images.unsplash.com/photo-1484704849700-f032a568e944" },
-]
+  {
+    id: 1,
+    name: "Women",
+    description: "Elegant & Trendy Fashion lorem` ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque.",
+    img:  "https://sc04.alicdn.com/kf/H4634df71c6824f0b9db86e57b379b9a0B.jpg"  
+  },
+  {
+    id: 2,
+    name: "Men",
+    description: "Sophisticated Style lorem` ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque.",
+    img: "https://ae01.alicdn.com/kf/HTB1pYwOOAzoK1RjSZFlq6yi4VXaT.jpg"  
+  },
+  {
+    id: 3,
+    name: "Kids",
+    description: "Playful & Comfortable lorem` ipsum dolor sit amet consectetur adipisicing elit. Voluptas, eaque.",
+    img:  "https://www.jiomart.com/images/product/original/rvkkwwkkhj/swadesi-stuff-digital-black-dial-multi-function-sports-watch-7-light-boys-girls-product-images-rvkkwwkkhj-2-202202280806.jpg?im=Resize=(500,630)" 
+  },
+];
 
-export default function Category() {
-  const [current, setCurrent] = useState(0)
-
-  // ✅ Auto Slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % categories.length)
-    }, 4000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const prevSlide = () => {
-    setCurrent((prev) =>
-      prev === 0 ? categories.length - 1 : prev - 1
-    )
-  }
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % categories.length)
-  }
-
-  const prevIndex =
-    current === 0 ? categories.length - 1 : current - 1
-  const nextIndex =
-    (current + 1) % categories.length
-
+const Category = () => {
   return (
-    <section className="bg-black py-16 text-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4">
-
+    <section className="py-20 px-20  sm:px-6 bg-gradient-to-br from-gray-950 via-black to-gray-900">
+      <div className="max-w-8xl px-20 w-full">
         {/* Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold">
-            Explore Categories
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+            Explore Our{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-600">
+              Collections
+            </span>
           </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Discover premium quality products curated just for you
+          </p>
         </div>
 
-        {/* Carousel */}
-        <div className="relative flex items-center justify-center h-[450px]">
+        {/* Categories Grid - FIXED: Grid is the best way to ensure perfect centering */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 justify-items-center">
+          {categories.map((item) => (
+            <div
+              key={item.id}
+              className="group relative overflow-hidden rounded-3xl cursor-pointer w-full max-w-[100vw] shadow-2xl shadow-emerald-900/10 h-96 sm:h-[500px] lg:h-[550px]"
+            >
+              {/* Image Container */}
+              <div className="relative h-[500px] sm:h-[500px] lg:h-[550px] overflow-hidden">
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full h-full object-cover transition-transform duration-700 "
+                />
 
-          {/* Left Card */}
-          <div
-            onClick={prevSlide}
-            className="hidden md:block absolute left-0 cursor-pointer opacity-40 hover:opacity-70 transition-all duration-500"
-          >
-            <img
-              src={`${categories[prevIndex].img}?auto=format&fit=crop&w=800&q=80`}
-              alt=""
-              className="w-[200px] h-[300px] object-cover rounded-xl"
-            />
-          </div>
+                {/* Gradient Overlay - Bottom to Top */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
-          {/* Center Card */}
-          <div className="z-20 transition-all duration-700 ease-in-out">
-            <img
-              src={`${categories[current].img}?auto=format&fit=crop&w=1000&q=90`}
-              alt=""
-              className="w-[320px] md:w-[400px] h-[400px] object-cover rounded-2xl shadow-2xl"
-            />
-            <h3 className="text-center text-2xl mt-4 font-semibold">
-              {categories[current].title}
-            </h3>
-          </div>
+                {/* Green Accent Overlay on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-green-900 via-emerald-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
 
-          {/* Right Card */}
-          <div
-            onClick={nextSlide}
-            className="hidden md:block absolute right-0 cursor-pointer opacity-40 hover:opacity-70 transition-all duration-500"
-          >
-            <img
-              src={`${categories[nextIndex].img}?auto=format&fit=crop&w=800&q=80`}
-              alt=""
-              className="w-[200px] h-[300px] object-cover rounded-xl"
-            />
-          </div>
+              {/* Content Overlay */}
+              <div className="absolute inset-0 flex flex-col justify-end p-8">
+                {/* Category Name */}
+                <h3 className="text-3xl sm:text-4xl font-bold text-white mb-2 transform transition-all duration-500 
+                 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:-translate-y-2">
+                  {item.name}
+                </h3>
 
-          {/* Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-2 md:left-6 bg-white/10 p-3 rounded-full"
-          >
-            ◀
-          </button>
+                {/* Description */}
+                <p className="text-gray-300 text-sm sm:text-base mb-4 transform transition-all duration-500 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:-translate-y-2">
+                  {item.description}
+                </p>
 
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 md:right-6 bg-white/10 p-3 rounded-full"
-          >
-            ▶
+                {/* Shop Now Button */}
+                <button className="flex items-center gap-2 text-emerald-400 font-semibold text-sm sm:text-base transform transition-all duration-500 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:-translate-y-2 hover:text-emerald-300">
+                  Shop Now
+                  <svg
+                    className="w-5 h-5 transition-transform group-hover:translate-x-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </button>
+              </div>
+ 
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-20">
+          <button className="px-10 py-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold  hover:from-emerald-600 hover:to-green-700 transform  ">
+            View All Collections
           </button>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Category;

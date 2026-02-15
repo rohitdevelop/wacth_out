@@ -13,7 +13,7 @@ const Product = () => {
         </div>
 
         {/* Cards */}
-        <div className="max-w-8xl mx-auto px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="max-w-7xl mx-auto px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {[
             "https://img.freepik.com/free-vector/classic-watches-interface_250435-186.jpg?semt=ais_hybrid&w=740&q=80",
             "https://img.freepik.com/free-vector/classic-watches-interface_250435-185.jpg?semt=ais_hybrid&w=740&q=80",
@@ -38,7 +38,7 @@ const Product = () => {
             </div>
           ))}
         </div>
-        <div className="max-w-8xl mx-auto px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-3.5">
+        <div className="max-w-7xl mx-auto px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-3.5">
           {[
             "https://img.freepik.com/premium-photo/watch-with-red-black-face-word-s-it_862462-27969.jpg?semt=ais_hybrid&w=740&q=80",
             "https://img.freepik.com/free-vector/classic-watches-interface_250435-186.jpg?semt=ais_hybrid&w=740&q=80",
