@@ -96,7 +96,7 @@ const Footer = () => {
                   placeholder="Enter your email"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-500 transition-colors"
                 />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-green-500 to-green-600 px-4 py-1.5 rounded-md text-sm font-medium hover:shadow-lg hover:shadow-green-500/50 transition-all">
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-gray-100 to-gray-100 px-4 text-black py-1.5  text-sm font-medium hover:shadow-lg hover:shadow-green-500/50 transition-all">
                   Join
                 </button>
               </div>
