@@ -7,9 +7,11 @@ const Product = () => {
 <section className="bg-black py-16">
   {/* Heading */}
   <div className="text-center mb-14">
-    <h1 className="text-4xl md:text-6xl font-bold tracking-wide font-serif text-white">
-      Our <span className="text-[#00ff00]">Collections</span>
+    <h1 className="text-4xl md:text-6xl font-bold tracking-wide text-white">
+      Our Best <span className="text-[#00ff00]">Collections</span>
     </h1>
+ <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mt-4">
+        Explore our premium collection of watches curated just for you</p>
   </div>
 
   {/* Cards Row 1 */}
