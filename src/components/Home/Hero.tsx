@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
           <span className="text-[#00ff00]">Chrono</span>
         </h1>
 
-        <h2 className="text-lg sm:text-xl md:text-2xl font-light tracking-widest uppercase text-gray-300 mb-6">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-light tracking-widest uppercase text-gray-100 mb-6">
           Luxury Watches That Define You
         </h2>
 

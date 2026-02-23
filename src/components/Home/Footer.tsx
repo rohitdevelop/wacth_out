@@ -1,9 +1,127 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Footer = () => {
+const [time, setTime] = useState({ h: "00", m: "00", s: "00" });
+  const [blink, setBlink] = useState(true);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime({
+        h: String(now.getHours()).padStart(2, "0"),
+        m: String(now.getMinutes()).padStart(2, "0"),
+        s: String(now.getSeconds()).padStart(2, "0"),
+      });
+      setBlink((prev) => !prev);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div>
-      <section className="relative w-full h-[1100px]">
+ <section className="relative flex flex-col w-[90vw] items-center justify-center min-h-56 bg-[#080808] overflow-hidden px-4">
+ 
+      {/* Scanlines overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(255,255,255,0.012) 3px, rgba(255,255,255,0.012) 4px)",
+        }}
+      />
+
+      {/* Top label */}
+      <p className="relative z-20 mb-6 sm:mb-10 text-[10px] sm:text-xs md:text-sm tracking-[0.5em] uppercase text-green-400/60 font-mono">
+        Live Clock
+      </p>
+
+      {/* Time display */}
+      <div className="relative z-20 flex items-start justify-center gap-1 sm:gap-2 md:gap-4">
+
+        {/* HOURS */}
+        <div className="flex flex-col items-center gap-1 sm:gap-2">
+          <span
+            className="font-black leading-none text-white select-none"
+            style={{
+              fontSize: "clamp(5.5rem, 24vw, 22rem)",
+              fontFamily: "'Arial Black', 'Impact', sans-serif",
+              letterSpacing: "-0.03em",
+             }}
+          >
+            {time.h}
+          </span>
+          <span className="text-[9px] sm:text-xs tracking-[0.4em] uppercase text-white/20 font-mono">
+            Hours
+          </span>
+        </div>
+
+        {/* Colon 1 */}
+        <span
+          className="font-black leading-none select-none transition-opacity duration-100"
+          style={{
+            fontSize: "clamp(4.5rem, 20vw, 18rem)",
+            fontFamily: "'Arial Black', 'Impact', sans-serif",
+            color: "#00ff00",
+             paddingTop: "clamp(0.15rem, 0.8vw, 0.6rem)",
+           }}
+        >
+          :
+        </span>
+
+        {/* MINUTES */}
+        <div className="flex flex-col items-center gap-1 sm:gap-2">
+          <span
+            className="font-black leading-none text-white select-none"
+            style={{
+              fontSize: "clamp(5.5rem, 24vw, 22rem)",
+              fontFamily: "'Arial Black', 'Impact', sans-serif",
+              letterSpacing: "-0.03em",
+             }}
+          >
+            {time.m}
+          </span>
+          <span className="text-[9px] sm:text-xs tracking-[0.4em] uppercase text-white/20 font-mono">
+            Minutes
+          </span>
+        </div>
+
+        {/* Colon 2 */}
+        <span
+          className="font-black leading-none select-none transition-opacity duration-100"
+          style={{
+            fontSize: "clamp(4.5rem, 20vw, 18rem)",
+            fontFamily: "'Arial Black', 'Impact', sans-serif",
+            color: "#00ff00",
+             paddingTop: "clamp(0.15rem, 0.8vw, 0.6rem)",
+           }}
+        >
+          :
+        </span>
+
+        {/* SECONDS */}
+        <div className="flex flex-col items-center gap-1 sm:gap-2">
+          <span
+            className="font-black leading-none select-none"
+            style={{
+              fontSize: "clamp(5.5rem, 24vw, 22rem)",
+              fontFamily: "'Arial Black', 'Impact', sans-serif",
+              letterSpacing: "-0.03em",
+              color: "#00ff00",
+             }}
+          >
+            {time.s}
+          </span>
+          <span className="text-[9px] sm:text-xs tracking-[0.4em] uppercase text-green-400/40 font-mono">
+            Seconds
+          </span>
+        </div>
+      </div>
+ 
+    </section>
+
+
+      <section className="relative w-full md:h-[1100px] h-[900px]">
         {/* Background Image */}
         <img
           src="https://www.lepage.fr/75894-zoom_default/hublot-big-bang-unico-dark-green-ceramic-automatic-watch-skeleton-dial-orange-rubber-strap-42-mm.jpg"
@@ -11,17 +129,17 @@ const Footer = () => {
           className="absolute inset-0 w-full h-full pt-10 object-cover"
         />
         {/* Dark Overlay */} {/* Content */}
-        <div className="relative z-10 pt-5 h-full text-center text-white px-6">
+        <div className="relative z-10 md:pt-5 pt-12 h-full text-center text-white px-6">
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <h1
-              className="text-[8rem] sm:text-[10rem] md:text-[10rem] font-extrabold whitespace-nowrap text-white"
+              className="text-[4rem] sm:text-[10rem] md:text-[10rem] font-extrabold whitespace-nowrap text-white"
               style={{ letterSpacing: "-0.05em" }}
             >
               TIME IS LUXURY
             </h1>
           </div>
-          <div className="flex flex-col items-center justify-center mt-[700px]">
-            <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl">
+          <div className="flex flex-col items-center justify-center md:mt-[700px] mt-[600px]">
+            <p className="mt-6 text-sm md:text-xl text-gray-200 max-w-2xl">
               Discover precision, elegance and timeless craftsmanship. Elevate
               your style with iconic performance.
             </p>
