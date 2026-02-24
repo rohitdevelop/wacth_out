@@ -20,7 +20,7 @@ const [time, setTime] = useState({ h: "00", m: "00", s: "00" });
   }, []);
   return (
     <div>
- <section className="relative flex flex-col w-[90vw] items-center justify-center min-h-56 bg-[#080808] overflow-hidden px-4">
+ <section className="relative flex flex-col w-[90vw] mx-auto items-center justify-center bg-[#080808] overflow-hidden px-4 py-4">
  
       {/* Scanlines overlay */}
       <div
@@ -40,11 +40,11 @@ const [time, setTime] = useState({ h: "00", m: "00", s: "00" });
       <div className="relative z-20 flex items-start justify-center gap-1 sm:gap-2 md:gap-4">
 
         {/* HOURS */}
-        <div className="flex flex-col items-center gap-1 sm:gap-2">
+        <div className="flex flex-col items-center  sm:gap-2">
           <span
             className="font-black leading-none text-white select-none"
             style={{
-              fontSize: "clamp(5.5rem, 24vw, 22rem)",
+              fontSize: "clamp(4.5rem, 20vw, 22rem)",
               fontFamily: "'Arial Black', 'Impact', sans-serif",
               letterSpacing: "-0.03em",
              }}
