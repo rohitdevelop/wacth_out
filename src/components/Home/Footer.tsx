@@ -1,41 +1,9 @@
-import React, {   } from "react";
+import React from "react";
 
 const Footer = () => {
  
   return (
     <div>
- 
-
-
-      <section className="relative w-full md:h-[1100px] h-[900px]">
-        {/* Background Image */}
-        <img
-          src="https://www.lepage.fr/75894-zoom_default/hublot-big-bang-unico-dark-green-ceramic-automatic-watch-skeleton-dial-orange-rubber-strap-42-mm.jpg"
-          alt="Luxury Watch"
-          className="absolute inset-0 w-full h-full pt-10 object-cover"
-        />
-        {/* Dark Overlay */} {/* Content */}
-        <div className="relative z-10 md:pt-5 pt-12 h-full text-center text-white px-6">
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <h1
-              className="text-[4rem] sm:text-[10rem] md:text-[10rem] font-extrabold whitespace-nowrap text-white"
-              style={{ letterSpacing: "-0.05em" }}
-            >
-              TIME IS LUXURY
-            </h1>
-          </div>
-          <div className="flex flex-col items-center justify-center md:mt-[700px] mt-[600px]">
-            <p className="mt-6 text-sm md:text-xl text-gray-200 max-w-2xl">
-              Discover precision, elegance and timeless craftsmanship. Elevate
-              your style with iconic performance.
-            </p>
-            <button className="mt-15 px-8 py-3 font-semibold tracking-wider bg-white text-black hover:bg-gray-200">
-              SHOP NOW
-            </button>
-          </div>
-        </div>
-      </section>
-
       <footer className="relative bg-green-950 text-white overflow-hidden">
         {/* Animated Grid Background */}
         <div className="absolute inset-0 opacity-10">

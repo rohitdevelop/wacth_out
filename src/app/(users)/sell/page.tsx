@@ -105,22 +105,19 @@ const carouselSlides = [
   {
     headline: "Turn Your Timepiece Into Value",
     sub: "The premium marketplace for pre-owned luxury watches.",
-    badge: "Trusted by 10,000+ sellers",
-    image:
+     image:
       "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=900&q=80&fit=crop",
   },
   {
     headline: "Every Watch Has a Story",
     sub: "We help the right buyer find yours.",
-    badge: "2–3 day listing guarantee",
-    image:
+     image:
       "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=900&q=80&fit=crop",
   },
   {
     headline: "Seamless. Secure. Swift.",
     sub: "Door-to-door pickup. Full insurance. Zero hassle.",
-    badge: "Free courier pickup",
-    image:
+     image:
       "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?w=900&q=80&fit=crop",
   },
 ];
@@ -166,7 +163,7 @@ export default function SellPage() {
           Listing Submitted
         </h1>
         <p className="text-neutral-400 text-lg tracking-wide">
-          We'll be in touch within 24 hours.
+          We will be in touch within 24 hours.
         </p>
       </div>
     );
@@ -204,10 +201,7 @@ export default function SellPage() {
         <div className="absolute left-12 top-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-[#00ff00] to-transparent hidden md:block" />
 
         <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-20 lg:px-32 max-w-5xl">
-          <span className="inline-flex items-center gap-2 text-[#00ff00] tracking-[0.3em] text-xs uppercase mb-6 font-['Montserrat',sans-serif]">
-            <span className="w-6 h-px bg-[#00ff00]" />
-            {carouselSlides[slide].badge}
-          </span>
+          
           <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light leading-none tracking-tight mb-6 transition-all duration-700">
             {carouselSlides[slide].headline}
           </h1>
@@ -246,29 +240,29 @@ export default function SellPage() {
       {/* ── HOW IT WORKS ──────────────────────────────────────── */}
       <section className="py-28 px-6 md:px-16 lg:px-32 max-w-8xl mx-auto">
         <div className="flex items-center gap-4 mb-4">
-          <span className="w-12 h-px bg-[#c9a84c]" />
-          <span className="text-[#c9a84c] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
+          <span className="w-12 h-px bg-[#00ff00]" />
+          <span className="text-[#00ff00] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
             The Process
           </span>
         </div>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mb-20">
           Four steps to
           <br />
-          <em className="text-[#c9a84c] not-italic">sell with confidence</em>
+          <em className="text-[#00ff00] not-italic">sell with confidence</em>
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
           {steps.map((step, i) => (
             <div
               key={i}
-              className="relative p-8 border border-neutral-800 hover:border-[#c9a84c]/40 transition-all duration-500 group"
+              className="relative p-8 border border-neutral-800 hover:border-white transition-all duration-500 group"
             >
               {/* Step number background */}
               <div className="absolute top-6 right-6 text-[80px] font-light text-neutral-900 leading-none select-none group-hover:text-neutral-800 transition-colors duration-500 font-['Montserrat',sans-serif]">
                 {step.number}
               </div>
               <div className="relative z-10">
-                <div className="text-[#c9a84c] mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-[#00ff00] mb-6 group-hover:scale-110 transition-transform duration-300">
                   {step.icon}
                 </div>
                 <h3 className="text-xl font-light tracking-wide mb-3">
@@ -298,15 +292,15 @@ export default function SellPage() {
             {/* Left: copy */}
             <div className="lg:sticky lg:top-32">
               <div className="flex items-center gap-4 mb-4">
-                <span className="w-8 h-px bg-[#c9a84c]" />
-                <span className="text-[#c9a84c] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
+                <span className="w-8 h-px bg-[#00ff00]" />
+                <span className="text-[#00ff00] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
                   Step 01
                 </span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-light leading-tight tracking-tight mb-6">
                 Tell us about
                 <br />
-                <em className="text-[#c9a84c] not-italic">your watch</em>
+                <em className="text-[#00ff00] not-italic">your watch</em>
               </h2>
               <p className="text-neutral-400 text-base leading-relaxed font-['Montserrat',sans-serif] font-light max-w-sm mb-8">
                 The more detail you provide, the faster and higher your listing
@@ -322,7 +316,7 @@ export default function SellPage() {
                     key={i}
                     className="flex items-start gap-3 text-sm font-['Montserrat',sans-serif] text-neutral-500"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] mt-2 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] mt-2 shrink-0" />
                     {tip}
                   </li>
                 ))}
@@ -338,7 +332,7 @@ export default function SellPage() {
           {/* Divider */}
           <div className="flex items-center gap-6 mb-24">
             <div className="flex-1 h-px bg-neutral-800" />
-            <div className="w-2 h-2 rotate-45 border border-[#c9a84c]" />
+            <div className="w-2 h-2 rotate-45 border border-[#00ff00]" />
             <div className="flex-1 h-px bg-neutral-800" />
           </div>
 
@@ -350,15 +344,15 @@ export default function SellPage() {
 
             <div className="lg:sticky lg:top-32 lg:order-1 order-2">
               <div className="flex items-center gap-4 mb-4">
-                <span className="w-8 h-px bg-[#c9a84c]" />
-                <span className="text-[#c9a84c] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
+                <span className="w-8 h-px bg-[#00ff00]" />
+                <span className="text-[#00ff00] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
                   Step 02
                 </span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-light leading-tight tracking-tight mb-6">
                 Your contact
                 <br />
-                <em className="text-[#c9a84c] not-italic">information</em>
+                <em className="text-[#00ff00] not-italic">information</em>
               </h2>
               <p className="text-neutral-400 text-base leading-relaxed font-['Montserrat',sans-serif] font-light max-w-sm mb-8">
                 We use this solely to coordinate pickup and payment. Your data
@@ -368,7 +362,7 @@ export default function SellPage() {
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#c9a84c"
+                  stroke="#00ff00"
                   strokeWidth="1.5"
                   className="w-5 h-5 shrink-0"
                 >
@@ -396,7 +390,7 @@ export default function SellPage() {
               { value: "48hr", label: "Average Pickup Time" },
             ].map((stat, i) => (
               <div key={i} className="group">
-                <div className="text-3xl sm:text-4xl font-light text-[#c9a84c] tracking-tight mb-2 group-hover:scale-105 transition-transform duration-300">
+                <div className="text-3xl sm:text-4xl font-light text-[#00ff00] tracking-tight mb-2 group-hover:scale-105 transition-transform duration-300">
                   {stat.value}
                 </div>
                 <div className="text-xs text-neutral-500 tracking-[0.2em] uppercase font-['Montserrat',sans-serif]">
@@ -411,15 +405,15 @@ export default function SellPage() {
       {/* ── FAQ SECTION ───────────────────────────────────────── */}
       <section className="py-28 px-6 md:px-16 lg:px-32 max-w-8xl mx-auto">
         <div className="flex items-center gap-4 mb-4">
-          <span className="w-12 h-px bg-[#c9a84c]" />
-          <span className="text-[#c9a84c] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
+          <span className="w-12 h-px bg-[#00ff00]" />
+          <span className="text-[#00ff00] text-xs tracking-[0.35em] uppercase font-['Montserrat',sans-serif]">
             Before You List
           </span>
         </div>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mb-16">
           Common questions
           <br />
-          <em className="text-[#c9a84c] not-italic">from sellers</em>
+          <em className="text-[#00ff00] not-italic">from sellers</em>
         </h2>
 
         <div className=" space-y-0">
@@ -429,11 +423,11 @@ export default function SellPage() {
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 className="w-full flex items-center justify-between py-7 text-left group"
               >
-                <span className="text-lg sm:text-xl font-light tracking-wide pr-8 group-hover:text-[#c9a84c] transition-colors duration-300">
+                <span className="text-lg sm:text-xl font-light tracking-wide pr-8 group-hover:text-[#00ff00] transition-colors duration-300">
                   {faq.q}
                 </span>
                 <span
-                  className={`shrink-0 w-8 h-8 border border-neutral-700 flex items-center justify-center transition-all duration-300 ${openFaq === i ? "border-[#c9a84c] rotate-45" : "group-hover:border-[#c9a84c]/50"}`}
+                  className={`shrink-0 w-8 h-8 border border-neutral-700 flex items-center justify-center transition-all duration-300 ${openFaq === i ? "border-[#00ff00] rotate-45" : "group-hover:border-[#00ff00]/50"}`}
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -460,7 +454,7 @@ export default function SellPage() {
 
       {/* ── FOOTER CTA ────────────────────────────────────────── */}
       <section className="py-28 px-6 text-center bg-[#0c0c0c] border-t border-neutral-900">
-        <p className="text-[#c9a84c] text-xs tracking-[0.35em] uppercase mb-6 font-['Montserrat',sans-serif]">
+        <p className="text-[#00ff00] text-xs tracking-[0.35em] uppercase mb-6 font-['Montserrat',sans-serif]">
           Ready to begin?
         </p>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mb-10 max-w-2xl mx-auto">
@@ -470,7 +464,7 @@ export default function SellPage() {
         </h2>
         <a
           href="#sell-form"
-          className="inline-flex items-center gap-3 px-10 py-5 bg-[#c9a84c] text-black text-sm tracking-[0.25em] uppercase font-['Montserrat',sans-serif] font-medium hover:bg-[#b8963e] transition-colors duration-300"
+          className="inline-flex items-center gap-3 px-10 py-5 border text-sm tracking-[0.25em] uppercase font-['Montserrat',sans-serif] font-medium hover:bg-white hover:text-black transition-colors duration-300"
         >
           List My Watch
           <svg
