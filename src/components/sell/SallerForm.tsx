@@ -197,18 +197,8 @@ export default function SellerForm({
       {/* Actions */}
       <div className="flex items-center gap-4 mt-10">
         <button
-          onClick={prevStep}
-          className="flex items-center gap-2 px-6 py-3.5 border border-neutral-700 text-neutral-400 text-xs tracking-[0.2em] uppercase hover:border-neutral-500 hover:text-neutral-300 transition-all duration-300"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3.5 h-3.5">
-            <path d="M19 12H5M11 6l-6 6 6 6" />
-          </svg>
-          Back
-        </button>
-
-        <button
           onClick={submit}
-          className="flex-1 relative overflow-hidden flex items-center justify-center gap-3 px-8 py-3.5 bg-[#00ff00] text-black text-xs tracking-[0.25em] uppercase font-semibold hover:bg-[#b8963e] active:scale-[0.98] transition-all duration-300 group"
+          className="flex-1 relative overflow-hidden flex items-center justify-center gap-3 px-8 py-3.5 border text-xs tracking-[0.25em] uppercase font-semibold hover:bg-white hover:text-black active:scale-[0.98] transition-all duration-300 group"
         >
           <span>Submit Listing</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200">

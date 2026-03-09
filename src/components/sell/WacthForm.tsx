@@ -77,9 +77,9 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
 
       {/* Section label */}
       <div className="flex items-center gap-3 mb-8">
-        <span className="w-6 h-px bg-[#c9a84c]" />
+        <span className="w-6 h-px bg-[#00ff00]" />
         <span
-          className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase"
+          className="text-[#00ff00] text-xs tracking-[0.3em] uppercase"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
           Watch Details
@@ -97,7 +97,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
             className={`
               relative flex flex-col items-center justify-center h-44 border cursor-pointer
               transition-all duration-300 overflow-hidden group
-              ${isDragging ? "border-[#c9a84c] bg-[#c9a84c]/5" : "border-neutral-700 hover:border-[#c9a84c]/50 bg-[#0a0a0a]"}
+              ${isDragging ? "border-[#00ff00] bg-[#c9a84c]/5" : "border-neutral-700 hover:border-[#00ff00]/50 bg-[#0a0a0a]"}
             `}
             onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
             onDragLeave={() => setIsDragging(false)}
@@ -130,7 +130,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
                 </svg>
                 <div className="text-center">
                   <p className="text-xs tracking-wider mb-0.5">
-                    Drop image or <span className="text-[#c9a84c]">browse</span>
+                    Drop image or <span className="text-[#00ff00]">browse</span>
                   </p>
                   <p className="text-[10px] text-neutral-700">JPG, PNG — max 10MB</p>
                 </div>
@@ -147,7 +147,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
               {label}
             </label>
             <div className="relative">
-              <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focused === key ? "text-[#c9a84c]" : "text-neutral-600"}`}>
+              <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focused === key ? "text-[#00ff00]" : "text-neutral-600"}`}>
                 {icon}
               </div>
               <input
@@ -161,7 +161,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
                   w-full bg-[#0a0a0a] pl-11 pr-4 py-3.5 text-sm text-white placeholder-neutral-700
                   border transition-all duration-300 outline-none tracking-wide
                   ${focused === key
-                    ? "border-[#c9a84c] shadow-[0_0_0_1px_rgba(201,168,76,0.15)]"
+                    ? "border-[#00ff00] shadow-[0_0_0_1px_rgba(201,168,76,0.15)]"
                     : "border-neutral-800 hover:border-neutral-600"
                   }
                 `}
@@ -191,7 +191,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
                 className={`
                   py-2.5 text-xs tracking-[0.15em] uppercase border transition-all duration-300
                   ${condition === c
-                    ? "border-[#c9a84c] text-[#c9a84c] bg-[#c9a84c]/8"
+                    ? "border-[#00ff00] text-[#00ff00] bg-[#c9a84c]/8"
                     : "border-neutral-800 text-neutral-500 hover:border-neutral-600 hover:text-neutral-400"
                   }
                 `}
@@ -219,7 +219,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
                 w-full bg-[#0a0a0a] px-4 py-3.5 text-sm text-white placeholder-neutral-700
                 border transition-all duration-300 outline-none tracking-wide resize-none leading-relaxed
                 ${focused === "description"
-                  ? "border-[#c9a84c] shadow-[0_0_0_1px_rgba(201,168,76,0.15)]"
+                  ? "border-[#00ff00] shadow-[0_0_0_1px_rgba(201,168,76,0.15)]"
                   : "border-neutral-800 hover:border-neutral-600"
                 }
               `}
@@ -234,7 +234,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
       {/* CTA */}
       <button
         onClick={nextStep}
-        className="w-full mt-10 flex items-center justify-center gap-3 px-8 py-4 bg-[#c9a84c] text-black text-xs tracking-[0.25em] uppercase font-semibold hover:bg-[#b8963e] active:scale-[0.98] transition-all duration-300 group"
+        className="w-full mt-10 flex items-center justify-center gap-3 px-8 py-4 text-white border text-xs tracking-[0.25em] uppercase font-semibold hover:bg-white hover:text-black  transition-all duration-300 group"
       >
         <span>Continue to Seller Info</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200">
@@ -244,7 +244,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
 
       {/* Step indicator */}
       <div className="flex items-center gap-2 mt-6 justify-center">
-        <span className="w-6 h-0.5 bg-[#c9a84c] rounded-full" />
+        <span className="w-6 h-0.5 bg-[#00ff00] rounded-full" />
         <span className="w-6 h-0.5 bg-[#c9a84c]/30 rounded-full" />
       </div>
     </div>
