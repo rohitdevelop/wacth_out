@@ -16,7 +16,7 @@ const Page = () => {
           </p>
 
           <h1 className="text-4xl md:text-5xl font-light leading-tight mb-6">
-            Let's talk about
+            Lets talk about
             <br />
             <span className="text-[#00ff00]">your watch</span>
           </h1>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Search, ShoppingCart, Heart, User, Menu, X } from "lucide-react";
 import Link from "next/link";
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
@@ -14,9 +15,9 @@ const Navbar = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setShowNav(false); // scrolling down
+        setShowNav(false);
       } else {
-        setShowNav(true); // scrolling up
+        setShowNav(true);
       }
 
       setLastScrollY(currentScrollY);
@@ -36,6 +37,7 @@ const Navbar = () => {
         bg-black/70 backdrop-blur-xl border-b border-[#0d400d]`}
       >
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+          
           {/* LOGO */}
           <h1 className="text-2xl font-bold tracking-wide text-white">
             Arvento<span className="text-[#00ff00]">Chrono</span>
@@ -43,29 +45,29 @@ const Navbar = () => {
 
           {/* DESKTOP MENU */}
           <ul className="hidden md:flex space-x-3 font-medium">
-  {[
-    { name: "Home", path: "/" },
-    { name: "Shop", path: "/shop" },
-    { name: "Sell", path: "/sell" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
-  ].map((item) => (
-    <li
-      key={item.name}
-      className="relative px-2 py-2 text-gray-200 overflow-hidden group cursor-pointer"
-    >
-      <Link href={item.path} className="block">
-        <span className="relative z-10 transition-all duration-300 group-hover:-translate-y-12 inline-block">
-          {item.name}
-        </span>
+            {[
+              { name: "Home", path: "/" },
+              { name: "Shop", path: "/shop" },
+              { name: "Sell", path: "/sell" },
+              { name: "About", path: "/about" },
+              { name: "Contact", path: "/contact" },
+            ].map((item) => (
+              <li
+                key={item.name}
+                className="relative px-2 py-2 text-gray-200 overflow-hidden group cursor-pointer"
+              >
+                <Link href={item.path}>
+                  <span className="relative z-10 transition-all duration-300 group-hover:-translate-y-12 inline-block">
+                    {item.name}
+                  </span>
 
-        <span className="absolute inset-0 flex items-center justify-center translate-y-12 transition-all duration-300 group-hover:translate-y-0 text-[#00ff00] font-semibold">
-          {item.name}
-        </span>
-      </Link>
-    </li>
-  ))}
-</ul>
+                  <span className="absolute inset-0 flex items-center justify-center translate-y-12 transition-all duration-300 group-hover:translate-y-0 text-[#00ff00] font-semibold">
+                    {item.name}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
           {/* SEARCH */}
           <div className="hidden lg:flex items-center border border-[#0d400d] rounded-lg px-3 py-2">
@@ -98,17 +100,15 @@ const Navbar = () => {
                 <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
                   Sign In
                 </button>
-
-                <button className="relative w-full px-4 py-3 text-left text-[#00ff00] font-semibold overflow-hidden group/item">
-                  <span className="relative z-10">Join Us</span>
-                  <span className="absolute inset-0 -translate-x-full group-hover/item:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-                </button>
               </div>
             </div>
           </div>
 
-          {/* MOBILE MENU BUTTON */}
-          <div className="md:hidden text-white">
+          {/* MOBILE ICONS */}
+          <div className="md:hidden flex items-center space-x-3 text-white">
+            <ShoppingCart className="text-[#00ff00]" />
+            <Heart className="text-[#00ff00]" />
+
             {open ? (
               <X onClick={() => setOpen(false)} />
             ) : (
@@ -120,19 +120,35 @@ const Navbar = () => {
 
       {/* MOBILE DRAWER */}
       <div
-        className={`fixed top-0 right-0 h-full w-1/2 bg-black/95 backdrop-blur-xl
+        className={`fixed top-0 right-0 h-full w-2/3 bg-black/95 backdrop-blur-xl
         z-40 transition-transform duration-300
         ${open ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="pt-24 px-6 space-y-6">
-          {["Home", "Shop", "Sell", "About", "Contact"].map((item) => (
-            <div
-              key={item}
-              className="text-gray-100 text-lg hover:text-[#00ff00] hover:bg-[#1a431a] hover:pl-5 duration-300 cursor-pointer transition-all"
-            >
-              {item}
-            </div>
-          ))}
+        <div className="flex flex-col justify-between h-full pt-24 px-6">
+
+          {/* MENU */}
+          <div className="space-y-6">
+            {["Home", "Shop", "Sell", "About", "Contact"].map((item) => (
+              <div
+                key={item}
+                className="text-gray-100 text-lg hover:text-[#00ff00] hover:bg-[#1a431a] hover:pl-5 duration-300 cursor-pointer transition-all"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+
+          {/* SIGN BUTTONS AT BOTTOM */}
+          <div className="pb-10 space-y-3">
+            <button className="w-full py-3 border border-[#00ff00] text-[#00ff00] rounded-lg hover:bg-[#00ff00] hover:text-black transition">
+              Sign In
+            </button>
+
+            <button className="w-full py-3 bg-[#00ff00] text-black rounded-lg hover:opacity-90 transition">
+              Sign Up
+            </button>
+          </div>
+
         </div>
       </div>
     </>
@@ -140,4 +156,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
- 
