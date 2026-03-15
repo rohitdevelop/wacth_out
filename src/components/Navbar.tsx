@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Search, ShoppingCart, Heart, User, Menu, X } from "lucide-react";
-import Link from "next/link";
+import { Search, ShoppingCart, Heart, User,Timer,Home } from "lucide-react";
+ import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -31,13 +31,12 @@ const Navbar = () => {
     <>
       {/* NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50
+        className={`hidden md:block fixed top-0 left-0 w-full z-50
         transition-transform duration-500 ease-in-out
         ${showNav ? "translate-y-0" : "-translate-y-full"}
         bg-black/70 backdrop-blur-xl border-b border-[#0d400d]`}
       >
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          
           {/* LOGO */}
           <h1 className="text-2xl font-bold tracking-wide text-white">
             Arvento<span className="text-[#00ff00]">Chrono</span>
@@ -103,52 +102,89 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-
-          {/* MOBILE ICONS */}
-          <div className="md:hidden flex items-center space-x-3 text-white">
-            <ShoppingCart className="text-[#00ff00]" />
-            <Heart className="text-[#00ff00]" />
-
-            {open ? (
-              <X onClick={() => setOpen(false)} />
-            ) : (
-              <Menu onClick={() => setOpen(true)} />
-            )}
-          </div>
         </div>
       </nav>
 
-      {/* MOBILE DRAWER */}
-      <div
-        className={`fixed top-0 right-0 h-full w-2/3 bg-black/95 backdrop-blur-xl
-        z-40 transition-transform duration-300
-        ${open ? "translate-x-0" : "translate-x-full"}`}
-      >
-        <div className="flex flex-col justify-between h-full pt-24 px-6">
+      {/* MOBILE NAVBAR */}
+      {/* MOBILE BOTTOM NAVBAR */}
+      <div className={`md:hidden fixed top-0 left-0 w-full z-50
+        transition-transform duration-500 ease-in-out
+        ${showNav ? "translate-y-0" : "-translate-y-full"}
+        bg-black/70 backdrop-blur-xl border-b border-[#0d400d]`}>
+        {/* Search */}
+        <div className="flex items-center px-4 py-3 gap-2">
+          <input
+            type="text"
+            placeholder="Search watches..."
+            className="flex-1 bg-[#111] border border-[#0d400d] rounded-lg px-3 py-2 text-sm text-white outline-none"
+          />
 
-          {/* MENU */}
-          <div className="space-y-6">
-            {["Home", "Shop", "Sell", "About", "Contact"].map((item) => (
-              <div
-                key={item}
-                className="text-gray-100 text-lg hover:text-[#00ff00] hover:bg-[#1a431a] hover:pl-5 duration-300 cursor-pointer transition-all"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+          <button className="bg-[#07ee07] text-black px-4 py-2 rounded-lg text-sm">
+            Shop
+          </button>
+        </div>
 
-          {/* SIGN BUTTONS AT BOTTOM */}
-          <div className="pb-10 space-y-3">
-            <button className="w-full py-3 border border-[#00ff00] text-[#00ff00] rounded-lg hover:bg-[#00ff00] hover:text-black transition">
-              Sign In
-            </button>
+        {/* Categories */}
+        <div className="flex items-center justify-center gap-4 px-4 pb-3 text-sm text-white">
+          <button className="whitespace-nowrap hover:text-[#00ff00]">
+            Men
+          </button>
+          <button className="whitespace-nowrap hover:text-[#00ff00]">
+            Women
+          </button>
+          <button className="whitespace-nowrap hover:text-[#00ff00]">
+            Kids
+          </button>
+          <button className="whitespace-nowrap hover:text-[#00ff00]">
+            Luxury
+          </button>
+          <button className="whitespace-nowrap hover:text-[#00ff00]">
+            Sports
+          </button>
+        </div>
+      </div>
+      {/* MOBILE TOP NAVBAR */}
+      <div className="md:hidden fixed bottom-0 left-0 w-full bg-black/95 border-t border-[#0d400d] z-50">
+        <div className="flex justify-around items-center py-2">
+          <Link
+            href="/"
+            className="flex flex-col items-center text-white text-xs"
+          >
+            <Home size={22} className="text-[#00ff00]" />
+            Home
+          </Link>
 
-            <button className="w-full py-3 bg-[#00ff00] text-black rounded-lg hover:opacity-90 transition">
-              Sign Up
-            </button>
-          </div>
+          <Link
+            href="/wishlist"
+            className="flex flex-col items-center text-white text-xs"
+          >
+            <Heart size={22} className="text-[#00ff00]" />
+            wishlist
+          </Link>
 
+          <Link
+            href="/sell"
+            className="flex flex-col items-center text-white text-xs"
+          >
+            <Timer size={22} className="text-[#00ff00]" />
+            Shell
+          </Link>
+
+          <Link
+            href="/cart"
+            className="flex flex-col items-center text-white text-xs"
+          >
+            <ShoppingCart size={22} className="text-[#00ff00]" />
+            Cart
+          </Link>
+
+          <Link
+            href="/profile"
+            className="flex flex-col items-center text-white text-xs"
+          >
+            <User size={22} className="text-[#00ff00]" />
+            Profile
+          </Link>
         </div>
       </div>
     </>
