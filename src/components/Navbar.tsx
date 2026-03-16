@@ -4,28 +4,25 @@ import React, { useState, useEffect } from "react";
 import { Search, ShoppingCart, Heart, User,Timer,Home } from "lucide-react";
  import Link from "next/link";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [showNav, setShowNav] = useState(true);
+const Navbar: React.FC  = () => {
+   const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Hide / show navbar on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setShowNav(false);
-      } else {
-        setShowNav(true);
-      }
+    setShowNav(!(currentScrollY > lastScrollY && currentScrollY > 80));
+    setLastScrollY(currentScrollY);
+  };
 
-      setLastScrollY(currentScrollY);
-    };
+  window.addEventListener("scroll", handleScroll);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [lastScrollY]);
 
   return (
     <>

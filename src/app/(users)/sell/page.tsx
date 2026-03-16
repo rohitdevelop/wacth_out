@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import SallerForm from "@/components/sell/SallerForm";
 import WacthForm from "@/components/sell/WacthForm";
 import Footer from "@/components/Home/Footer";
+import Image from "next/image";
 
 const steps = [
   {
@@ -105,29 +106,41 @@ const carouselSlides = [
   {
     headline: "Turn Your Timepiece Into Value",
     sub: "The premium marketplace for pre-owned luxury watches.",
-     image:
+    image:
       "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=900&q=80&fit=crop",
   },
   {
     headline: "Every Watch Has a Story",
     sub: "We help the right buyer find yours.",
-     image:
+    image:
       "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=900&q=80&fit=crop",
   },
   {
     headline: "Seamless. Secure. Swift.",
     sub: "Door-to-door pickup. Full insurance. Zero hassle.",
-     image:
+    image:
       "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?w=900&q=80&fit=crop",
   },
 ];
 
 export default function SellPage() {
+  const [sellerImage, setSellerImage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [watchImage, setWatchImage] = useState<string | null>(null);
 
+  const nextStep = () => {
+    console.log("Go to seller form");
+  };
+
+  const prevStep = () => {
+    console.log("Go to previous step");
+  };
+  const submit = () => {
+    setSubmitted(true);
+  };
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setSlide((s) => (s + 1) % carouselSlides.length);
@@ -179,9 +192,11 @@ export default function SellPage() {
             className="absolute inset-0 transition-opacity duration-1000"
             style={{ opacity: i === slide ? 1 : 0 }}
           >
-            <img
+            <Image
               src={s.image}
               alt={s.headline}
+              width={500}
+              height={500}
               className="w-full h-full object-cover scale-105"
               style={{ filter: "brightness(0.35)" }}
             />
@@ -201,7 +216,6 @@ export default function SellPage() {
         <div className="absolute left-12 top-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-[#00ff00] to-transparent hidden md:block" />
 
         <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-20 lg:px-32 max-w-5xl">
-          
           <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light leading-none tracking-tight mb-6 transition-all duration-700">
             {carouselSlides[slide].headline}
           </h1>
@@ -325,7 +339,11 @@ export default function SellPage() {
 
             {/* Right: form */}
             <div className="bg-[#111] border border-neutral-800 p-8 md:p-10">
-              <WacthForm />
+              <WacthForm
+                watchImage={watchImage}
+                setWatchImage={setWatchImage}
+                nextStep={nextStep}
+              />
             </div>
           </div>
 
@@ -339,7 +357,12 @@ export default function SellPage() {
           {/* Seller Form */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div className="bg-[#111] border border-neutral-800 p-8 md:p-10 lg:order-1 order-1">
-              <SallerForm />
+              <SallerForm
+                sellerImage={sellerImage}
+                setSellerImage={setSellerImage}
+                prevStep={prevStep}
+                submit={submit}
+              />
             </div>
 
             <div className="lg:sticky lg:top-32 lg:order-1 order-2">
@@ -478,7 +501,7 @@ export default function SellPage() {
           </svg>
         </a>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

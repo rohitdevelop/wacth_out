@@ -27,6 +27,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "assets-metrostyle.abs-cbn.com" },
       { protocol: "https", hostname: "cdn.prod.website-files.com" },
       { protocol: "https", hostname: "www.lepage.fr" },
+      { protocol: "https", hostname:  "images.unsplash.com" },
     ],
   },
 };
