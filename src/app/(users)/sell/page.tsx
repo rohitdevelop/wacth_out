@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import SallerForm from "@/components/sell/SallerForm";
-import WacthForm from "@/components/sell/WacthForm";
+import SellerForm from "@/components/sell/SallerForm";
+import WatchForm from "@/components/sell/WacthForm";
 import Footer from "@/components/Home/Footer";
 import Image from "next/image";
 
@@ -135,9 +135,7 @@ export default function SellPage() {
     console.log("Go to seller form");
   };
 
-  const prevStep = () => {
-    console.log("Go to previous step");
-  };
+ 
   const submit = () => {
     setSubmitted(true);
   };
@@ -339,7 +337,7 @@ export default function SellPage() {
 
             {/* Right: form */}
             <div className="bg-[#111] border border-neutral-800 p-8 md:p-10">
-              <WacthForm
+              <WatchForm
                 watchImage={watchImage}
                 setWatchImage={setWatchImage}
                 nextStep={nextStep}
@@ -357,11 +355,10 @@ export default function SellPage() {
           {/* Seller Form */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div className="bg-[#111] border border-neutral-800 p-8 md:p-10 lg:order-1 order-1">
-              <SallerForm
+              <SellerForm
                 sellerImage={sellerImage}
                 setSellerImage={setSellerImage}
-                prevStep={prevStep}
-                submit={submit}
+                 submit={submit}
               />
             </div>
 

@@ -6,15 +6,13 @@ import Image from "next/image";
 type Props = {
   sellerImage: string | null;
   setSellerImage: (img: string) => void;
-  prevStep: () => void;
-  submit: () => void;
+   submit: () => void;
 };
 
 export default function SellerForm({
   sellerImage,
   setSellerImage,
-  prevStep,
-  submit,
+   submit,
 }: Props) {
   const [focused, setFocused] = useState<string | null>(null);
   const [values, setValues] = useState({ name: "", phone: "", city: "" });
