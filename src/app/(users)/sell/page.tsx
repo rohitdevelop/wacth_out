@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import SellerForm from "@/components/sell/SallerForm";
-import WatchForm from "@/components/sell/WacthForm";
+import WatchForm from "@/components/sell/WatchForm";
+import SellerForm from "@/components/sell/SellerForm";
 import Footer from "@/components/Home/Footer";
 import Image from "next/image";
 
@@ -130,11 +130,7 @@ export default function SellPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [watchImage, setWatchImage] = useState<string | null>(null);
-
-  const nextStep = () => {
-    console.log("Go to seller form");
-  };
-
+ 
  
   const submit = () => {
     setSubmitted(true);
@@ -340,7 +336,6 @@ export default function SellPage() {
               <WatchForm
                 watchImage={watchImage}
                 setWatchImage={setWatchImage}
-                nextStep={nextStep}
               />
             </div>
           </div>

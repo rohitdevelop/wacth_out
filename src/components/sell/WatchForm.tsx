@@ -6,12 +6,12 @@ import Image from "next/image";
 type Props = {
   watchImage: string | null;
   setWatchImage: (img: string) => void;
-  nextStep: () => void;
+ 
 };
 
 const conditions = ["New", "Excellent", "Good", "Fair"];
 
-export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props) {
+export default function WatchForm({ watchImage, setWatchImage }: Props) {
   const [focused, setFocused] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [condition, setCondition] = useState<string | null>(null);
@@ -233,7 +233,7 @@ export default function WatchForm({ watchImage, setWatchImage, nextStep }: Props
 
       {/* CTA */}
       <button
-        onClick={nextStep}
+        
         className="w-full mt-10 flex items-center justify-center gap-3 px-8 py-4 text-white border text-xs tracking-[0.25em] uppercase font-semibold hover:bg-white hover:text-black  transition-all duration-300 group"
       >
         <span>Continue to Seller Info</span>
