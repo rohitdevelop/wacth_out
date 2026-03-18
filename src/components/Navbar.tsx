@@ -90,12 +90,16 @@ useEffect(() => {
                 opacity-0 invisible group-hover:visible group-hover:opacity-100
                 transition-all duration-300"
               >
+                <Link href={"/signup"}>
                 <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
                   Sign Up
                 </button>
+                </Link>
+                <Link href={"/login"}>
                 <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
                   Sign In
                 </button>
+                </Link>
               </div>
             </div>
           </div>
