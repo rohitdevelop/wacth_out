@@ -1,12 +1,47 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signupuser } from "../../../../../api/auth/auth.api";
+import { redirect } from "next/dist/server/api-utils";
 
 const Page = () => {
+  const [user, setuser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    age: "",
+    gender: "",
+  });
+const router = useRouter()
+  const handlChange = (e: any) => {
+    setuser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const res = await signupuser({ ...user, age: Number(user.age) });
+
+      setuser({
+        name: "",
+        email: "",
+        password: "",
+        age: "",
+        gender: "",
+      });
+      
+
+      router.push("/login")
+    } catch (err: any) {
+      console.log(err.response?.data);
+    }
+  };
+
   return (
     <div className="relative min-h-screen w-full flex bg-black text-black overflow-hidden">
-      
       {/* LEFT SIDE IMAGE */}
       <div className="relative hidden lg:block lg:w-1/2 h-screen">
         <Image
@@ -21,17 +56,19 @@ const Page = () => {
       </div>
 
       {/* RIGHT SIDE FORM */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center 
+      <div
+        className="w-full lg:w-1/2 flex items-center justify-center 
         px-4 sm:px-6 md:px-10 lg:px-12 
         pt-24 pb-20 sm:pt-28 sm:pb-24  /* 👈 navbar space top/bottom */
-      ">
-        
+      "
+      >
         {/* WHITE CARD */}
-        <div className="w-full max-w-md 
+        <div
+          className="w-full max-w-md 
           bg-[#111] border border-neutral-800 shadow-2xl 
           px-6 py-6 sm:px-8 sm:py-8 md:p-10
-        ">
-
+        "
+        >
           {/* Heading */}
           <div className="mb-4 text-center">
             <h1 className="text-2xl sm:text-3xl font-semibold text-white">
@@ -43,14 +80,16 @@ const Page = () => {
           </div>
 
           {/* FORM */}
-          <form className="space-y-3 sm:space-y-4">
-
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Name */}
             <div>
               <label className="text-sm text-neutral-400">Full Name</label>
               <input
                 type="text"
                 placeholder="Enter your name"
+                name="name"
+                value={user.name}
+                onChange={handlChange}
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
               />
             </div>
@@ -60,6 +99,9 @@ const Page = () => {
               <label className="text-sm text-neutral-400">Email</label>
               <input
                 type="email"
+                name="email"
+                value={user.email}
+                onChange={handlChange}
                 placeholder="Enter your email"
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
               />
@@ -70,6 +112,9 @@ const Page = () => {
               <label className="text-sm text-neutral-400">Password</label>
               <input
                 type="password"
+                 name="password"
+                value={user.password}
+                onChange={handlChange}
                 placeholder="Enter password"
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
               />
@@ -81,6 +126,9 @@ const Page = () => {
                 <label className="text-sm text-neutral-400">Age</label>
                 <input
                   type="number"
+                  onChange={handlChange}
+                   name="age"
+                value={user.age}
                   placeholder="Age"
                   className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
                 />
@@ -88,7 +136,12 @@ const Page = () => {
 
               <div>
                 <label className="text-sm text-neutral-400">Gender</label>
-                <select className="w-full bg-black mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none">
+                <select
+                  name="gender"
+                  value={user.gender}
+                  onChange={handlChange}
+                  className="w-full bg-black mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
+                >
                   <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -104,19 +157,17 @@ const Page = () => {
             >
               Sign Up
             </button>
-
           </form>
 
           {/* Footer */}
           <p className="mt-6 text-center text-sm text-neutral-500">
             Already have an account?{" "}
             <Link href={"/login"}>
-            <span className="font-medium text-[#00ff00] cursor-pointer">
-              Sign In
-            </span>
+              <span className="font-medium text-[#00ff00] cursor-pointer">
+                Sign In
+              </span>
             </Link>
           </p>
-
         </div>
       </div>
     </div>
