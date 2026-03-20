@@ -1,28 +1,30 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Search, ShoppingCart, Heart, User,Timer,Home } from "lucide-react";
- import Link from "next/link";
+import Link from "next/link";
+import { Search, ShoppingCart, Heart, User, Timer, Home } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 
-const Navbar: React.FC  = () => {
-   const [showNav, setShowNav] = useState(true);
+const Navbar: React.FC = () => {
+  const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { user, handleLogout } = useAuth();
 
   // Hide / show navbar on scroll
-useEffect(() => {
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
-    setShowNav(!(currentScrollY > lastScrollY && currentScrollY > 80));
-    setLastScrollY(currentScrollY);
-  };
+      setShowNav(!(currentScrollY > lastScrollY && currentScrollY > 80));
+      setLastScrollY(currentScrollY);
+    };
 
-  window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, [lastScrollY]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
   return (
     <>
@@ -81,37 +83,72 @@ useEffect(() => {
             <Heart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
 
             {/* USER DROPDOWN */}
-            <div className="relative group">
-              <User className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
+            {user ? (
+              <div className="relative group flex items-center gap-2">
+                {/* Avatar */}
+                <Link href={"/profile"}>
+                <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black font-bold cursor-pointer">
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+                </Link>
 
-              <div
-                className="absolute right-0 mt-4 w-40 bg-black/90 backdrop-blur-xl
-                border border-[#00ff00]/30 rounded-xl shadow-xl overflow-hidden
-                opacity-0 invisible group-hover:visible group-hover:opacity-100
-                transition-all duration-300"
-              >
-                <Link href={"/signup"}>
-                <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
-                  Sign Up
-                </button>
-                </Link>
-                <Link href={"/login"}>
-                <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
-                  Sign In
-                </button>
-                </Link>
+                {/* Dropdown */}
+                <div
+                  className="absolute right-0 mt-36 w-40 bg-black/90 backdrop-blur-xl
+                    border border-[#00ff00]/30 rounded-xl shadow-xl overflow-hidden
+                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                    transition-all duration-300"
+                >
+                     <Link href={"/profile"}>
+                  <button
+                     className="w-full px-4 py-3 cursor-pointer text-left text-white hover:bg-[#00ff00]/10"
+                     >
+                    Profile
+                  </button>
+                    </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full px-4 py-3 cursor-pointer text-left text-white hover:bg-red-600/10"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="relative group">
+                <User className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
+
+                <div
+                  className="absolute right-0 mt-4 w-40 bg-black/90 backdrop-blur-xl
+                    border border-[#00ff00]/30 rounded-xl shadow-xl overflow-hidden
+                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                    transition-all duration-300"
+                >
+                  <Link href={"/signup"}>
+                    <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
+                      Sign Up
+                    </button>
+                  </Link>
+                  <Link href={"/login"}>
+                    <button className="w-full px-4 py-3 text-left text-white hover:bg-[#00ff00]/10">
+                      Sign In
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
 
       {/* MOBILE NAVBAR */}
       {/* MOBILE BOTTOM NAVBAR */}
-      <div className={`md:hidden fixed top-0 left-0 w-full z-50
+      <div
+        className={`md:hidden fixed top-0 left-0 w-full z-50
         transition-transform duration-500 ease-in-out
         ${showNav ? "translate-y-0" : "-translate-y-full"}
-        bg-black/70 backdrop-blur-xl border-b border-[#0d400d]`}>
+        bg-black/70 backdrop-blur-xl border-b border-[#0d400d]`}
+      >
         {/* Search */}
         <div className="flex items-center px-4 py-3 gap-2">
           <input
@@ -178,14 +215,25 @@ useEffect(() => {
             <ShoppingCart size={22} className="text-[#00ff00]" />
             Cart
           </Link>
-
-          <Link
-            href="/profile"
-            className="flex flex-col items-center text-white text-xs"
-          >
-            <User size={22} className="text-[#00ff00]" />
-            Profile
-          </Link>
+          {user ? (
+            <Link
+              href={"/profile"}
+              className="flex flex-col items-center text-white text-xs"
+            >
+              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-black font-bold cursor-pointer">
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+              Profile
+            </Link>
+          ) : (
+            <Link
+              href="/profile"
+              className="flex flex-col items-center text-white text-xs"
+            >
+              <User size={22} className="text-[#00ff00]" />
+              Profile
+            </Link>
+          )}
         </div>
       </div>
     </>

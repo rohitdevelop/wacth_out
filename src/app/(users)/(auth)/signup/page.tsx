@@ -3,41 +3,43 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signupuser } from "../../../../../api/auth/auth.api";
-import { redirect } from "next/dist/server/api-utils";
-
+import { useAuth } from "../../../../../hooks/useAuth";
+import { UserForm } from "../../../../../types/auth";
 const Page = () => {
-  const [user, setuser] = useState({
+  const [user, setUser] = useState<UserForm>({
     name: "",
     email: "",
     password: "",
     age: "",
     gender: "",
   });
-const router = useRouter()
+  const router = useRouter();
+  const { handleSignup } = useAuth();
   const handlChange = (e: any) => {
-    setuser({ ...user, [e.target.name]: e.target.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    try {
-      const res = await signupuser({ ...user, age: Number(user.age) });
+     await handleSignup({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      age: Number(user.age),
+      gender: user.gender,
+    });
+ 
+    // optional: clear form
+    setUser({
+      name: "",
+      email: "",
+      password: "",
+      age: "",
+      gender: "",
+    });
 
-      setuser({
-        name: "",
-        email: "",
-        password: "",
-        age: "",
-        gender: "",
-      });
-      
-
-      router.push("/login")
-    } catch (err: any) {
-      console.log(err.response?.data);
-    }
+    router.push("/login");
   };
 
   return (
@@ -112,7 +114,7 @@ const router = useRouter()
               <label className="text-sm text-neutral-400">Password</label>
               <input
                 type="password"
-                 name="password"
+                name="password"
                 value={user.password}
                 onChange={handlChange}
                 placeholder="Enter password"
@@ -127,8 +129,8 @@ const router = useRouter()
                 <input
                   type="number"
                   onChange={handlChange}
-                   name="age"
-                value={user.age}
+                  name="age"
+                  value={user.age}
                   placeholder="Age"
                   className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
                 />

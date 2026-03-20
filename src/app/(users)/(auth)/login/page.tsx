@@ -3,15 +3,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signinuser } from "../../../../../api/auth/auth.api"; // Your login API function
-
+ import { useAuth } from "../../../../../hooks/useAuth";
 const Page = () => {
-  const router = useRouter();
-
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const router = useRouter();
+  const {handleSignin}= useAuth()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -19,21 +18,17 @@ const Page = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const res = await signinuser(user);
-      console.log(res);
-      
-      // Clear form
-      setUser({
+
+
+  await handleSignin({...user});
+  
+       setUser({
         email: "",
         password: "",
       });
 
-      // Redirect after login (change path if needed)
-      router.push("/"); // example path
-    } catch (err: any) {
-      console.log(err.response?.data || err.message);
-    }
+       router.push("/");  
+   
   };
 
   return (
@@ -114,7 +109,7 @@ const Page = () => {
 
           {/* Footer */}
           <p className="mt-6 text-center text-sm text-neutral-500">
-            Don't have an account?{" "}
+            Dont have an account?{" "}
             <Link href={"/signup"}>
               <span className="font-medium text-[#00ff00] cursor-pointer">
                 Sign Up
