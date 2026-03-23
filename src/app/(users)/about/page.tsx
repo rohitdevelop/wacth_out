@@ -98,8 +98,8 @@ export default function AboutPage() {
             </span>
           </h1>
           <p className="text-white/50 text-lg leading-relaxed max-w-xl mx-auto mb-10">
-            We curate the worlds finest timepieces for those who understand
-            that true luxury is measured in precision — not just style.
+            We curate the worlds finest timepieces for those who understand that
+            true luxury is measured in precision — not just style.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
@@ -257,9 +257,7 @@ export default function AboutPage() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-white/55 text-sm leading-relaxed italic flex-1">
-                 
-                </p>
+                <p className="text-white/55 text-sm leading-relaxed italic flex-1"></p>
                 <div className="flex items-center gap-3 mt-6 pt-5 border-t border-white/5">
                   <div
                     className="w-9 h-9 rounded-full flex items-center justify-center font-mono text-xs font-medium text-black"

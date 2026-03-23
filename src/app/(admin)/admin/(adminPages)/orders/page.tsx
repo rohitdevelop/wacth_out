@@ -1,9 +1,10 @@
 import React from 'react'
- const page = () => {
+
+const page = () => {
   return (
     <div>
-        hello
-     </div>
+      hello order page
+    </div>
   )
 }
 
