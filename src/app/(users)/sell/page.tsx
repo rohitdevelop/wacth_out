@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import WatchForm from "@/components/Sell/WatchForm";
-import SellerForm from "@/components/Sell/SellerForm";
-import Footer from "@/components/Home/Footer";
+import WatchForm from "../../../components/Sell/WatchForm";
+import SellerForm from "../../../components/Sell/SellerForm";
+import Footer from "../../../components/Home/Footer";
 import Image from "next/image";
 
 const steps = [

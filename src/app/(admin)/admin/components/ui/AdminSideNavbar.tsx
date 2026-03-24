@@ -11,7 +11,6 @@ import {
   Settings,
   LogOut,
   Menu,
-  X,
 } from "lucide-react";
 
 const nav = [
@@ -28,40 +27,42 @@ export default function Sidebar() {
   const [active, setActive] = useState("Dashboard");
 
   return (
-    <aside
-      className={`
-        fixed top-0 left-0 h-screen z-40 flex flex-col
-        bg-zinc-950/90 backdrop-blur-xl border-r border-white/10 text-white
-        transition-all duration-300 ease-in-out
+   <aside
+  className={`
+    fixed top-0 left-0 h-screen z-40 flex flex-col
+    text-white
+    transition-all duration-300 ease-in-out
 
-        ${open ? "w-64" : "w-16"} 
-        lg:w-64
+     bg-gradient-to-r from-black via-zinc-950 to-green-950/80
+
+     backdrop-blur-xl border-r border-green-500/20
+
+     shadow-[0_0_30px_rgba(0,255,0,0.05)]
+
+        ${open ? "w-64" : "w-16"}   
+        lg:w-64                   
       `}
     >
-      {/* 🔘 Toggle Button */}
+      {/* 🔘 Toggle */}
       <button
         onClick={() => setOpen(!open)}
-        className="md:hidden p-2 bg-green-600/20 w-8 text-green-400 rounded-lg transition duration-200"
+        className="lg:hidden m-2 p-2 bg-green-600/20 w-8 text-green-400 rounded-lg"
       >
-        <span className="transition-all duration-300">
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </span>
+        <Menu size={18} />
       </button>
 
       {/* 👤 Profile */}
       <div className="flex flex-col items-center px-2 pb-6 border-b border-white/10 mt-4">
-        <div className="relative w-14 h-14 mb-3">
-          <div className="rounded-full flex items-center justify-center bg-gradient-to-br from-black to-green-900 border border-green-500/30 w-full h-full">
-            <span className="text-green-400 font-bold">RS</span>
-          </div>
+        <div className="w-14 h-14 mb-3 rounded-full flex items-center justify-center bg-gradient-to-br from-black to-green-900 border border-green-500/30">
+          <span className="text-green-400 font-bold">RS</span>
         </div>
 
-        {/* 👇 Smooth show/hide */}
+        {/* 👇 show only when open */}
         <div
           className={`
             transition-all duration-300 text-center
-            ${open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 h-0 overflow-hidden"}
-            lg:opacity-100 lg:translate-y-0 lg:h-auto
+            ${open ? "opacity-100" : "opacity-0 h-0 overflow-hidden"}
+            lg:opacity-100 lg:h-auto
           `}
         >
           <p className="text-sm font-semibold">Rohit Singh</p>
@@ -79,45 +80,62 @@ export default function Sidebar() {
             href={path}
             onClick={() => setActive(name)}
             className={`
-              flex items-center gap-3 px-3 py-2.5 rounded-xl
-              transition-all duration-300
-              ${
-                active === name
-                  ? "bg-green-600/20 text-green-400"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-white"
-              }
-            `}
-          >
-            <Icon size={18} />
+        flex items-center px-3 py-2.5 rounded-xl
+        transition-all duration-300
 
-            {/* 👇 Smooth text animation */}
+        ${open ? "gap-3 justify-start" : "gap-0 justify-center lg:gap-2 lg:justify-start"}
+
+        ${
+          active === name
+            ? "bg-green-600/20 text-green-400"
+            : "text-zinc-400 hover:bg-white/5 hover:text-white"
+        }
+      `}
+          >
+            <Icon
+              className={`
+          transition-all duration-300
+          ${open ? "w-5 h-5" : "w-7 h-7"}
+          lg:w-5 lg:h-5
+        `}
+            />
+
             <span
               className={`
-                text-sm whitespace-nowrap transition-all duration-300
-                ${open ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 w-0 overflow-hidden"}
-                lg:opacity-100 lg:translate-x-0 lg:w-auto
-              `}
+          text-sm whitespace-nowrap transition-all duration-300
+          ${open ? "opacity-100 ml-1" : "opacity-0 w-0 overflow-hidden"}
+          lg:opacity-100 lg:w-auto
+        `}
             >
               {name}
             </span>
           </Link>
         ))}
       </nav>
-
       {/* 🚪 Logout */}
       <div className="p-2 border-t border-white/10">
         <Link
           href="/logout"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-red-400 hover:bg-red-500/10 transition"
+          className={`
+      flex items-center px-3 py-2.5 rounded-xl transition-all duration-300 text-red-400 hover:bg-red-500/10
+
+      ${open ? "gap-3 justify-start" : "gap-0 justify-center lg:gap-3 lg:justify-start"}
+    `}
         >
-          <LogOut size={18} />
+          <LogOut
+            className={`
+        transition-all duration-300
+        ${open ? "w-5 h-5" : "w-7 h-7"}
+        lg:w-5 lg:h-5
+      `}
+          />
 
           <span
             className={`
-              text-sm whitespace-nowrap transition-all duration-300
-              ${open ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 w-0 overflow-hidden"}
-              lg:opacity-100 lg:translate-x-0 lg:w-auto
-            `}
+        text-sm whitespace-nowrap transition-all duration-300
+        ${open ? "opacity-100 ml-1" : "opacity-0 w-0 overflow-hidden"}
+        lg:opacity-100 lg:w-auto lg:ml-1
+      `}
           >
             Sign Out
           </span>

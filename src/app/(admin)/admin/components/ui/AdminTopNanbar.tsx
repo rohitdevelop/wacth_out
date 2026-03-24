@@ -3,28 +3,38 @@
 import React from "react";
 import { Bell, Search } from "lucide-react";
 
-const AdminTopNavbar = (  ) => {
+const AdminTopNavbar = () => {
   return (
-    <header
-      className={`
-        fixed top-0 right-0 z-30 h-16
-        bg-zinc-950/90 backdrop-blur-xl border-b border-white/10
-        flex items-center justify-between px-4 md:px-6 text-white
-        transition-all duration-300
+  <header
+  className="
+    fixed top-0 right-0 z-30 h-16
+    flex items-center justify-between px-4 md:px-6 text-white
+    transition-all duration-300
  
-      `}
-    >
+    left-16 lg:left-64
+
+ 
+    bg-gradient-to-b from-black via-zinc-950 to-green-950/80
+
+ 
+    backdrop-blur-xl border-b border-green-500/20
+
+    
+    shadow-[0_5px_30px_rgba(0,255,0,0.05)]
+  "
+>
       {/* 🧠 Welcome Text */}
+      <div className="">
+
       <h1 className="text-sm md:text-base font-semibold whitespace-nowrap">
         Arvento
         <span className="text-[#00ff00]">Chrono</span>
       </h1>
 
-      {/* 🔍 Search + 🔔 Notification */}
-      <div className="flex items-center gap-3">
-        
-        {/* 🔍 Search */}
-        <div className="relative">
+      </div>
+      
+       <div className="flex items-center gap-3">
+         <div className="relative">
           <Search
             size={16}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
@@ -36,12 +46,10 @@ const AdminTopNavbar = (  ) => {
           />
         </div>
 
-        {/* 🔔 Notification */}
-        <div className="relative cursor-pointer p-2 rounded-lg hover:bg-white/5 transition">
+         <div className="relative cursor-pointer p-2 rounded-lg hover:bg-white/5 transition">
           <Bell size={18} />
 
-          {/* 🔴 Notification Dot */}
-          <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full"></span>
+           <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full"></span>
         </div>
       </div>
     </header>

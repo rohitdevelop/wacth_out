@@ -10,16 +10,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <>
-      <main>
-        <AdminTopNanbar />
-        <AdminSideNavbar />
+    <div>
+      {/* 🔝 Top Navbar */}
+      <AdminTopNanbar />
+
+      {/* 📌 Sidebar */}
+      <AdminSideNavbar />
+
+      {/* 📦 Main Content */}
+      <main
+        className={`
+          min-h-screen
+          mt-16
+          ml-16 lg:ml-64
+          p-4 md:p-6
+          transition-all duration-300
+        `}
+      >
         {children}
       </main>
-    </>
+    </div>
   );
 }

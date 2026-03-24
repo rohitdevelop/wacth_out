@@ -3,7 +3,7 @@ import React from 'react'
 const admindhashboard = () => {
   return (
     <div>
-      hello
+      hello kaise ho 
     </div>
   )
 }
