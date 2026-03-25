@@ -22,4 +22,5 @@ export interface Login {
 export interface SafeUser {
   name: string;
   email: string;
+  role: string
 }

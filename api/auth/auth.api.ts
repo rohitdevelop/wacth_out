@@ -13,3 +13,7 @@ export const signinuser = async (data: Login) =>{
 export const logoutuser = async () =>{
    await api.post("auth/logoutuser")
 }
+export const getMe = async () => {
+  const res = await api.get("auth/me");  
+  return res.data;
+};

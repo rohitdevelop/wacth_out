@@ -1,36 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
- import { useAuth } from "../../../../../hooks/useAuth";
+import { useAuth } from "../../../../../hooks/useAuth";
 const Page = () => {
-  const [user, setUser] = useState({
+  const [formDeta, setFormDeta] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
-  const {handleSignin}= useAuth()
+  const { handleSignin, user } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setFormDeta({ ...formDeta, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-
-  await handleSignin({...user});
-  
-       setUser({
-        email: "",
-        password: "",
-      });
-
-       router.push("/");  
-   
+    await handleSignin({ ...formDeta });
   };
-
+  useEffect(() => {
+    if (user?.role === "admin") {
+      router.push("/admin/dashboard");
+    } else if (user) {
+      router.push("/");
+    }
+  }, [user]);
   return (
     <div className="relative min-h-screen w-full flex bg-black text-black overflow-hidden">
       {/* LEFT SIDE IMAGE */}
@@ -77,7 +73,7 @@ const Page = () => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                value={user.email}
+                value={formDeta.email}
                 onChange={handleChange}
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
                 required
@@ -91,7 +87,7 @@ const Page = () => {
                 type="password"
                 name="password"
                 placeholder="Enter password"
-                value={user.password}
+                value={formDeta.password}
                 onChange={handleChange}
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
                 required

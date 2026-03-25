@@ -1,7 +1,14 @@
 "use client";
+
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { signinuser, signupuser,logoutuser } from "../api/auth/auth.api";
+import {
+  signinuser,
+  signupuser,
+  logoutuser,
+  getMe as getMeApi,
+} from "../api/auth/auth.api";
 import { User, Login, SafeUser } from "../types/auth";
+
 interface AuthContextType {
   user: SafeUser | null;
   loading: boolean;
@@ -11,7 +18,7 @@ interface AuthContextType {
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined,
+  undefined
 );
 
 interface Props {
@@ -20,29 +27,29 @@ interface Props {
 
 export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<SafeUser | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // 🔥 initially true
 
-  // Auto login
-useEffect(() => {
-  const storedUser = localStorage.getItem("user");
+  // 🔥 Auto login using /me
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getMeApi();
+        setUser(res.user);
+      } catch (err) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (storedUser && storedUser !== "undefined") {
-    try {
-      setUser(JSON.parse(storedUser));
-    } catch (err) {
-      console.log("Invalid JSON:", err);
-      localStorage.removeItem("user"); // clean bad data
-    }
-  }
-}, []);
+    fetchUser();
+  }, []);
 
   const handleSignup = async (data: User) => {
     setLoading(true);
     try {
       const res = await signupuser(data);
- 
       setUser(res.user);
-       localStorage.setItem("user", JSON.stringify(res.user));
     } catch (err) {
       console.log(err);
     } finally {
@@ -54,10 +61,7 @@ useEffect(() => {
     setLoading(true);
     try {
       const res = await signinuser(data);
-
-   
       setUser(res.user);
-       localStorage.setItem("user", JSON.stringify(res.user));
     } catch (err) {
       console.log(err);
     } finally {
@@ -65,25 +69,22 @@ useEffect(() => {
     }
   };
 
-
-const handleLogout = async () => {
-  setLoading(true);
-  try {
-    await logoutuser(); 
-
-    setUser(null);  
-    
- localStorage.removeItem("user");
-
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleLogout = async () => {
+    setLoading(true);
+    try {
+      await logoutuser();
+      setUser(null);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ user, loading, handleSignup, handleSignin,handleLogout }}>
+    <AuthContext.Provider
+      value={{ user, loading, handleSignup, handleSignin, handleLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );
