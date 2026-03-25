@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import WatchForm from "@/components/Sell/WatchForm";
-import SellerForm from "@/components/Sell/SellerForm";
+import WatchForm from "@/components/sell/WatchForm";
+import SellerForm from "@/components/sell/SellerForm";
 import Footer from "@/components/Home/Footer";
 import Image from "next/image";
 import { Watch, User, Truck, DollarSign } from "lucide-react";

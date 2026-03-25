@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <h2 className="text-lg sm:text-xl md:text-2xl font-light tracking-widest uppercase text-gray-100 mb-6">
-          Luxury Watches That Define You
+          Luxury Watches That Define You changes
         </h2>
 
         <p className="text-sm sm:text-base md:text-lg text-gray-400 mb-10 leading-relaxed  max-w-2xl mx-auto">
