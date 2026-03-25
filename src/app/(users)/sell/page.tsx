@@ -1,81 +1,36 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import WatchForm from "../../../components/Sell/WatchForm";
-import SellerForm from "../../../components/Sell/SellerForm";
-import Footer from "../../../components/Home/Footer";
+import WatchForm from "@/components/Sell/WatchForm";
+import SellerForm from "@/components/Sell/SellerForm";
+import Footer from "@/components/Home/Footer";
 import Image from "next/image";
-
+import { Watch, User, Truck, DollarSign } from "lucide-react";
 const steps = [
   {
     number: "01",
     title: "Describe Your Watch",
     description:
       "Fill in your watch details — brand, model, condition, and photos.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-7 h-7"
-      >
-        <rect x="6" y="2" width="12" height="20" rx="3" />
-        <path d="M9 7h6M9 12h6M9 17h3" />
-      </svg>
-    ),
+    icon:<Watch className="w-7 h-7" />,
   },
   {
     number: "02",
     title: "Your Information",
     description: "Provide your contact details so we can schedule a pickup.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-7 h-7"
-      >
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-      </svg>
-    ),
+    icon: <User className="w-7 h-7" />,
   },
   {
     number: "03",
     title: "We Come to You",
     description: "Our courier picks up your watch directly from your location.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-7 h-7"
-      >
-        <path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" />
-        <rect x="9" y="11" width="14" height="10" rx="1" />
-        <circle cx="12" cy="21" r="1" />
-        <circle cx="20" cy="21" r="1" />
-      </svg>
-    ),
+    icon: <Truck className="w-7 h-7" />,
   },
   {
     number: "04",
     title: "Get Listed & Paid",
     description: "Your watch appears on our platform within 2–3 business days.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-7 h-7"
-      >
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" />
-      </svg>
-    ),
+    icon: <DollarSign className="w-7 h-7" />,
   },
 ];
 
