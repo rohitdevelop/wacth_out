@@ -73,17 +73,19 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-          aria-hidden
-        >
-          <div className="absolute w-[480px] h-[480px] rounded-full border border-[#00ff00]/8" />
-          <div className="absolute w-[320px] h-[320px] rounded-full border border-[#00ff00]/5" />
-          <div className="absolute w-[640px] h-[640px] rounded-full border border-white/3" />
-        </div>
+      <section
+        style={{
+          backgroundImage:
+            "url('https://c4.wallpaperflare.com/wallpaper/38/1014/441/watch-luxury-watches-wallpaper-preview.jpg')",
+        }}
+        className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden bg-cover bg-center bg-no-repeat"
+      >
+        {/* ✅ Radial Glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/90 -z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,255,0,0.08),transparent)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_50%_at_50%_50%,rgba(0,255,0,0.04),transparent)] pointer-events-none" />
 
+        {/* ✅ Content */}
         <div className="relative z-10 max-w-3xl">
           <p
             className="text-xs tracking-[.3em] uppercase mb-5"
@@ -91,24 +93,25 @@ export default function AboutPage() {
           >
             Est. 2019 · Premium Timepieces
           </p>
+
           <h1 className="text-5xl md:text-7xl font-light leading-[1.05] mb-6">
             About{" "}
             <span className="font-semibold" style={{ color: G }}>
               ArventoChrono
             </span>
           </h1>
-          <p className="text-white/50 text-lg leading-relaxed max-w-xl mx-auto mb-10">
+
+          <p className="text-white/70 text-lg leading-relaxed max-w-xl mx-auto mb-10">
             We curate the worlds finest timepieces for those who understand that
             true luxury is measured in precision — not just style.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              className="px-8 py-3.5 rounded-full text-black text-sm font-semibold tracking-wide hover:brightness-110"
-              style={{ background: G }}
-            >
+            <button className="px-8 py-3.5 text-black bg-white text-sm font-semibold tracking-wide hover:bg-gray-200 cursor-pointer">
               Explore Collection
             </button>
-            <button className="px-8 py-3.5 rounded-full text-sm border border-white/15 text-white/70 hover:bg-white/5">
+
+            <button className="px-8 py-3.5 text-sm border border-white text-white/70 hover:bg-white hover:text-black">
               Our Story ↓
             </button>
           </div>
@@ -117,7 +120,7 @@ export default function AboutPage() {
 
       {/* ── STATS ────────────────────────────────────────────── */}
       <div className="border-y border-white/5 bg-[#0a0a0a] py-12 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p
@@ -135,7 +138,7 @@ export default function AboutPage() {
       </div>
 
       {/* ── STORY ────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+      <section className="px-6 md:px-16 lg:px-32 max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 py-24 items-center">
         <div className="relative">
           <div className="absolute -inset-3 rounded-2xl border border-[#00ff00]/8 -z-10" />
           <Image
@@ -198,7 +201,7 @@ export default function AboutPage() {
 
       {/* ── FEATURES ─────────────────────────────────────────── */}
       <section className="bg-[#0a0a0a] py-24 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p
               className="text-xs tracking-[.25em] uppercase mb-3"
@@ -278,7 +281,7 @@ export default function AboutPage() {
 
       {/* ── CTA ──────────────────────────────────────────────── */}
       <section className="px-6 py-24">
-        <div className="max-w-4xl mx-auto rounded-3xl border border-[#00ff00]/15 bg-[#0a0a0a] p-10 md:p-16 text-center relative overflow-hidden">
+      <div className="max-w-7xl mx-auto border border-gray-600 bg-gradient-to-br from-black via-[#0a0a0a] to-[#001a0d] p-10 md:p-16 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_50%_at_50%_50%,rgba(0,255,0,0.05),transparent)] pointer-events-none" />
           <div className="relative z-10">
             <p
@@ -296,15 +299,13 @@ export default function AboutPage() {
             </h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
               <button
-                className="px-9 py-4 rounded-full text-black font-semibold text-sm tracking-wide hover:brightness-110"
-                style={{ background: G }}
-              >
+                className="px-9 py-4 text-black bg-white font-semibold cursor-pointer text-sm tracking-wide hover:brightness-110"
+               >
                 Shop Collection
               </button>
               <button
-                className="px-9 py-4 rounded-full text-sm border hover:bg-white/5"
-                style={{ borderColor: `${G}30`, color: `${G}cc` }}
-              >
+                className="px-9 py-4  text-sm border hover:bg-white hover:text-black cursor-pointer"
+               >
                 Book a Consultation
               </button>
             </div>

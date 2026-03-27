@@ -149,7 +149,7 @@ const Category = () => {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <button className="px-8 py-3 sm:px-10 sm:py-4 bg-white text-black font-bold hover:bg-gray-100">
+          <button className="px-8 py-3 sm:px-10 cursor-pointer sm:py-4 bg-white text-black font-bold hover:bg-gray-100">
             View All Collections
           </button>
         </div>

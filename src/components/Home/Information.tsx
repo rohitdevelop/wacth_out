@@ -421,7 +421,7 @@ export default function ReviewCarousel() {
               Discover precision, elegance and timeless craftsmanship. Elevate
               your style with iconic performance.
             </p>
-            <button className="mt-15 px-8 py-3 font-semibold tracking-wider bg-white text-black hover:bg-gray-200">
+            <button className="mt-15 px-8 py-3 font-semibold tracking-wider bg-white text-black cursor-pointer hover:bg-gray-200">
               SHOP NOW
             </button>
           </div>

@@ -286,7 +286,7 @@ export default function SellPage() {
             </div>
 
             {/* Right: form */}
-            <div className="bg-[#111] border border-neutral-800 p-8 md:p-10">
+            <div className="bg-gradient-to-l from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] border border-neutral-600  p-8 md:p-10">
               <WatchForm
                 watchImage={watchImage}
                 setWatchImage={setWatchImage}
@@ -303,7 +303,7 @@ export default function SellPage() {
 
           {/* Seller Form */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <div className="bg-[#111] border border-neutral-800 p-8 md:p-10 lg:order-1 order-1">
+            <div className="bg-gradient-to-r from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] border border-neutral-600 p-8 md:p-10 lg:order-1 order-1">
               <SellerForm
                 sellerImage={sellerImage}
                 setSellerImage={setSellerImage}
@@ -387,7 +387,7 @@ export default function SellPage() {
 
         <div className=" space-y-0">
           {faqs.map((faq, i) => (
-            <div key={i} className="border-t border-neutral-800 last:border-b">
+            <div key={i} className="border-t border-neutral-500 last:border-b">
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 className="w-full flex items-center justify-between py-7 text-left group"
@@ -426,10 +426,8 @@ export default function SellPage() {
         <p className="text-[#00ff00] text-xs tracking-[0.35em] uppercase mb-6 font-['Montserrat',sans-serif]">
           Ready to begin?
         </p>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mb-10 max-w-2xl mx-auto">
-          Your watch deserves
-          <br />
-          the right audience.
+        <h2 className="text-7xl sm:text-5xl lg:text-6xl font-light tracking-tight mb-10 max-w-2xl mx-auto">
+          Your watch deserves the right audience.
         </h2>
         <a
           href="#sell-form"

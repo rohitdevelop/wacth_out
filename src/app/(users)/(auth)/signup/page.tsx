@@ -61,15 +61,12 @@ const Page = () => {
       <div
         className="w-full lg:w-1/2 flex items-center justify-center 
         px-4 sm:px-6 md:px-10 lg:px-12 
-        pt-24 pb-20 sm:pt-28 sm:pb-24  /* 👈 navbar space top/bottom */
+        pt-24 pb-20 sm:pt-28 sm:pb-24  
       "
       >
         {/* WHITE CARD */}
         <div
-          className="w-full max-w-md 
-          bg-[#111] border border-neutral-800 shadow-2xl 
-          px-6 py-6 sm:px-8 sm:py-8 md:p-10
-        "
+          className="w-full max-w-md bg-gradient-to-l from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] border border-neutral-600  px-6 py-6 sm:px-8 sm:py-8 md:p-10"
         >
           {/* Heading */}
           <div className="mb-4 text-center">
@@ -155,7 +152,7 @@ const Page = () => {
             {/* Button */}
             <button
               type="submit"
-              className="w-full mt-4 bg-black text-white border border-white py-3 font-semibold hover:bg-white hover:text-black transition"
+              className="w-full mt-4 bg-black text-white border border-white py-3 cursor-pointer font-semibold hover:bg-white hover:text-black transition"
             >
               Sign Up
             </button>

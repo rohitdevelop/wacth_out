@@ -157,11 +157,11 @@ const Product = () => {
 
         {/* CTA */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 justify-center lg:justify-end">
-          <button className="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 tracking-wider text-xs sm:text-sm hover:bg-zinc-200 transition">
+          <button className="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 tracking-wider text-xs cursor-pointer sm:text-sm hover:bg-zinc-200 transition">
             EXPLORE
           </button>
 
-          <button className="border border-zinc-600 px-6 sm:px-8 py-3 sm:py-4 tracking-wider text-xs sm:text-sm hover:bg-white hover:text-black transition">
+          <button className="border border-zinc-600 px-6 sm:px-8 py-3 sm:py-4 tracking-wider text-xs cursor-pointer sm:text-sm hover:bg-white hover:text-black transition">
             DETAILS
           </button>
         </div>

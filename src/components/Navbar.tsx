@@ -79,8 +79,12 @@ const Navbar: React.FC = () => {
 
           {/* ICONS */}
           <div className="hidden md:flex items-center space-x-4">
+            <Link href={'/cart'}>
             <ShoppingCart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
+            </Link>
+            <Link href={'/wishlist'}>
             <Heart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
+            </Link>
 
             {/* USER DROPDOWN */}
             {user ? (
