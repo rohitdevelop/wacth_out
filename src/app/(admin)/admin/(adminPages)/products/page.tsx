@@ -1,26 +1,20 @@
 "use client";
 
 import React from "react";
-import { Eye, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye } from "lucide-react";
 
-const orders = [
+const products = [
   {
-    id: "#ORD123",
-    user: "Rohit Singh",
-    total: "₹12,500",
-    status: "Delivered",
+    id: 1,
+    name: "Rolex Submariner",
+    price: "₹8,50,000",
+    status: "Active",
   },
   {
-    id: "#ORD124",
-    user: "Amit Kumar",
-    total: "₹8,200",
-    status: "Pending",
-  },
-  {
-    id: "#ORD125",
-    user: "John Doe",
-    total: "₹15,000",
-    status: "Cancelled",
+    id: 2,
+    name: "Omega Speedmaster",
+    price: "₹5,20,000",
+    status: "Inactive",
   },
 ];
 
@@ -34,70 +28,73 @@ const Page = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 ">
 
         {/* 🔥 Header */}
-        <div className="mb-10">
+        <div className="flex items-center justify-between mb-10">
           <h1 className="text-4xl font-semibold">
-            Manage <span className="text-[#00ff00]">Orders</span>
+            Manage <span className="text-[#00ff00]">Products</span>
           </h1>
-          <p className="text-neutral-400 mt-2 text-sm">
-            Track and manage all customer orders
-          </p>
+
+          {/* Add Product */}
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-[#00ff00] text-black text-sm font-semibold hover:opacity-90 transition rounded-md">
+            <Plus size={16} />
+            Add Product
+          </button>
         </div>
 
         {/* 📦 Table */}
         <div className="border border-neutral-800 rounded-xl overflow-hidden bg-white/5 backdrop-blur-md">
 
           {/* Table Head */}
-          <div className="grid grid-cols-5 px-6 py-4 text-sm text-neutral-400 border-b border-neutral-800">
-            <span>Order ID</span>
-            <span>User</span>
-            <span>Total</span>
+          <div className="grid grid-cols-4 px-6 py-4 text-sm text-neutral-400 border-b border-neutral-800">
+            <span>Product</span>
+            <span>Price</span>
             <span>Status</span>
             <span className="text-right">Actions</span>
           </div>
 
           {/* Table Body */}
-          {orders.map((order) => (
+          {products.map((item) => (
             <div
-              key={order.id}
-              className="grid grid-cols-5 px-6 py-4 items-center border-b border-neutral-900 hover:bg-white/5 transition"
+              key={item.id}
+              className="grid grid-cols-4 px-6 py-4 items-center border-b border-neutral-900 hover:bg-white/5 transition"
             >
-              <span className="text-white">{order.id}</span>
+              <span className="text-white">{item.name}</span>
 
-              <span className="text-neutral-300">{order.user}</span>
+              <span className="text-neutral-300">{item.price}</span>
 
-              <span className="text-neutral-300">{order.total}</span>
-
-              {/* Status */}
               <span
                 className={`text-xs px-2 py-1 rounded w-fit ${
-                  order.status === "Delivered"
-                    ? "bg-green-500/10 text-green-400"
-                    : order.status === "Pending"
-                    ? "bg-yellow-500/10 text-yellow-400"
+                  item.status === "Active"
+                    ? "bg-[#00ff00]/10 text-[#00ff00]"
                     : "bg-red-500/10 text-red-400"
                 }`}
               >
-                {order.status}
+                {item.status}
               </span>
 
               {/* Actions */}
               <div className="flex justify-end gap-3">
+
                 <button className="p-2 border border-neutral-700 hover:border-[#00ff00] hover:text-[#00ff00] transition rounded-md">
                   <Eye size={16} />
+                </button>
+
+                <button className="p-2 border border-neutral-700 hover:border-blue-400 hover:text-blue-400 transition rounded-md">
+                  <Pencil size={16} />
                 </button>
 
                 <button className="p-2 border border-neutral-700 hover:border-red-500 hover:text-red-500 transition rounded-md">
                   <Trash2 size={16} />
                 </button>
+
               </div>
             </div>
           ))}
         </div>
 
-        {/* Empty State */}
-        {orders.length === 0 && (
+        {/* ⚡ Empty State (optional) */}
+        {products.length === 0 && (
           <div className="text-center mt-10 text-neutral-400">
-            No orders found
+            No products found
           </div>
         )}
 

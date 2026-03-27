@@ -19,7 +19,7 @@ const nav = [
   { name: "Orders", icon: ShoppingCart, path: "/admin/orders" },
   { name: "Forsell", icon: Tag, path: "/admin/forsell" },
   { name: "Users", icon: Users, path: "/admin/users" },
-  { name: "Settings", icon: Settings, path: "/admin/settings" },
+  { name: "Profile", icon: Settings, path: "/admin/profile" },
 ];
 
 export default function Sidebar() {

@@ -6,7 +6,7 @@ export function proxy(req: NextRequest) {
   const token = req.cookies.get("jwt_token")?.value;
   const pathname = req.nextUrl.pathname;
 
-const protectedRoutes = ["/dashboard", "/admin", "/cart", "/wishlist"];
+const protectedRoutes = ["/cart", "/wishlist"];
 
 const isProtected = protectedRoutes.some((route) =>
   pathname.startsWith(route)
@@ -20,7 +20,7 @@ if (!token && isProtected) {
 
 export const config = {
   matcher: [
-    "/admin/:path*",
+    // "/admin/:path*",
     "/cart",
     "/wishlist",
   ],
