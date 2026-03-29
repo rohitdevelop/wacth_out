@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const nav = [
   { name: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
@@ -24,23 +25,13 @@ const nav = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("Dashboard");
-
+   const pathname = usePathname();
   return (
-   <aside
-  className={`
-    fixed top-0 left-0 h-screen z-40 flex flex-col
-    text-white
-    transition-all duration-300 ease-in-out
-
-     bg-gradient-to-r from-black via-zinc-950 to-green-950/80
-
-     backdrop-blur-xl border-r border-green-500/20
-
-     shadow-[0_0_30px_rgba(0,255,0,0.05)]
-
-        ${open ? "w-64" : "w-16"}   
-        lg:w-64                   
+    <aside
+      className={`
+    fixed top-0 left-0 h-screen z-40 flex flex-col text-white transition-all duration-300 ease-in-out bg-gradient-to-r from-black via-zinc-950 to-green-950/80
+     backdrop-blur-xl border-r border-green-500/20 shadow-[0_0_30px_rgba(0,255,0,0.05)]
+        ${open ? "w-64" : "w-16"} lg:w-64                   
       `}
     >
       {/* 🔘 Toggle */}
@@ -50,7 +41,6 @@ export default function Sidebar() {
       >
         <Menu size={18} />
       </button>
-
       {/* 👤 Profile */}
       <div className="flex flex-col items-center px-2 pb-6 border-b border-white/10 mt-4">
         <div className="w-14 h-14 mb-3 rounded-full flex items-center justify-center bg-gradient-to-br from-black to-green-900 border border-green-500/30">
@@ -71,14 +61,12 @@ export default function Sidebar() {
           </p>
         </div>
       </div>
-
       {/* 📌 Nav */}
-      <nav className="flex-1 py-3 space-y-1 px-2">
+       <nav className="flex-1 py-3 space-y-1 px-2">
         {nav.map(({ name, icon: Icon, path }) => (
           <Link
             key={name}
             href={path}
-            onClick={() => setActive(name)}
             className={`
         flex items-center px-3 py-2.5 rounded-xl
         transition-all duration-300
@@ -86,7 +74,7 @@ export default function Sidebar() {
         ${open ? "gap-3 justify-start" : "gap-0 justify-center lg:gap-2 lg:justify-start"}
 
         ${
-          active === name
+          pathname === path
             ? "bg-green-600/20 text-green-400"
             : "text-zinc-400 hover:bg-white/5 hover:text-white"
         }
