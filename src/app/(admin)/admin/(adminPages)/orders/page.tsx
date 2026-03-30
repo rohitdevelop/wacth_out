@@ -1,109 +1,13 @@
-"use client";
-
-import React from "react";
-import { Eye, Trash2 } from "lucide-react";
-
-const orders = [
-  {
-    id: "#ORD123",
-    user: "Rohit Singh",
-    total: "₹12,500",
-    status: "Delivered",
-  },
-  {
-    id: "#ORD124",
-    user: "Amit Kumar",
-    total: "₹8,200",
-    status: "Pending",
-  },
-  {
-    id: "#ORD125",
-    user: "John Doe",
-    total: "₹15,000",
-    status: "Cancelled",
-  },
-];
-
-const Page = () => {
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
-
-      {/* 🌌 Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,0,0.08),transparent_60%)] pointer-events-none" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 ">
-
-        {/* 🔥 Header */}
-        <div className="mb-10">
-          <h1 className="text-4xl font-semibold">
-            Manage <span className="text-[#00ff00]">Orders</span>
-          </h1>
-          <p className="text-neutral-400 mt-2 text-sm">
-            Track and manage all customer orders
-          </p>
-        </div>
-
-        {/* 📦 Table */}
-        <div className="border border-neutral-800 rounded-xl overflow-hidden bg-white/5 backdrop-blur-md">
-
-          {/* Table Head */}
-          <div className="grid grid-cols-5 px-6 py-4 text-sm text-neutral-400 border-b border-neutral-800">
-            <span>Order ID</span>
-            <span>User</span>
-            <span>Total</span>
-            <span>Status</span>
-            <span className="text-right">Actions</span>
-          </div>
-
-          {/* Table Body */}
-          {orders.map((order) => (
-            <div
-              key={order.id}
-              className="grid grid-cols-5 px-6 py-4 items-center border-b border-neutral-900 hover:bg-white/5 transition"
-            >
-              <span className="text-white">{order.id}</span>
-
-              <span className="text-neutral-300">{order.user}</span>
-
-              <span className="text-neutral-300">{order.total}</span>
-
-              {/* Status */}
-              <span
-                className={`text-xs px-2 py-1 rounded w-fit ${
-                  order.status === "Delivered"
-                    ? "bg-green-500/10 text-green-400"
-                    : order.status === "Pending"
-                    ? "bg-yellow-500/10 text-yellow-400"
-                    : "bg-red-500/10 text-red-400"
-                }`}
-              >
-                {order.status}
-              </span>
-
-              {/* Actions */}
-              <div className="flex justify-end gap-3">
-                <button className="p-2 border border-neutral-700 hover:border-[#00ff00] hover:text-[#00ff00] transition rounded-md">
-                  <Eye size={16} />
-                </button>
-
-                <button className="p-2 border border-neutral-700 hover:border-red-500 hover:text-red-500 transition rounded-md">
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {orders.length === 0 && (
-          <div className="text-center mt-10 text-neutral-400">
-            No orders found
-          </div>
-        )}
-
-      </div>
-    </div>
-  );
-};
-
-export default Page;
+ import React from 'react'
+import Orders from '../../components/admin/Orders'
+ 
+ const page = () => {
+   return (
+     <div>
+       <Orders/>
+     </div>
+   )
+ }
+ 
+ export default page
+ 
