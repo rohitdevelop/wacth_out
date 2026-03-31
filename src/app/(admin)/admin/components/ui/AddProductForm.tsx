@@ -97,7 +97,7 @@ const AddProductForm = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void })
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               type="submit"
-              className="w-full py-3 bg-[#00ff00] text-black font-semibold rounded-lg hover:opacity-90 transition"
+              className="w-full py-3 bg-white text-black font-semibold cursor-pointer hover:opacity-90 transition"
             >
               Add Product
             </button>
@@ -105,7 +105,7 @@ const AddProductForm = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void })
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="w-full py-3 border border-neutral-700 rounded-lg hover:bg-white/5 transition"
+              className="w-full py-3 border border-neutral-400  hover:bg-white/5 transition"
             >
               Cancel
             </button>

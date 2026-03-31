@@ -52,13 +52,11 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
   };
 
   return (
-   <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm ">
-
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm ">
       {/* Modal */}
       <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-neutral-800 rounded-2xl shadow-xl">
-
         {/* Top Bar */}
-        <div className="p-6 border-b border-zinc-900 flex justify-between items-center bg-zinc-900/30">
+        <div className="p-6 border-b border-neutral-600 flex justify-between items-center bg-zinc-900/30">
           <div>
             <h2 className="text-xl font-bold text-white tracking-tight">
               Order Details
@@ -69,7 +67,7 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 bg-zinc-900 hover:bg-zinc-800 rounded-xl transition"
+            className="p-2 bg-zinc-900 hover:bg-zinc-700 cursor-pointer rounded-xl transition"
           >
             <X size={20} />
           </button>
@@ -80,10 +78,10 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
           {/* 3-Column Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest flex items-center gap-2">
+              <p className="text-[10px] uppercase font-bold text-neutral-400 tracking-widest flex items-center gap-2">
                 <MapPin size={12} /> Shipping Address
               </p>
-              <div className="text-sm text-zinc-300 leading-relaxed">
+              <div className="text-sm text-zinc-300 leading-relaxed mb-4">
                 {order.shippingAddress.street},<br />
                 {order.shippingAddress.city}, {order.shippingAddress.state}
                 <br />
@@ -93,7 +91,7 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest flex items-center gap-2">
+              <p className="text-[10px] uppercase font-bold text-neutral-400 tracking-widest flex items-center gap-2">
                 <CreditCard size={12} /> Billing
               </p>
               <p className="text-sm text-zinc-300">
@@ -107,7 +105,7 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest flex items-center gap-2">
+              <p className="text-[10px] uppercase font-bold text-neutral-400 tracking-widest flex items-center gap-2">
                 <Calendar size={12} /> Delivery Status
               </p>
               <p className="text-sm text-zinc-300">
@@ -122,7 +120,7 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
           </div>
 
           {/* Product List */}
-          <div className="border border-zinc-900 rounded-2xl bg-zinc-900/20 overflow-hidden">
+          <div className="border border-neutral-600 bg-zinc-900/20 overflow-hidden">
             <div className="px-4 py-3 bg-zinc-900/50 border-b border-zinc-900 text-[10px] font-bold uppercase text-zinc-500">
               Line Items ({order.items.length})
             </div>
@@ -151,7 +149,7 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
             </div>
             <div className="p-4 bg-zinc-900/50 flex justify-between items-center">
               <span className="text-sm font-bold text-white">Grand Total</span>
-              <span className="text-xl font-bold text-[#00ff00]">
+              <span className="text-xl font-bold font-mono text-[#00ff00]">
                 ₹{order.totalPrice.toLocaleString()}
               </span>
             </div>
@@ -161,15 +159,16 @@ const OrderEdit = ({ order, setIsOpen }: OrderEditProps) => {
         {/* Action Footer */}
         <div className="p-6 bg-zinc-900/50 border-t border-zinc-900 flex flex-col sm:flex-row gap-4 justify-between items-center">
           <div className="flex items-center gap-3">
-            <span className="text-xs text-zinc-500">Change Status:</span>
-            <select className="bg-zinc-950 border border-zinc-800 text-xs rounded-lg px-3 py-2 outline-none focus:border-[#00ff00]">
-              <option>Processing</option>
-              <option>Shipped</option>
-              <option>Delivered</option>
-              <option>Cancelled</option>
+            <span className="text-sm text-zinc-400">Change Status:</span>
+            <select  className="bg-black border  border-neutral-700  text-sm px-3 cursor-pointer py-3 outline-none focus:border-[#00ff00]">
+              <option value={"processing"}>Processing</option>
+              <option value={"Shipped"}>Shipped</option>
+              <option value={"Delivered"}>Delivered</option>
+              <option value={"Cancelled"}>Cancelled</option>
             </select>
+        
           </div>
-          <button className="w-full sm:w-auto px-8 py-3 bg-[#00ff00] text-black font-bold rounded-xl text-sm hover:scale-105 active:scale-95 transition-transform shadow-[0_0_20px_rgba(0,255,0,0.2)]">
+          <button className="w-full sm:w-auto px-8 py-3 bg-white text-black font-bold  text-sm cursor-pointer">
             Update Order
           </button>
         </div>
