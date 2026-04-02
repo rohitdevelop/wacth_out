@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
- import AdminProfile from "../../components/ui/AdminProfile";
+ import AdminProfile from "../../components/admin/AdminProfile";
 
 
 const Page = () => {
