@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.lepage.fr" },
       { protocol: "https", hostname:  "images.unsplash.com" },
       { protocol: "https", hostname:  "wallpapers.com" },
-    ],
+     ],
   },
 };
 

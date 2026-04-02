@@ -87,15 +87,13 @@ const Orders = () => {
   };
 
   return (
-    <div className="min-h-screen   p-4 md:p-8 ">
- 
-      <div className="max-w-7xl mx-auto relative z-10">
-        
+    <div className="min-h-screen   relative overflow-hidden font-sans pb-20  ">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight">
-              Order <span className="text-[#00ff00]">Management</span>
+              Manage <span className="text-[#00ff00]">Orders</span>
             </h1>
             <p className="text-neutral-400 mt-2 text-sm">
               Monitor sales performance and logistics
@@ -121,7 +119,7 @@ const Orders = () => {
               </span>
             </div>
           </div>
-        </div>
+        </header>
 
         {/* Orders Table */}
         <div className="bg-zinc-900/50 border border-neutral-700 rounded-2xl overflow-hidden backdrop-blur-md">
