@@ -131,7 +131,7 @@ export default function SellPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white font-['Cormorant_Garamond',serif]">
+    <div className="min-h-screen   ">
       {/* ── HERO CAROUSEL ─────────────────────────────────────── */}
       <section className="relative w-full h-[92vh] min-h-[560px] overflow-hidden">
         {carouselSlides.map((s, i) => (
