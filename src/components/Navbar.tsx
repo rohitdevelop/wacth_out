@@ -146,7 +146,7 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* MOBILE NAVBAR */}
-      {/* MOBILE BOTTOM NAVBAR */}
+      {/* MOBILE top NAVBAR */}
       <div
         className={`md:hidden fixed top-0 left-0 w-full z-50
         transition-transform duration-500 ease-in-out
@@ -154,18 +154,16 @@ const Navbar: React.FC = () => {
         bg-black/70 backdrop-blur-xl border-b border-[#0d400d]`}
       >
         {/* Search */}
-        <div className="flex items-center px-4 py-3 gap-2">
-          <input
-            type="text"
-            placeholder="Search watches..."
-            className="flex-1 bg-[#111] border border-[#0d400d] rounded-lg px-3 py-2 text-sm text-white outline-none"
-          />
+        <div className="flex items-center justify-between px-4 py-3 gap-2">
+            <h1 className="text-2xl font-bold tracking-wide text-white">
+            Arvento<span className="text-[#00ff00]">Chrono</span>
+          </h1>
 
-          <button className="bg-[#07ee07] text-black px-4 py-2 rounded-lg text-sm">
+          <button className="bg-white text-black px-4 py-2 text-sm">
             Shop
           </button>
         </div>
-
+<div className="border border-neutral-800 mb-1"></div>
         {/* Categories */}
         <div className="flex items-center justify-center gap-4 px-4 pb-3 text-sm text-white">
           <button className="whitespace-nowrap hover:text-[#00ff00]">
@@ -185,7 +183,9 @@ const Navbar: React.FC = () => {
           </button>
         </div>
       </div>
-      {/* MOBILE TOP NAVBAR */}
+
+
+      {/* MOBILE BOTTOM NAVBAR */}
       <div className="md:hidden fixed bottom-0 left-0 w-full bg-black/95 border-t border-[#0d400d] z-50">
         <div className="flex justify-around items-center py-2">
           <Link

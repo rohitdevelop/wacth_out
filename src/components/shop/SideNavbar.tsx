@@ -1,45 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import {
   SlidersHorizontal,
   Tag,
   IndianRupee,
   Star,
   RotateCcw,
-  Menu,
 } from "lucide-react";
 
 export default function FilterSidebar() {
-  const [open, setOpen] = useState(true);
-
   return (
     <aside
-      className={`
-         h-screen z-10 flex flex-col text-white
-      transition-all duration-300 ease-in-out
-      bg-black 
-      backdrop-blur-xl border-r border-green-500/20
-      shadow-[0_0_30px_rgba(0,255,0,0.05)]
-      ${open ? "w-64" : "w-16"}
-    `}
+      className={`hidden md:block
+     left-64  
+     backdrop-blur-xl bg-black/60 
+    border-b border-green-500/20 
+    px-4 md:px-8 py-3 
+    flex flex-col gap-3
+    transition-all duration-300
+  `}
     >
-      {/* 🔘 Toggle */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="m-2 p-2 bg-green-600/20 text-green-400 rounded-lg w-8"
-      >
-        <Menu size={18} />
-      </button>
-
       {/* 🔍 Title */}
       <div className="px-3 py-4 border-b border-white/10 flex items-center gap-2">
         <SlidersHorizontal className="text-green-400" size={18} />
-        <span
-          className={`transition-all duration-300 text-sm font-semibold ${
-            open ? "opacity-100" : "opacity-0 w-0 overflow-hidden"
-          }`}
-        >
+        <span className="transition-all duration-300 text-sm font-semibol">
           Filters
         </span>
       </div>
@@ -48,21 +32,15 @@ export default function FilterSidebar() {
       <div className="px-3 py-4 border-b border-white/10">
         <div className="flex items-center gap-2 mb-3">
           <Tag size={16} className="text-green-400" />
-          <span
-            className={`text-xs uppercase text-neutral-400 ${
-              open ? "block" : "hidden"
-            }`}
-          >
+          <span className="text-xs uppercase text-neutral-400">
             Category
           </span>
         </div>
 
-        {["All", "Smart", "Analog", "Digital"].map((item) => (
+        {(["All", "Smart", "Analog", "Digital"] as string[]).map((item) => (
           <p
             key={item}
-            className={`cursor-pointer text-sm py-1 hover:text-green-400 ${
-              open ? "block" : "hidden"
-            }`}
+            className="cursor-pointer text-sm py-1 hover:text-green-400"
           >
             {item}
           </p>
@@ -73,62 +51,29 @@ export default function FilterSidebar() {
       <div className="px-3 py-4 border-b border-white/10">
         <div className="flex items-center gap-2 mb-3">
           <IndianRupee size={16} className="text-green-400" />
-          <span
-            className={`text-xs uppercase text-neutral-400 ${
-              open ? "block" : "hidden"
-            }`}
-          >
-            Price
-          </span>
+          <span className="text-xs uppercase text-neutral-400">Price</span>
         </div>
-
-        {open && (
-          <>
-            <input
-              type="range"
-              className="w-full accent-green-400"
-            />
-            <div className="flex justify-between text-xs mt-1">
-              <span>₹0</span>
-              <span>₹50k</span>
-            </div>
-          </>
-        )}
       </div>
 
       {/* ⭐ RATING */}
       <div className="px-3 py-4 border-b border-white/10">
         <div className="flex items-center gap-2 mb-3">
           <Star size={16} className="text-green-400" />
-          <span
-            className={`text-xs uppercase text-neutral-400 ${
-              open ? "block" : "hidden"
-            }`}
-          >
-            Rating
-          </span>
+          <span className="text-xs uppercase text-neutral-400">Rating</span>
         </div>
 
-        {open && (
-          <div className="space-y-1 text-sm">
-            <p>⭐⭐⭐⭐☆ & up</p>
-            <p>⭐⭐⭐☆☆ & up</p>
-            <p>⭐⭐☆☆☆ & up</p>
-          </div>
-        )}
+        <div className="space-y-1 text-sm">
+          <p>⭐⭐⭐⭐☆ & up</p>
+          <p>⭐⭐⭐☆☆ & up</p>
+          <p>⭐⭐☆☆☆ & up</p>
+        </div>
       </div>
 
       {/* 🔄 RESET */}
       <div className="p-3 mt-auto">
         <button className="flex items-center justify-center gap-2 w-full py-2 border border-green-400/30 rounded-lg hover:bg-green-500/10 transition">
           <RotateCcw size={16} />
-          <span
-            className={`text-sm ${
-              open ? "block" : "hidden"
-            }`}
-          >
-            Reset
-          </span>
+          <span className="text-sm">Reset</span>
         </button>
       </div>
     </aside>
