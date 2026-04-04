@@ -25,7 +25,7 @@ const nav = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
-   const pathname = usePathname();
+  const pathname = usePathname();
   return (
     <aside
       className={`
@@ -62,7 +62,7 @@ export default function Sidebar() {
         </div>
       </div>
       {/* 📌 Nav */}
-       <nav className="flex-1 py-3 space-y-1 px-2">
+      <nav className="flex-1 py-3 space-y-1 px-2">
         {nav.map(({ name, icon: Icon, path }) => (
           <Link
             key={name}
