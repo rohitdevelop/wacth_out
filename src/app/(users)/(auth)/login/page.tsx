@@ -1,17 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useAuth } from "../../../../../hooks/useAuth";
+
 const Page = () => {
   const [formDeta, setFormDeta] = useState({
     email: "",
     password: "",
   });
-  const router = useRouter();
-  const { handleSignin, user } = useAuth();
-
+  
+const {handleSignin} = useAuth()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormDeta({ ...formDeta, [e.target.name]: e.target.value });
   };
@@ -20,13 +19,7 @@ const Page = () => {
 
     await handleSignin({ ...formDeta });
   };
-  useEffect(() => {
-    if (user?.role === "admin") {
-      router.push("/admin/dashboard");
-    } else if (user) {
-      router.push("/");
-    }
-  }, [user]);
+ 
   return (
     <div className="relative min-h-screen w-full flex bg-black text-black overflow-hidden">
       {/* LEFT SIDE IMAGE */}

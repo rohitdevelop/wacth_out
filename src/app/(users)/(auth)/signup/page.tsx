@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useAuth } from "../../../../../hooks/useAuth";
 import { UserForm } from "../../../../../types/auth";
-const Page = () => {
+ const Page = () => {
   const [user, setUser] = useState<UserForm>({
     name: "",
     email: "",
@@ -13,7 +12,7 @@ const Page = () => {
     age: "",
     gender: "",
   });
-  const router = useRouter();
+
   const { handleSignup } = useAuth();
   const handlChange = (e: any) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -29,8 +28,7 @@ const Page = () => {
       age: Number(user.age),
       gender: user.gender,
     });
- 
-    // optional: clear form
+     // optional: clear form
     setUser({
       name: "",
       email: "",
@@ -39,7 +37,6 @@ const Page = () => {
       gender: "",
     });
 
-    router.push("/login");
   };
 
   return (

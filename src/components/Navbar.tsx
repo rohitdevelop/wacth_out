@@ -79,11 +79,11 @@ const Navbar: React.FC = () => {
 
           {/* ICONS */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href={'/cart'}>
-            <ShoppingCart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
+            <Link href={"/cart"}>
+              <ShoppingCart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
             </Link>
-            <Link href={'/wishlist'}>
-            <Heart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
+            <Link href={"/wishlist"}>
+              <Heart className="text-[#00ff00] cursor-pointer hover:scale-110 transition" />
             </Link>
 
             {/* USER DROPDOWN */}
@@ -91,9 +91,9 @@ const Navbar: React.FC = () => {
               <div className="relative group flex items-center gap-2">
                 {/* Avatar */}
                 <Link href={"/profile"}>
-                <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black font-bold cursor-pointer">
-                  {user.name.charAt(0).toUpperCase()}
-                </div>
+                  <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black font-bold cursor-pointer">
+                    {user?.name ? user.name.charAt(0).toUpperCase() : <User size={22} className="text-[#00ff00]" />}
+                  </div>
                 </Link>
 
                 {/* Dropdown */}
@@ -103,13 +103,11 @@ const Navbar: React.FC = () => {
                     opacity-0 invisible group-hover:visible group-hover:opacity-100
                     transition-all duration-300"
                 >
-                     <Link href={"/profile"}>
-                  <button
-                     className="w-full px-4 py-3 cursor-pointer text-left text-white hover:bg-[#00ff00]/10"
-                     >
-                    Profile
-                  </button>
-                    </Link>
+                  <Link href={"/profile"}>
+                    <button className="w-full px-4 py-3 cursor-pointer text-left text-white hover:bg-[#00ff00]/10">
+                      Profile
+                    </button>
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="w-full px-4 py-3 cursor-pointer text-left text-white hover:bg-red-600/10"
@@ -155,7 +153,7 @@ const Navbar: React.FC = () => {
       >
         {/* Search */}
         <div className="flex items-center justify-between px-4 py-3 gap-2">
-            <h1 className="text-2xl font-bold tracking-wide text-white">
+          <h1 className="text-2xl font-bold tracking-wide text-white">
             Arvento<span className="text-[#00ff00]">Chrono</span>
           </h1>
 
@@ -163,7 +161,7 @@ const Navbar: React.FC = () => {
             Shop
           </button>
         </div>
-<div className="border border-neutral-800 mb-1"></div>
+        <div className="border border-neutral-800 mb-1"></div>
         {/* Categories */}
         <div className="flex items-center justify-center gap-4 px-4 pb-3 text-sm text-white">
           <button className="whitespace-nowrap hover:text-[#00ff00]">
@@ -183,7 +181,6 @@ const Navbar: React.FC = () => {
           </button>
         </div>
       </div>
-
 
       {/* MOBILE BOTTOM NAVBAR */}
       <div className="md:hidden fixed bottom-0 left-0 w-full bg-black/95 border-t border-[#0d400d] z-50">
@@ -224,8 +221,8 @@ const Navbar: React.FC = () => {
               href={"/profile"}
               className="flex flex-col items-center text-white text-xs"
             >
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-black font-bold cursor-pointer">
-                {user.name.charAt(0).toUpperCase()}
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black font-bold cursor-pointer">
+                {user?.name ? user.name.charAt(0).toUpperCase() : <User size={22} className="text-[#00ff00]" />}
               </div>
               Profile
             </Link>
