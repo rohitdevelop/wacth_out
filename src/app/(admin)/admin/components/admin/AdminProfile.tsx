@@ -26,7 +26,7 @@ const AdminProfile = () => {
   const [admin, setAdmin] = useState(initialAdmin);
   const [editMode, setEditMode] = useState(false);
 
-  const handleChange = (field, value) => {
+  const handleChange = (field:string, value:string) => {
     setAdmin((prev) => ({ ...prev, [field]: value }));
   };
 
