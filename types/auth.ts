@@ -11,7 +11,7 @@ export interface UserForm {
   email: string;
   password: string;
   gender: "" | "male" | "female" | "other";
-  age: string; // ✅ string for input
+  age: string;  
 }
 export interface Address {
   street?: string;
@@ -30,3 +30,5 @@ export interface SafeUser {
   email: string;
   role: string
 }
+
+ 
