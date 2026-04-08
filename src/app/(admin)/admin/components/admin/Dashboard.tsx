@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartArea,
 } from "chart.js";
 
 import {
@@ -17,24 +18,16 @@ import {
   ShoppingCart,
   IndianRupee,
   Activity,
- 
+  ArrowUpRight,
 } from "lucide-react";
 
 /* ================= TYPES ================= */
-type ValuePiece = Date | null;
 
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-interface StatCard {
+interface StatCardProps {
   title: string;
   value: string;
   delta: string;
   icon: React.ReactNode;
-}
-
-interface BarDataItem {
-  value: number;
-  label: string;
 }
 
 interface Employee {
@@ -65,311 +58,255 @@ interface ActivityItem {
   variant: "green" | "amber";
 }
 
-/* ================= DATA ================= */
-const getGradient = (ctx, chartArea) => {
-  const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+/* ================= CHART CONFIG ================= */
 
-  gradient.addColorStop(0, "#00ff00");   // top (light green)
-  gradient.addColorStop(1, "black");   // bottom (dark green)
-
-  return gradient;
-};
-const data = {
-  labels: ['Men', 'Kids', 'Women', 'Sports'],
-  datasets: [
-    {
-      label: 'Sales',
-      data: [30, 45, 60, 40],
-      backgroundColor: (context) => {
-        const { chart } = context;
-        const { ctx, chartArea } = chart;
-
-        if (!chartArea) return "#22c55e"; // fallback
-
-        return getGradient(ctx, chartArea);
-      },
-      borderRadius: 8,
-    },
-  ],
-};
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
-const STATS: StatCard[] = [
-  { title: "Users", value: "1,240", delta: "+4.2%", icon: <Users size={14} /> },
-  {
-    title: "Orders",
-    value: "320",
-    delta: "+11.5%",
-    icon: <ShoppingCart size={14} />,
-  },
-  {
-    title: "Revenue",
-    value: "₹8.4L",
-    delta: "+18.3%",
-    icon: <IndianRupee size={14} />,
-  },
-  {
-    title: "Activity",
-    value: "89%",
-    delta: "+2.1%",
-    icon: <Activity size={14} />,
-  },
+const getGradient = (ctx: CanvasRenderingContext2D, chartArea: ChartArea) => {
+  const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+  gradient.addColorStop(0, "rgba(34, 197, 94, 0.1)"); // bottom (faded green)
+  gradient.addColorStop(1, "rgba(34, 197, 94, 1)");   // top (solid green)
+  return gradient;
+};
+
+const chartData = {
+  labels: ["Men", "Kids", "Women", "Sports"],
+  datasets: [
+    {
+      label: "Sales",
+      data: [30, 45, 60, 40],
+      backgroundColor: (context: any) => {
+        const chart = context.chart;
+        const { ctx, chartArea } = chart;
+        if (!chartArea) return "#22c55e";
+        return getGradient(ctx, chartArea);
+      },
+      borderRadius: 6,
+      borderSkipped: false,
+    },
+  ],
+};
+
+/* ================= MOCK DATA ================= */
+
+const STATS: StatCardProps[] = [
+  { title: "Users", value: "1,240", delta: "+4.2%", icon: <Users size={16} /> },
+  { title: "Orders", value: "320", delta: "+11.5%", icon: <ShoppingCart size={16} /> },
+  { title: "Revenue", value: "₹8.4L", delta: "+18.3%", icon: <IndianRupee size={16} /> },
+  { title: "Activity", value: "89%", delta: "+2.1%", icon: <Activity size={16} /> },
 ];
 
- 
 const EMPLOYEES: Employee[] = [
-  {
-    name: "Aman",
-    role: "Sales",
-    salary: "₹20k",
-    img: "https://randomuser.me/api/portraits/men/1.jpg",
-    initials: "AG",
-  },
-  {
-    name: "Priya",
-    role: "Manager",
-    salary: "₹28k",
-    img: "https://randomuser.me/api/portraits/women/2.jpg",
-    initials: "PS",
-  },
-  {
-    name: "Rahul",
-    role: "Dev",
-    salary: "₹35k",
-    img: "https://randomuser.me/api/portraits/men/3.jpg",
-    initials: "RV",
-  },
+  { name: "Aman", role: "Sales", salary: "₹20k", img: "https://i.pravatar.cc/150?u=1", initials: "AG" },
+  { name: "Priya", role: "Manager", salary: "₹28k", img: "https://i.pravatar.cc/150?u=2", initials: "PS" },
+  { name: "Rahul", role: "Dev", salary: "₹35k", img: "https://i.pravatar.cc/150?u=3", initials: "RV" },
 ];
 
 const PRODUCTS: Product[] = [
-  { rank: "01", name: "Rolex", revenue: "₹2.1L", pct: 92 },
-  { rank: "02", name: "Omega", revenue: "₹1.6L", pct: 74 },
+  { rank: "01", name: "Rolex Submariner", revenue: "₹2.1L", pct: 92 },
+  { rank: "02", name: "Omega Speedmaster", revenue: "₹1.6L", pct: 74 },
 ];
 
 const SELLERS: Seller[] = [
-  { initials: "AG", name: "Aman", units: "148", isTop: true },
-  { initials: "PS", name: "Priya", units: "122", isTop: false },
+  { initials: "AG", name: "Aman Gupta", units: "148", isTop: true },
+  { initials: "PS", name: "Priya Sharma", units: "122", isTop: false },
 ];
 
 const ACTIVITY_ITEMS: ActivityItem[] = [
-  { text: "New User", badge: "+1", variant: "green" },
-  { text: "Order", badge: "+3", variant: "green" },
-  { text: "Server Load", badge: "Medium", variant: "amber" },
+  { text: "New User Registered", badge: "+1", variant: "green" },
+  { text: "Bulk Order Placed", badge: "+3", variant: "green" },
+  { text: "Server Load High", badge: "Medium", variant: "amber" },
 ];
 
-/* ================= COMPONENTS ================= */
+/* ================= SUB-COMPONENTS ================= */
 
-function CustomBar({ item }: { item: BarDataItem }) {
-  return (
-    <div className="flex flex-1 flex-col items-center ">
-      <div className="w-full flex items-end h-40">
-        <div
-          className="w-full rounded-t bg-gradient-to-t from-green-500/70 to-transparent hover:from-green-400 transition-all"
-          style={{ height: `${item.value}%` }}
-        />
-      </div>
-      <span className="text-xs text-neutral-500 mt-1">{item.label}</span>
-    </div>
-  );
-}
+const Card = ({ title, children, className = "" }: { title: string; children: React.ReactNode; className?: string }) => (
+  <div className={`bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 hover:border-zinc-700 transition-all ${className}`}>
+    <h3 className="text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-6">{title}</h3>
+    {children}
+  </div>
+);
 
-function Card({ title, children }: any) {
-  return (
-    <div className="bg-zinc-900 border border-neutral-800 rounded-xl p-5 hover:border-green-500/30 transition">
-      <h3 className="text-sm text-neutral-400 mb-4">{title}</h3>
-      {children}
-    </div>
-  );
-}
-
-/* ================= MAIN ================= */
+/* ================= MAIN DASHBOARD ================= */
 
 export default function AdminDashboard() {
   const [mounted, setMounted] = useState(false);
-  const [value, setValue] = useState<Value>(new Date());
-  useEffect(() => setMounted(true), []);
-  const handleChange = (val: Value) => {
-    setValue(val);
-  };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <div className="min-h-screen bg-black" />;
+
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden font-sans pb-20">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <div className="min-h-screen bg-black text-zinc-100 font-sans selection:bg-green-500/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
         {/* HEADER */}
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
-            <h1 className="text-4xl font-bold tracking-tight">
-              Admin <span className="text-green-400">Dashboard</span>
+            <h1 className="text-4xl font-extrabold tracking-tight">
+              Admin <span className="text-green-500">Analytics</span>
             </h1>
-            <p className="text-neutral-500 mt-2 text-sm">
-              Welcome back, here is what's happening today.
+            <p className="text-zinc-500 mt-2 font-medium">
+              Performance overview for the current billing cycle.
             </p>
           </div>
-          <div className="flex gap-3">
-            <button className="px-4 py-2 bg-zinc-900 border border-neutral-800 rounded-lg text-sm hover:bg-zinc-800 transition">
-              Download Report
+          <div className="flex items-center gap-4">
+            <button className="px-5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-sm font-semibold hover:bg-zinc-800 transition-all flex items-center gap-2">
+              Generate Report
+            </button>
+            <button className="px-5 py-2.5 bg-green-600 text-black rounded-xl text-sm font-bold hover:bg-green-500 transition-all">
+              Live View
             </button>
           </div>
         </header>
 
-        {/* STATS */}
-
-        <div className="grid grid-cols-4 gap-6 flex-1 mb-5">
-          {STATS.map((s, i) => (
+        {/* STATS GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {STATS.map((stat, i) => (
             <div
               key={i}
-              className="group h-[120px] px-6 py-4 bg-zinc-950 border border-neutral-800 rounded-2xl hover:border-green-500/40 transition-all flex flex-col justify-between"
+              className="group p-6 bg-zinc-900/40 border border-zinc-800 rounded-2xl hover:border-green-500/50 transition-all"
             >
-              {/* TOP */}
-              <div className="flex justify-between items-start">
-                <div className="p-2 bg-zinc-900 rounded-lg text-green-400 group-hover:bg-green-500 group-hover:text-black transition-colors">
-                  {s.icon}
+              <div className="flex justify-between items-start mb-4">
+                <div className="p-2.5 bg-zinc-800 rounded-lg text-green-400 group-hover:bg-green-500 group-hover:text-black transition-all">
+                  {stat.icon}
                 </div>
-
-                <span className="text-green-400 text-[10px] font-semibold px-2 py-1 bg-green-500/10 rounded-full">
-                  {s.delta}
+                <span className="flex items-center gap-1 text-green-400 text-[11px] font-bold px-2 py-1 bg-green-500/10 rounded-full">
+                  {stat.delta} <ArrowUpRight size={10} />
                 </span>
               </div>
-
-              {/* BOTTOM */}
-              <div>
-                <p className="text-neutral-400 text-[10px] uppercase tracking-wider">
-                  {s.title}
-                </p>
-                <p className="text-xl font-bold mt-1">{s.value}</p>
-              </div>
+              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">{stat.title}</p>
+              <p className="text-3xl font-bold mt-1 tracking-tight">{stat.value}</p>
             </div>
           ))}
         </div>
 
-        {/* REVENUE + ACTIVITY */}
-        <div className="grid lg:grid-cols-3 gap-5 mb-5">
-          <div className="lg:col-span-2 border border-neutral-800 rounded-xl p-3">
-            <div className="relative h-48 w-full mt-4">
-              <svg
-                viewBox="0 0 400 100"
-                className="w-full h-full overflow-visible"
-              >
-                <defs>
-                  <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#4ade80" stopOpacity="0.5" />
-                    <stop offset="100%" stopColor="#4ade80" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                {/* Area Fill */}
-                <path
-                  d="M0,80 Q50,20 100,50 T200,30 T300,60 T400,20 L400,100 L0,100 Z"
-                  fill="url(#lineGradient)"
-                />
-                {/* Path Line */}
-                <path
-                  d="M0,80 Q50,20 100,50 T200,30 T300,60 T400,20"
-                  fill="none"
-                  stroke="#4ade80"
-                  strokeWidth="2"
-                />
-              </svg>
-              <div className="flex justify-between mt-2 text-[10px] text-neutral-500 uppercase tracking-widest">
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
+        {/* MAIN CONTENT GRID */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          
+          {/* REVENUE GRAPH */}
+          <div className="lg:col-span-2 flex flex-col gap-8">
+            <Card title="Revenue Flow">
+              <div className="h-48 w-full relative">
+                <svg viewBox="0 0 400 100" className="w-full h-full overflow-visible">
+                  <defs>
+                    <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M0,80 Q50,20 100,50 T200,30 T300,60 T400,20 L400,100 L0,100 Z"
+                    fill="url(#areaGradient)"
+                  />
+                  <path
+                    d="M0,80 Q50,20 100,50 T200,30 T300,60 T400,20"
+                    fill="none"
+                    stroke="#22c55e"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <div className="flex justify-between mt-4 text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
+                  {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(d => <span key={d}>{d}</span>)}
+                </div>
               </div>
+            </Card>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card title="Top Products">
+                <div className="space-y-4">
+                  {PRODUCTS.map((p, i) => (
+                    <div key={i} className="flex items-center justify-between group">
+                      <div className="flex items-center gap-4">
+                        <span className="text-zinc-600 font-mono text-xs">{p.rank}</span>
+                        <span className="text-sm font-medium group-hover:text-green-400 transition-colors">{p.name}</span>
+                      </div>
+                      <span className="text-sm font-bold">{p.revenue}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              <Card title="Top Sellers">
+                <div className="space-y-4">
+                  {SELLERS.map((s, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-7 h-7 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-green-500 border border-zinc-700">
+                          {s.initials}
+                        </div>
+                        <span className="text-sm font-medium">{s.name}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm text-zinc-400">{s.units} units</span>
+                        {s.isTop && <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
             </div>
           </div>
 
-          <Card title="Activity">
-            {ACTIVITY_ITEMS.map((a, i) => (
-              <div
-                key={i}
-                className="flex justify-between text-sm py-2 border-b border-neutral-800"
-              >
-                <span>{a.text}</span>
-                <span
-                  className={
-                    a.variant === "green" ? "text-green-400" : "text-yellow-400"
-                  }
-                >
-                  {a.badge}
-                </span>
+          {/* SIDEBAR CONTENT */}
+          <div className="flex flex-col gap-8">
+            <Card title="Recent Activity">
+              <div className="space-y-1">
+                {ACTIVITY_ITEMS.map((a, i) => (
+                  <div key={i} className="flex justify-between items-center py-3 border-b border-zinc-800/50 last:border-0">
+                    <span className="text-sm text-zinc-300">{a.text}</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${
+                      a.variant === "green" ? "bg-green-500/10 text-green-500" : "bg-amber-500/10 text-amber-500"
+                    }`}>
+                      {a.badge}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </Card>
-        </div>
+            </Card>
 
-        {/* EMPLOYEES + CATEGORY */}
-        <div className="grid lg:grid-cols-3 gap-5">
-          <Card title="Employees">
-            {EMPLOYEES.map((e, i) => (
-              <div key={i} className="flex items-center gap-3 py-2">
-                <img src={e.img} className="w-8 h-8 rounded-full" />
-                <div className="flex-1">
-                  <p className="text-sm">{e.name}</p>
-                  <p className="text-xs text-neutral-500">{e.role}</p>
-                </div>
-                <span className="text-green-400 text-sm">{e.salary}</span>
+            <Card title="Internal Team">
+              <div className="space-y-5">
+                {EMPLOYEES.map((e, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <img src={e.img} alt={e.name} className="w-10 h-10 rounded-xl object-cover grayscale group-hover:grayscale-0 transition-all" />
+                    <div className="flex-1">
+                      <p className="text-sm font-bold">{e.name}</p>
+                      <p className="text-[11px] text-zinc-500 font-medium">{e.role}</p>
+                    </div>
+                    <span className="text-sm font-mono text-green-500">{e.salary}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </Card>
+            </Card>
 
-          <div className="lg:col-span-2">
-            <Card title="Category Sales">
-              <div className="h-[250px] w-full">
+            <Card title="Category Performance">
+              <div className="h-[200px]">
                 <Bar
-                  data={data}
+                  data={chartData}
                   options={{
                     responsive: true,
-                    plugins: {
-                      legend: { display: false },
-                    },
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
                     scales: {
-                      x: {
-                        ticks: { color: "#a1a1aa" },
-                        grid: { display: false },
-                      },
-                      y: {
-                        ticks: { color: "#a1a1aa" },
-                        grid: { color: "#27272a" },
-                      },
+                      x: { ticks: { color: "#71717a", font: { size: 10 } }, grid: { display: false } },
+                      y: { ticks: { color: "#71717a", font: { size: 10 } }, grid: { color: "#27272a" } },
                     },
                   }}
                 />
               </div>
             </Card>
           </div>
-        </div>
-
-        {/* PRODUCTS + SELLERS */}
-        <div className="grid md:grid-cols-2 gap-5 mt-5">
-          <Card title="Top Products">
-            {PRODUCTS.map((p, i) => (
-              <div key={i} className="flex items-center gap-3 py-2">
-                <span>{p.rank}</span>
-                <span className="flex-1">{p.name}</span>
-                <span>{p.revenue}</span>
-              </div>
-            ))}
-          </Card>
-
-          <Card title="Top Sellers">
-            {SELLERS.map((s, i) => (
-              <div key={i} className="flex items-center gap-3 py-2">
-                <span>{s.initials}</span>
-                <span className="flex-1">{s.name}</span>
-                <span>{s.units}</span>
-                {s.isTop && <span className="text-green-400 text-xs">Top</span>}
-              </div>
-            ))}
-          </Card>
         </div>
       </div>
     </div>
