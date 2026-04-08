@@ -1,19 +1,40 @@
 import api from "../../lib/axios";
-import {User,Login} from "../../types/auth"
+import { User, Login,Address } from "../../types/auth";
 
+// Auth___________________________________________________________
+export const signinuser = async (data: User) => {
+  const res = await api.post("/auth/signup", data);
+  return res.data;
+};
 
-export const signupuser = async (data: User) =>{
-    const res = await api.post("auth/signup",data)
-    return res.data
-}
-export const signinuser = async (data: Login) =>{
-    const res = await api.post("auth/login",data)
-    return res.data
-}
-export const logoutuser = async () =>{
-   await api.post("auth/logoutuser")
-}
+export const signupuser = async (data: Login) => {
+  const res = await api.post("/auth/login", data);
+  return res.data;
+};
+
+export const logoutuser = async () => {
+  const res = await api.post("/auth/logoutuser");
+  return res.data;
+};
+
 export const getMe = async () => {
-  const res = await api.get("auth/me");  
+  const res = await api.get("/auth/me");
+  return res.data;
+};
+
+//  Profile_________________________________________________________
+export const addAddress = async (data: Address) => {
+  const res = await api.post("/auth/address", data);
+  return res.data;
+};
+
+//  Admin______________________________________________________________
+export const getAllUsers = async () => {
+  const res = await api.get("/auth/users");
+  return res.data;
+};
+
+export const deleteUser = async (id: string) => {
+  const res = await api.delete(`/auth/delete-user/${id}`);
   return res.data;
 };

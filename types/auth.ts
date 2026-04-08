@@ -13,7 +13,13 @@ export interface UserForm {
   gender: "" | "male" | "female" | "other";
   age: string; // ✅ string for input
 }
-
+export interface Address {
+  street?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  zipCode?: string;
+}
 export interface Login {
   email: string;
   password: string;
