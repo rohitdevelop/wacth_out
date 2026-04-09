@@ -1,9 +1,32 @@
 "use client";
 
+import React, { useState } from "react";
 import { Mail, MapPinned, Phone } from "lucide-react";
-import React from "react";
-
+import { useContact } from "../../../../hooks/useContact";
 const Page = () => {
+  const [quiry, setQuiry] = useState({
+    name: "",
+    email: "",
+    topic: "",
+    message: "",
+  });
+
+  const { quirycreated } = useContact();
+
+  const handleChange = (e:any) => {
+    const { name, value } = e.target;
+
+    setQuiry((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handlesubmit = async (e:React.FormEvent) => {
+    e.preventDefault();
+    await quirycreated({ ...quiry });
+  };
+
   return (
     <div className="min-h-screen bg-black text-white py-20 mt-20">
       <div className="px-6 md:px-16 lg:px-32 max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -71,11 +94,14 @@ const Page = () => {
         >
           <h2 className="text-2xl mb-6 font-light">Send us a message</h2>
 
-          <form className="space-y-2">
+          <form onSubmit={handlesubmit} className="space-y-2">
             <div>
               <label className="text-sm text-neutral-400">Full Name</label>
               <input
                 type="text"
+                name="name"
+                value={quiry.name}
+                onChange={handleChange}
                 className="w-full mt-2 bg-black border border-neutral-700 p-3 focus:outline-none focus:border-[#00ff00]"
               />
             </div>
@@ -84,6 +110,9 @@ const Page = () => {
               <label className="text-sm text-neutral-400">Email</label>
               <input
                 type="email"
+                name="email"
+                value={quiry.email}
+                onChange={handleChange}
                 className="w-full mt-2 bg-black border border-neutral-700 p-3 focus:outline-none focus:border-[#00ff00]"
               />
             </div>
@@ -92,6 +121,9 @@ const Page = () => {
               <label className="text-sm text-neutral-400">Subject</label>
               <input
                 type="text"
+                name="topic"
+                value={quiry.topic}
+                onChange={handleChange}
                 className="w-full mt-2 bg-black border border-neutral-700 p-3 focus:outline-none focus:border-[#00ff00]"
               />
             </div>
@@ -100,6 +132,9 @@ const Page = () => {
               <label className="text-sm text-neutral-400">Message</label>
               <textarea
                 rows={5}
+                name="message"
+                value={quiry.message}
+                onChange={handleChange}
                 className="w-full mt-2 bg-black border border-neutral-700 p-3 focus:outline-none focus:border-[#00ff00]"
               />
             </div>

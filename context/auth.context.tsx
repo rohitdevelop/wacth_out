@@ -61,7 +61,6 @@ export function AuthProvider({ children }: Props) {
     } catch (error: any) {
       const err = error.response?.data;
       console.log(err);
-
       if (err?.errors?.length > 0) {
         toast.error(err.errors[0].message); // 👈 first error
       } else {
