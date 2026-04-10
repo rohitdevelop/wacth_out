@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import Image from "next/image";
 import {
   Watch,
@@ -19,54 +19,62 @@ type Props = {
 
 const conditions = ["New", "Excellent", "Good", "Fair"];
 
-export default function WatchForm({ watchImage, setWatchImage,onNext }: Props) {
+export default function WatchForm({
+  watchImage,
+  setWatchImage,
+  onNext,
+}: Props) {
   const [focused, setFocused] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [condition, setCondition] = useState<string | null>(null);
+  const fileRef = useRef<File | null>(null);
   const [values, setValues] = useState({
     brand: "",
     model: "",
     price: "",
     description: "",
   });
-
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setWatchImage(URL.createObjectURL(file));
+    const selectedFile = e.target.files?.[0];
+
+    if (selectedFile) {
+      fileRef.current = selectedFile; // ✅ instant update
+      setWatchImage(URL.createObjectURL(selectedFile));
+    }
   };
 
   const handleNext = () => {
-  if (!values.brand || !values.model || !values.price) {
-    return alert("Please fill all watch details");
-  }
+    if (!values.brand || !values.model || !values.price) {
+      return alert("Please fill all watch details");
+    }
 
-  const finalWatchData = {
-    watchDetails: [
-      {
-        image: watchImage,
-        brand: values.brand,
-        model: values.model,
-        price: Number(values.price),
-        condition: condition?.toLowerCase(),
-        description: values.description,
-      },
-    ],
+    const finalWatchData = {
+      watchDetails: [
+        {
+          brand: values.brand,
+          model: values.model,
+          price: Number(values.price),
+          condition: condition?.toLowerCase(),
+          description: values.description,
+        },
+      ],
+      file: fileRef.current,
+    };
+
+    onNext(finalWatchData);
   };
-
-  console.log("WATCH DATA:", finalWatchData); // DEBUG
-
-  onNext(finalWatchData);
-};
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      setWatchImage(URL.createObjectURL(file));
+
+    const selectedFile = e.dataTransfer.files?.[0];
+
+    if (selectedFile && selectedFile.type.startsWith("image/")) {
+      fileRef.current = selectedFile;
+      setWatchImage(URL.createObjectURL(selectedFile));
     }
   };
-
   const handleChange =
     (field: string) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -97,8 +105,10 @@ export default function WatchForm({ watchImage, setWatchImage,onNext }: Props) {
   ];
 
   return (
-    <div className="relative" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-      
+    <div
+      className="relative"
+      style={{ fontFamily: "'Montserrat', sans-serif" }}
+    >
       {/* Section label */}
       <div className="flex items-center gap-3 mb-8">
         <span className="w-6 h-px bg-[#00ff00]" />
@@ -108,7 +118,6 @@ export default function WatchForm({ watchImage, setWatchImage,onNext }: Props) {
       </div>
 
       <div className="space-y-5">
-
         {/* Image Upload */}
         <div>
           <label className="block text-xs tracking-[0.15em] uppercase text-neutral-300 mb-2">
@@ -150,8 +159,7 @@ export default function WatchForm({ watchImage, setWatchImage,onNext }: Props) {
               <div className="flex flex-col items-center gap-2 text-neutral-300">
                 <Upload size={24} className="text-neutral-400" />
                 <p className="text-xs">
-                  Drop image or{" "}
-                  <span className="text-[#00ff00]">browse</span>
+                  Drop image or <span className="text-[#00ff00]">browse</span>
                 </p>
                 <p className="text-[10px] text-neutral-500">
                   JPG, PNG — max 10MB
@@ -178,9 +186,7 @@ export default function WatchForm({ watchImage, setWatchImage,onNext }: Props) {
             <div className="relative">
               <div
                 className={`absolute left-4 top-1/2 -translate-y-1/2 ${
-                  focused === key
-                    ? "text-[#00ff00]"
-                    : "text-neutral-400"
+                  focused === key ? "text-[#00ff00]" : "text-neutral-400"
                 }`}
               >
                 {icon}
@@ -261,7 +267,10 @@ export default function WatchForm({ watchImage, setWatchImage,onNext }: Props) {
       </div>
 
       {/* Button */}
-      <button onClick={handleNext} className="w-full mt-10 flex items-center justify-center gap-2 bg-white text-black py-3 font-semibold hover:opacity-90 transition">
+      <button
+        onClick={handleNext}
+        className="w-full mt-10 flex items-center justify-center gap-2 bg-white text-black py-3 font-semibold hover:opacity-90 transition"
+      >
         Continue to Seller Info
         <ArrowRight size={16} />
       </button>

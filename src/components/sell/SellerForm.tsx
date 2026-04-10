@@ -36,21 +36,23 @@ export default function SellerForm({
   const { CreateSell } = useSell();
 
   // 📸 Image Upload
-const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-  const selectedFile = e.target.files?.[0];
+  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
 
-  if (selectedFile) {
-    setFile(selectedFile); // ✅ store file
-    setSellerImage(URL.createObjectURL(selectedFile)); // preview
-  }
-};
-
+    if (selectedFile) {
+      setFile(selectedFile);
+      setSellerImage(URL.createObjectURL(selectedFile));
+    }
+  };
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      setSellerImage(URL.createObjectURL(file));
+
+    const selectedFile = e.dataTransfer.files?.[0];
+
+    if (selectedFile && selectedFile.type.startsWith("image/")) {
+      setFile(selectedFile); // ✅ ADD THIS
+      setSellerImage(URL.createObjectURL(selectedFile));
     }
   };
 
@@ -60,8 +62,7 @@ const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
       setValues((v) => ({ ...v, [field]: e.target.value }));
     };
 
-  // 🚀 SUBMIT (API INTEGRATION HERE)
-
+ 
   const handleSubmit = async () => {
     if (!values.name || !values.phone || !values.city) {
       return alert("Fill all fields");
@@ -86,18 +87,19 @@ const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
         },
       ]),
     );
-
-    // ✅ watchDetails as string
     formData.append("watchDetails", JSON.stringify(watchData.watchDetails));
-
-    // ✅ IMAGE (IMPORTANT)
-    if (file) {
-      formData.append("file", file); // must match multer field name
+    if (watchData?.file) {
+      formData.append("image", watchData.file); // ✅ correct
     }
 
     try {
       await CreateSell(formData);
-      alert("Success ✅");
+      setValues({
+        name:"",
+        city:"",
+        phone:""
+      })
+
     } catch (err) {
       console.log(err);
     }

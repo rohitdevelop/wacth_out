@@ -54,8 +54,7 @@ export function ContactProvider({ children }: Props) {
       const res = await AllUserQuiry();
 
       setAllMessage(res.data);
-      // ❌ no toast, no redirect
-    } catch (err: any) {
+     } catch (err: any) {
       const errorMsg =
         err?.response?.data?.message || "Failed to fetch messages";
 
