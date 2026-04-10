@@ -3,6 +3,7 @@ import { AuthProvider } from "../../context/auth.context";
 import { Playfair_Display, Montserrat } from "next/font/google";
 import ToastProvider from "./providers/toastprovider";
 import { ContactProvider } from "context/contact.context";
+import { SellProvider } from "context/sell.context";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -23,9 +24,12 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
       <body className="font-(--font-playfair)">
         <ToastProvider />
+        <SellProvider>
+
         <ContactProvider>
           <AuthProvider>{children}</AuthProvider>
         </ContactProvider>
+        </SellProvider>
       </body>
     </html>
   );

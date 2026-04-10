@@ -17,12 +17,10 @@ export interface Watch {
 
 export interface Sellproducts {
   _id?: string;  
-
   avtar?: string;
   name: string;
   phone: number;
-
-  address: Address[];
+   address: Address[];
   watchDetails: Watch[];
 
   user: string;  

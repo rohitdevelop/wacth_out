@@ -1,7 +1,6 @@
 import api from "../../lib/axios";
-import { Sellproducts } from "types/sell-products";
-
-export const SellProducts = async (data: Sellproducts) => {
+ 
+export const SellProducts = async (data: FormData) => {
   const res = await api.post("sell/createSeller", data);
   return res.data;
 };

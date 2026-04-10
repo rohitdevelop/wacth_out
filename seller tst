@@ -32,18 +32,14 @@ export default function SellerForm({
   });
   const [isDragging, setIsDragging] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+
   const { CreateSell } = useSell();
 
   // 📸 Image Upload
-const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-  const selectedFile = e.target.files?.[0];
-
-  if (selectedFile) {
-    setFile(selectedFile); // ✅ store file
-    setSellerImage(URL.createObjectURL(selectedFile)); // preview
-  }
-};
+  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setSellerImage(URL.createObjectURL(file));
+  };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -63,45 +59,43 @@ const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
   // 🚀 SUBMIT (API INTEGRATION HERE)
 
   const handleSubmit = async () => {
+    // simple validation
+    if (!watchData) {
+      return alert("Please fill watch details first");
+    }
+
     if (!values.name || !values.phone || !values.city) {
-      return alert("Fill all fields");
+      return alert("Please fill all fields");
     }
 
-    const formData = new FormData();
-
-    // ✅ normal fields
-    formData.append("name", values.name);
-    formData.append("phone", values.phone);
-
-    // ✅ address as string
-    formData.append(
-      "address",
-      JSON.stringify([
-        {
-          street: "test",
-          city: values.city,
-          state: "test",
-          country: "India",
-          zipCode: "123456",
-        },
-      ]),
-    );
-
-    // ✅ watchDetails as string
-    formData.append("watchDetails", JSON.stringify(watchData.watchDetails));
-
-    // ✅ IMAGE (IMPORTANT)
-    if (file) {
-      formData.append("file", file); // must match multer field name
-    }
+    setSubmitting(true);
 
     try {
-      await CreateSell(formData);
-      alert("Success ✅");
+      await CreateSell({
+        name: values.name,
+        phone: Number(values.phone),
+
+        address: [
+          {
+            street: "Some Street",
+            city: values.city,
+            state: "Delhi",
+            country: "India",
+            zipCode: "110001",
+          },
+        ],
+
+        watchDetails: watchData.watchDetails, // ✅ correct
+
+        user: "USER_ID_HERE", // ⚠️ required
+      });
     } catch (err) {
       console.log(err);
+    } finally {
+      setSubmitting(false);
     }
   };
+
   const fields = [
     {
       key: "name",
