@@ -1,16 +1,18 @@
 "use client";
-import React, { useState, } from "react";
+import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "../../../../../hooks/useAuth";
 
 const Page = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formDeta, setFormDeta] = useState({
     email: "",
     password: "",
   });
-  
-const {handleSignin} = useAuth()
+
+  const { handleSignin } = useAuth();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormDeta({ ...formDeta, [e.target.name]: e.target.value });
   };
@@ -19,7 +21,7 @@ const {handleSignin} = useAuth()
 
     await handleSignin({ ...formDeta });
   };
- 
+
   return (
     <div className="relative min-h-screen w-full flex bg-black text-black overflow-hidden">
       {/* LEFT SIDE IMAGE */}
@@ -42,9 +44,7 @@ const {handleSignin} = useAuth()
         pt-24 pb-20 sm:pt-28 sm:pb-24"
       >
         {/* WHITE CARD */}
-           <div
-          className="w-full max-w-md bg-gradient-to-l from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] bg-[#111] border border-neutral-600 shadow-2xl px-6 py-6 sm:px-8 sm:py-8 md:p-10"
-        >
+        <div className="w-full max-w-md bg-gradient-to-l from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] bg-[#111] border border-neutral-600 shadow-2xl px-6 py-6 sm:px-8 sm:py-8 md:p-10">
           {/* Heading */}
           <div className="mb-4 text-center">
             <h1 className="text-2xl sm:text-3xl font-semibold text-white">
@@ -72,17 +72,23 @@ const {handleSignin} = useAuth()
             </div>
 
             {/* Password */}
-            <div>
+            <div className="relative">
               <label className="text-sm text-neutral-400">Password</label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Enter password"
                 value={formDeta.password}
                 onChange={handleChange}
-                className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
+                className="w-full mt-1 p-3 pr-10 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
                 required
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 cursor-pointer text-neutral-400"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
             </div>
 
             {/* Button */}

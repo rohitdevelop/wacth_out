@@ -12,6 +12,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useSell } from "hooks/useSell";
+import { toast } from "react-toastify";
+import { log } from "console";
 
 type Props = {
   sellerImage: string | null;
@@ -31,7 +33,6 @@ export default function SellerForm({
     city: "",
   });
   const [isDragging, setIsDragging] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const { CreateSell } = useSell();
 
@@ -62,20 +63,25 @@ export default function SellerForm({
       setValues((v) => ({ ...v, [field]: e.target.value }));
     };
 
- 
   const handleSubmit = async () => {
     if (!values.name || !values.phone || !values.city) {
-      return alert("Fill all fields");
+      toast.warning("All fields are required");
     }
+    if (!watchData || !watchData.watchDetails || watchData.watchDetails.length === 0) {
+      toast.warning("watchDetails are required"); 
+      return    
+   }
+  if (!watchData.watchDetails[0]?.brand) {
+    toast.warning("Please complete watch details properly");
+    return;
+  }
 
     const formData = new FormData();
 
-    // ✅ normal fields
-    formData.append("name", values.name);
+     formData.append("name", values.name);
     formData.append("phone", values.phone);
 
-    // ✅ address as string
-    formData.append(
+     formData.append(
       "address",
       JSON.stringify([
         {
@@ -89,17 +95,16 @@ export default function SellerForm({
     );
     formData.append("watchDetails", JSON.stringify(watchData.watchDetails));
     if (watchData?.file) {
-      formData.append("image", watchData.file); // ✅ correct
+      formData.append("image", watchData.file); 
     }
 
     try {
       await CreateSell(formData);
       setValues({
-        name:"",
-        city:"",
-        phone:""
-      })
-
+        name: "",
+        city: "",
+        phone: "",
+      });
     } catch (err) {
       console.log(err);
     }
@@ -217,6 +222,7 @@ export default function SellerForm({
                 onFocus={() => setFocused(key)}
                 onBlur={() => setFocused(null)}
                 placeholder={placeholder}
+                required
                 className={`w-full bg-[#0a0a0a] pl-11 pr-4 py-3 text-white placeholder-neutral-500 border outline-none transition
                   ${
                     focused === key
@@ -239,9 +245,9 @@ export default function SellerForm({
       <button
         disabled={!watchData}
         onClick={handleSubmit}
-        className="mt-8 w-full flex items-center justify-center gap-2 bg-white text-black py-3 font-semibold hover:opacity-90 transition disabled:opacity-50"
+        className="mt-8 w-full flex items-center justify-center gap-2 bg-white cursor-pointer text-black py-3 font-semibold hover:opacity-90 transition disabled:opacity-50"
       >
-        {submitting ? "Submitting..." : "Submit Listing"}
+        Submit your Poduct
         <ArrowRight size={16} />
       </button>
     </div>

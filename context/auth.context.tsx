@@ -32,7 +32,7 @@ export function AuthProvider({ children }: Props) {
   const [loading, setLoading] = useState(true); // 🔥 initially true
   
   const router = useRouter();
-  // 🔥 Auto login using /me
+  //  Auto login using /me
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -54,15 +54,14 @@ export function AuthProvider({ children }: Props) {
     setLoading(true);
     try {
       const res = await signupuser(data);
-      console.log(res);
-      setUser(res.user);
+       setUser(res.user);
       toast.success(res.message);
       router.push("/login");
     } catch (error: any) {
       const err = error.response?.data;
       console.log(err);
       if (err?.errors?.length > 0) {
-        toast.error(err.errors[0].message); // 👈 first error
+        toast.error(err.errors[0].message); 
       } else {
         toast.error(err?.message || "Something went wrong");
       }
@@ -79,8 +78,7 @@ export function AuthProvider({ children }: Props) {
       setUser(res.user);
       toast.success(res.message);
 
-      // ✅ direct redirect (NO useEffect here)
-      if (res.user?.role === "admin") {
+       if (res.user?.role === "admin") {
         router.push("/admin/dashboard");
       } else {
         router.push("/");

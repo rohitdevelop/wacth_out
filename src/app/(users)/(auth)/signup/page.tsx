@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import {Eye, EyeOff} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "../../../../../hooks/useAuth";
 import { UserForm } from "../../../../../types/auth";
- const Page = () => {
+const Page = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<UserForm>({
     name: "",
     email: "",
@@ -21,14 +23,14 @@ import { UserForm } from "../../../../../types/auth";
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-     await handleSignup({
+    await handleSignup({
       name: user.name,
       email: user.email,
       password: user.password,
       age: Number(user.age),
       gender: user.gender,
     });
-     // optional: clear form
+    // optional: clear form
     setUser({
       name: "",
       email: "",
@@ -36,7 +38,6 @@ import { UserForm } from "../../../../../types/auth";
       age: "",
       gender: "",
     });
-
   };
 
   return (
@@ -62,9 +63,7 @@ import { UserForm } from "../../../../../types/auth";
       "
       >
         {/* WHITE CARD */}
-        <div
-          className="w-full max-w-md bg-gradient-to-l from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] border border-neutral-600  px-6 py-6 sm:px-8 sm:py-8 md:p-10"
-        >
+        <div className="w-full max-w-md bg-gradient-to-l from-black via-zinc-950 to-green-950/80 backdrop-blur-xl border-r shadow-[0_0_30px_rgba(0,255,0,0.05)] border border-neutral-600  px-6 py-6 sm:px-8 sm:py-8 md:p-10">
           {/* Heading */}
           <div className="mb-4 text-center">
             <h1 className="text-2xl sm:text-3xl font-semibold text-white">
@@ -89,7 +88,6 @@ import { UserForm } from "../../../../../types/auth";
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
               />
             </div>
-
             {/* Email */}
             <div>
               <label className="text-sm text-neutral-400">Email</label>
@@ -102,20 +100,28 @@ import { UserForm } from "../../../../../types/auth";
                 className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
               />
             </div>
-
             {/* Password */}
-            <div>
+            <div className="relative">
               <label className="text-sm text-neutral-400">Password</label>
+
               <input
-                type="password"
+                type={showPassword ? "text" : "password"} // 👈 toggle ho raha hai
                 name="password"
                 value={user.password}
                 onChange={handlChange}
                 placeholder="Enter password"
-                className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
+                className="w-full mt-1 p-3 pr-10 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
               />
-            </div>
 
+              {/* 👁 Eye Icon */}
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 cursor-pointer text-neutral-400"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+              
+            </div>
             {/* Age & Gender */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -126,7 +132,7 @@ import { UserForm } from "../../../../../types/auth";
                   name="age"
                   value={user.age}
                   placeholder="Age"
-                  className="w-full mt-1 p-3 border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
+                  className="w-full mt-1 p-3 font-mono border text-white border-neutral-500 focus:border-[#00ff00] outline-none"
                 />
               </div>
 
@@ -145,7 +151,6 @@ import { UserForm } from "../../../../../types/auth";
                 </select>
               </div>
             </div>
-
             {/* Button */}
             <button
               type="submit"

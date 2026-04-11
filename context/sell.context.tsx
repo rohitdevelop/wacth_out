@@ -28,14 +28,14 @@ export const SellProvider = ({ children }: Props) => {
   const [allproducts, setAllProducts] = useState<Sellproducts[]>([]);
   const [loading, setLoading] = useState(false);
 const router = useRouter()
-  // ✅ CREATE PRODUCT
+  //  CREATE PRODUCT
   const CreateSell = async (data: FormData) => {
     setLoading(true);
     try {
       const res = await SellProducts(data);
 
       setSellProduct(res.seller);
-      toast.success("Product listed successfully ✅");
+      toast.success("Product listed successfully");
       router.push("/profile")
       return res.data;
     } catch (error: any) {
@@ -49,7 +49,7 @@ const router = useRouter()
     }
   };
 
-  // ✅ GET ALL PRODUCTS
+  //  GET ALL PRODUCTS
   const AllSell = async () => {
     setLoading(true);
     try {

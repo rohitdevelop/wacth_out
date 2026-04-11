@@ -6,6 +6,7 @@ import SellerForm from "@/components/sell/SellerForm";
 import Footer from "@/components/Home/Footer";
 import Image from "next/image";
 import { Watch, User, Truck, DollarSign } from "lucide-react";
+
 const steps = [
   {
     number: "01",
@@ -80,15 +81,12 @@ const carouselSlides = [
 
 export default function SellPage() {
   const [sellerImage, setSellerImage] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [watchImage, setWatchImage] = useState<string | null>(null);
   const [watchData, setWatchData] = useState<any>(null);
-  const submit = () => {
-    setSubmitted(true);
-  };
+
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setSlide((s) => (s + 1) % carouselSlides.length);
@@ -105,30 +103,6 @@ export default function SellPage() {
       setSlide((s) => (s + 1) % carouselSlides.length);
     }, 5000);
   };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#080808] text-white gap-6">
-        <div className="w-20 h-20 rounded-full border-2 border-[#00ff00] flex items-center justify-center mb-2 animate-pulse">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#c9a84c"
-            strokeWidth="2"
-            className="w-10 h-10"
-          >
-            <path d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h1 className="text-4xl font-light tracking-widest text-[#00ff00] uppercase">
-          Listing Submitted
-        </h1>
-        <p className="text-neutral-400 text-lg tracking-wide">
-          We will be in touch within 24 hours.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen   ">
@@ -362,7 +336,7 @@ export default function SellPage() {
               { value: "48hr", label: "Average Pickup Time" },
             ].map((stat, i) => (
               <div key={i} className="group">
-                <div className="text-3xl sm:text-4xl font-light text-[#00ff00] tracking-tight mb-2 group-hover:scale-105 transition-transform duration-300">
+                <div className="text-3xl font-mono sm:text-4xl font-light text-[#00ff00] tracking-tight mb-2 group-hover:scale-105 transition-transform duration-300">
                   {stat.value}
                 </div>
                 <div className="text-xs text-neutral-500 tracking-[0.2em] uppercase font-['Montserrat',sans-serif]">

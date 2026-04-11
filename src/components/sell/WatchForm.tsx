@@ -10,6 +10,7 @@ import {
   Pencil,
   ArrowRight,
 } from "lucide-react";
+import { toast } from "react-toastify";
 
 type Props = {
   watchImage: string | null;
@@ -44,10 +45,12 @@ export default function WatchForm({
   };
 
   const handleNext = () => {
+    if (!fileRef.current) {
+      toast.warning("Add image its required")
+    }
     if (!values.brand || !values.model || !values.price) {
       return alert("Please fill all watch details");
     }
-
     const finalWatchData = {
       watchDetails: [
         {
@@ -87,7 +90,7 @@ export default function WatchForm({
       placeholder: "Rolex, Omega, Patek Philippe…",
       type: "text",
       icon: <Watch size={16} />,
-    },
+     },
     {
       key: "model",
       label: "Model / Reference",
@@ -105,7 +108,11 @@ export default function WatchForm({
   ];
 
   return (
-    <div
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleNext();
+      }}
       className="relative"
       style={{ fontFamily: "'Montserrat', sans-serif" }}
     >
@@ -199,6 +206,7 @@ export default function WatchForm({
                 onFocus={() => setFocused(key)}
                 onBlur={() => setFocused(null)}
                 placeholder={placeholder}
+                required
                 className={`
                   w-full bg-[#0a0a0a] pl-11 pr-4 py-3 text-white placeholder-neutral-500
                   border outline-none transition
@@ -268,12 +276,12 @@ export default function WatchForm({
 
       {/* Button */}
       <button
-        onClick={handleNext}
-        className="w-full mt-10 flex items-center justify-center gap-2 bg-white text-black py-3 font-semibold hover:opacity-90 transition"
+        type="submit"
+        className="w-full mt-10 flex items-center justify-center gap-2 cursor-pointer bg-white text-black py-3 font-semibold hover:opacity-90 transition"
       >
         Continue to Seller Info
         <ArrowRight size={16} />
       </button>
-    </div>
+    </form>
   );
 }
