@@ -16,6 +16,7 @@ interface AuthContextType {
   loading: boolean;
   handleSignup: (data: User) => Promise<void>;
   handleSignin: (data: Login) => Promise<void>;
+  getSingleUser: () => Promise<void>;
   handleLogout: () => Promise<void>;
 }
 
@@ -76,6 +77,8 @@ export function AuthProvider({ children }: Props) {
       const res = await signinuser(data);
 
       setUser(res.user);
+      
+      
       toast.success(res.message);
 
        if (res.user?.role === "admin") {
@@ -98,6 +101,17 @@ export function AuthProvider({ children }: Props) {
     }
   };
 
+  const getSingleUser = async () =>{
+    try {
+      const res = await getMeApi()
+      console.log(res.user);
+       return res.user;
+      
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  }
+
   const handleLogout = async () => {
     setLoading(true);
     try {
@@ -112,7 +126,7 @@ export function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, handleSignup, handleSignin, handleLogout }}
+      value={{ user, loading, handleSignup, handleSignin, handleLogout, getSingleUser }}
     >
       {children}
     </AuthContext.Provider>

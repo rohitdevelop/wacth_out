@@ -3,8 +3,8 @@ import axios from "axios";
 const devUrl = process.env.NEXT_PUBLIC_DEVLOPMENT_URL;
 const prodUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 
-const baseURL = "https://wacth-app.onrender.com/api/"
-   
+const baseURL = devUrl   
+// const baseURL = produrl   
 
 const api = axios.create({
   baseURL,
@@ -12,3 +12,9 @@ const api = axios.create({
 });
 
 export default api;
+
+
+// 🔥 ROOT CAUSE (FINAL)
+
+// 👉 Cookie store ho rahi hai
+// 👉 BUT browser API request ke saath send nahi kar raha
