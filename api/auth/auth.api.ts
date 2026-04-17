@@ -34,6 +34,11 @@ export const addAddress = async (data: Address) => {
   return res.data;
 };
 
+export const editeProfile = async (data: User) => {
+  const res = await api.patch("/auth/editProfile", data);
+  return res.data;
+};
+
 // 👑 Admin______________________________________________________________
 
 export const getAllUsers = async () => {

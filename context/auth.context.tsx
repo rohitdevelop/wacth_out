@@ -6,6 +6,7 @@ import {
   signupuser,
   logoutuser,
   getMe as getMeApi,
+  editeProfile,
 } from "../api/auth/auth.api";
 import { User, Login, SafeUser } from "../types/auth";
 import { toast } from "react-toastify";
@@ -18,6 +19,7 @@ interface AuthContextType {
   handleSignin: (data: Login) => Promise<void>;
   getSingleUser: () => Promise<void>;
   handleLogout: () => Promise<void>;
+  updateProfile: (data: User) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -112,6 +114,20 @@ export function AuthProvider({ children }: Props) {
     }
   }
 
+  const updateProfile = async (data: User) =>{
+    setLoading(true);
+    try{
+      const res =  await editeProfile(data);
+      setUser(res.user);
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      console.error("Error editing profile:", error);
+        toast.error("Failed to update profile");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleLogout = async () => {
     setLoading(true);
     try {
@@ -126,7 +142,7 @@ export function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, handleSignup, handleSignin, handleLogout, getSingleUser }}
+      value={{ user, loading, handleSignup, handleSignin, handleLogout, getSingleUser, updateProfile }}
     >
       {children}
     </AuthContext.Provider>
