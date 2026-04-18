@@ -10,6 +10,14 @@ export const SellProducts = async (data: FormData) => {
 
 // products get admin for sell-----------------------------------------------  
 export const GetAllSellProducts = async () => {
+  const res = await api.get("sell/getAllWatches");
+  return res.data;
+};
+
+
+// products get user of there sell products-------------------------------------  
+export const GetSellProducts = async () => {
   const res = await api.get("sell/sellWatches");
   return res.data;
 };
+ 

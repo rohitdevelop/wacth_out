@@ -16,7 +16,7 @@ interface SellContextType {
 }
 
 export const SellContext = createContext<SellContextType | undefined>(
-  undefined
+  undefined,
 );
 
 interface Props {
@@ -27,7 +27,7 @@ export const SellProvider = ({ children }: Props) => {
   const [sellProduct, setSellProduct] = useState<Sellproducts | null>(null);
   const [allproducts, setAllProducts] = useState<Sellproducts[]>([]);
   const [loading, setLoading] = useState(false);
-const router = useRouter()
+  const router = useRouter();
   //  CREATE PRODUCT
   const CreateSell = async (data: FormData) => {
     setLoading(true);
@@ -36,11 +36,10 @@ const router = useRouter()
 
       setSellProduct(res.seller);
       toast.success("Product listed successfully");
-      router.push("/profile")
+      router.push("/profile");
       return res.data;
     } catch (error: any) {
-      const errorMsg =
-        error?.response?.data?.message || "Something went wrong";
+      const errorMsg = error?.response?.data?.message || "Something went wrong";
 
       toast.error(errorMsg);
       throw error;
@@ -49,20 +48,22 @@ const router = useRouter()
     }
   };
 
-  //  GET ALL PRODUCTS
+  //  GET ALL PRODUCTS FOR ADMIN
   const AllSell = async () => {
     setLoading(true);
     try {
       const res = await GetAllSellProducts();
 
-      setAllProducts(res.data);
+      setAllProducts(res.allWatches);
+      console.log(res);
 
       return res.allWatches;
     } catch (error: any) {
-      const errorMsg =
-        error?.response?.data?.message || "Something went wrong";
+      const errorMsg = error?.response?.data?.message || "Something went wrong";
 
       toast.error(errorMsg);
+      console.log(errorMsg);
+
       throw error;
     } finally {
       setLoading(false);
