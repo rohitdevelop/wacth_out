@@ -7,6 +7,8 @@ import {
   logoutuser,
   getMe as getMeApi,
   editeProfile,
+  getAllUsers,
+  deleteUser,
 } from "../api/auth/auth.api";
 import { User, Login, SafeUser } from "../types/auth";
 import { toast } from "react-toastify";
@@ -20,6 +22,9 @@ interface AuthContextType {
   getSingleUser: () => Promise<void>;
   handleLogout: () => Promise<void>;
   updateProfile: (data: User) => Promise<void>;
+  AllUserAdmin: () => Promise<void>;
+  deleteUserAdmin: (id: string) => Promise<void>;
+  allUsers: SafeUser[];
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -33,7 +38,8 @@ interface Props {
 export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<SafeUser | null>(null);
   const [loading, setLoading] = useState(true); // 🔥 initially true
-  
+  const [allUsers, setAllUsers] = useState<SafeUser[]>([]); // 🔥 state for all users
+
   const router = useRouter();
   //  Auto login using /me
   useEffect(() => {
@@ -47,7 +53,6 @@ export function AuthProvider({ children }: Props) {
       } finally {
         setLoading(false);
       }
-    
     };
 
     fetchUser();
@@ -57,14 +62,14 @@ export function AuthProvider({ children }: Props) {
     setLoading(true);
     try {
       const res = await signupuser(data);
-       setUser(res.user);
+      setUser(res.user);
       toast.success(res.message);
       router.push("/login");
     } catch (error: any) {
       const err = error.response?.data;
       console.log(err);
       if (err?.errors?.length > 0) {
-        toast.error(err.errors[0].message); 
+        toast.error(err.errors[0].message);
       } else {
         toast.error(err?.message || "Something went wrong");
       }
@@ -79,11 +84,10 @@ export function AuthProvider({ children }: Props) {
       const res = await signinuser(data);
 
       setUser(res.user);
-      
-      
+
       toast.success(res.message);
 
-       if (res.user?.role === "admin") {
+      if (res.user?.role === "admin") {
         router.push("/admin/dashboard");
       } else {
         router.push("/");
@@ -103,31 +107,55 @@ export function AuthProvider({ children }: Props) {
     }
   };
 
-  const getSingleUser = async () =>{
+  const getSingleUser = async () => {
     try {
-      const res = await getMeApi()
+      const res = await getMeApi();
       console.log(res.user);
-       return res.user;
-      
+      return res.user;
     } catch (error) {
       console.error("Error fetching user:", error);
     }
-  }
+  };
 
-  const updateProfile = async (data: User) =>{
+  const updateProfile = async (data: User) => {
     setLoading(true);
-    try{
-      const res =  await editeProfile(data);
+    try {
+      const res = await editeProfile(data);
       setUser(res.user);
       toast.success("Profile updated successfully");
     } catch (error) {
       console.error("Error editing profile:", error);
-        toast.error("Failed to update profile");
+      toast.error("Failed to update profile");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
+  const AllUserAdmin = async () => {
+    try {
+      setLoading(true);
+      const res = await getAllUsers();
+      setAllUsers(res.users);
+      return res.users; 
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteUserAdmin = async (id: string) => {
+    try {      
+      setLoading(true);
+      await deleteUser(id);
+      toast.success("User deleted successfully");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user");
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleLogout = async () => {
     setLoading(true);
     try {
@@ -142,7 +170,18 @@ export function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, handleSignup, handleSignin, handleLogout, getSingleUser, updateProfile }}
+      value={{
+        user,
+        loading,
+        handleSignup,
+        handleSignin,
+        handleLogout,
+        getSingleUser,
+        updateProfile,
+        AllUserAdmin,
+        deleteUserAdmin,
+        allUsers,
+      }}
     >
       {children}
     </AuthContext.Provider>

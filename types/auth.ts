@@ -26,9 +26,33 @@ export interface Login {
 }
  
 export interface SafeUser {
+  _id: string;
+
   name: string;
   email: string;
-  role: string
+  phone?: string;
+
+  role: "user" | "admin";
+
+  gender?: "male" | "female" | "other";
+  age?: number;
+
+  avatar?: string;
+
+  isEmailVerified: boolean;
+  isActive: boolean;
+
+  address: {
+    _id?: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    zipCode?: string;
+  }[];
+
+  createdAt: string;
+  updatedAt: string;
 }
 
  

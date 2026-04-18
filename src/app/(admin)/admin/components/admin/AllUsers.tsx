@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Eye, Search, Trash2 } from "lucide-react";
 import UsersEye from "../ui/UsersEye";
+import { useAuth } from "hooks/useAuth";
 
 type User = {
   _id: string;
@@ -17,58 +18,31 @@ type User = {
   createdAt: string;
 };
 
-// Dummy Data based on your schema
-const DUMMY_USERS = [
-  {
-    _id: "u1",
-    name: "Rohit Singh",
-    email: "rohit@example.com",
-    phone: "9876543210",
-    role: "user",
-    isActive: true,
-    isEmailVerified: true,
-    age: 19,
-    gender: "male",
-    createdAt: "2026-03-29",
-  },
-  {
-    _id: "u2",
-    name: "Admin User",
-    email: "admin@example.com",
-    phone: "9999999999",
-    role: "user",
-    isActive: true,
-    isEmailVerified: false,
-    age: 25,
-    gender: "male",
-    createdAt: "2026-03-20",
-  },
-  {
-    _id: "u3",
-    name: "Test User",
-    email: "test@example.com",
-    phone: "8888888888",
-    role: "user",
-    isActive: false,
-    isEmailVerified: false,
-    age: 22,
-    gender: "female",
-    createdAt: "2026-03-15",
-  },
-];
-
 const AllUsers = () => {
-  const [users, setUsers] = useState<User[]>(DUMMY_USERS);
+  const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // Stats
+
+  const { AllUserAdmin, deleteUserAdmin ,allUsers} = useAuth();
+
+useEffect(() => {
+   AllUserAdmin();
+}, []);
+
+  // 🔥 DELETE FIX
+  const deleteUser = async (id: string) => {
+    try {
+      await deleteUserAdmin(id); // ✅ wait for API
+      setUsers((prev) => prev.filter((u) => u._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 🔥 FIX missing variables
   const totalUsers = users.length;
   const activeUsers = users.filter((u) => u.isActive).length;
   const verifiedUsers = users.filter((u) => u.isEmailVerified).length;
-
-  const deleteUser = (id: string) => {
-    setUsers(users.filter((u) => u._id !== id));
-  };
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden font-sans pb-20">
@@ -90,11 +64,12 @@ const AllUsers = () => {
               className="flex-1 bg-transparent outline-none text-white placeholder-neutral-400 px-2 py-2"
             />
 
-            <button className="p-2  bg-white cursor-pointer text-black flex items-center justify-center">
+            <button className="p-2 bg-white cursor-pointer text-black flex items-center justify-center">
               <Search size={18} />
             </button>
           </div>
         </header>
+
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-10">
           <div className="bg-zinc-900 p-5 rounded-xl border border-zinc-800">
@@ -104,7 +79,9 @@ const AllUsers = () => {
 
           <div className="bg-zinc-900 p-5 rounded-xl border border-zinc-800">
             <p className="text-zinc-400 text-sm">Active Users</p>
-            <h2 className="text-2xl font-bold text-[#00ff00]">{activeUsers}</h2>
+            <h2 className="text-2xl font-bold text-[#00ff00]">
+              {activeUsers}
+            </h2>
           </div>
 
           <div className="bg-zinc-900 p-5 rounded-xl border border-zinc-800">
@@ -130,7 +107,7 @@ const AllUsers = () => {
             </thead>
 
             <tbody>
-              {users.map((user) => (
+              {allUsers.map((user) => (
                 <tr
                   key={user._id}
                   className="border-t border-zinc-800 hover:bg-white/[0.02] group"
@@ -162,9 +139,7 @@ const AllUsers = () => {
                     {new Date(user.createdAt).toLocaleDateString()}
                   </td>
 
-                  {/* Actions */}
                   <td className="flex justify-end gap-4 p-4">
-                    {/* Eye */}
                     <button
                       onClick={() => {
                         setSelectedUser(user);
@@ -175,7 +150,6 @@ const AllUsers = () => {
                       <Eye size={18} />
                     </button>
 
-                    {/* Delete */}
                     <button
                       onClick={() => deleteUser(user._id)}
                       className="text-zinc-400 hover:text-red-500"
@@ -188,9 +162,8 @@ const AllUsers = () => {
             </tbody>
           </table>
         </div>
-
-        {/* View Modal */}
       </div>
+
       {selectedUser && isOpen && (
         <UsersEye selectedUser={selectedUser} setIsOpen={setIsOpen} />
       )}
