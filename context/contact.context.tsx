@@ -11,11 +11,11 @@ interface ContactContextType {
   getAllMessages: () => Promise<void>;
   loading: boolean;
   message: ContactMessage | null;
-  allmessage: ContactMessage[]; 
+  allmessage: ContactMessage[];
 }
 
 export const ContactContext = createContext<ContactContextType | undefined>(
-  undefined
+  undefined,
 );
 
 interface Props {
@@ -29,7 +29,7 @@ export function ContactProvider({ children }: Props) {
 
   const router = useRouter();
 
-   const quirycreated = async (data: ContactMessage) => {
+  const quirycreated = async (data: ContactMessage) => {
     setLoading(true);
     try {
       const res = await UserQuiry(data);
@@ -39,8 +39,7 @@ export function ContactProvider({ children }: Props) {
 
       router.push("/"); // optional
     } catch (err: any) {
-      const errorMsg =
-        err?.response?.data?.message || "Something went wrong";
+      const errorMsg = err?.response?.data?.message || "Something went wrong";
 
       toast.error(errorMsg);
     } finally {
@@ -48,13 +47,15 @@ export function ContactProvider({ children }: Props) {
     }
   };
 
-   const getAllMessages = async () => {
+  const getAllMessages = async () => {
     setLoading(true);
     try {
       const res = await AllUserQuiry();
 
-      setAllMessage(res.data);
-     } catch (err: any) {
+      setAllMessage(res.allmessage);
+
+      return res.allmessage; // ✅ IMPORTANT
+    } catch (err: any) {
       const errorMsg =
         err?.response?.data?.message || "Failed to fetch messages";
 
@@ -71,7 +72,7 @@ export function ContactProvider({ children }: Props) {
         getAllMessages,
         loading,
         message,
-        allmessage, 
+        allmessage,
       }}
     >
       {children}

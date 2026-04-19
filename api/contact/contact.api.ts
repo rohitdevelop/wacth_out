@@ -10,6 +10,6 @@ export const UserQuiry = async (data: ContactMessage) => {
 
 // all query for backend.................................
 export const AllUserQuiry = async () => {
-  const res = await api.get("contact/createMessage");
+  const res = await api.get("contact/allMessages");
   return res.data;
 };

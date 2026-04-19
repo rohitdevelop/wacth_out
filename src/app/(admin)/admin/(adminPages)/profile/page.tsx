@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
- import AdminProfile from "../../components/admin/AdminProfile";
-
+import AdminProfile from "../../components/admin/AdminProfile";
 
 const Page = () => {
   return (
@@ -19,13 +18,13 @@ const Page = () => {
             </p>
           </div>
           <div className="flex gap-2">
-            <button className="bg-white cursor-pointer border flex justify-center items-center border-neutral-700 px-8 py-2 text-2xl text-black">
-              save
+            <button className=" cursor-pointer border flex justify-center items-center border-neutral-700 px-8 py-2 text-2xl text-white">
+              PROFILE
             </button>
           </div>
         </header>
         <div className="border border-neutral-800 w-full"></div>
-        <AdminProfile/>
+        <AdminProfile />
       </div>
     </div>
   );
