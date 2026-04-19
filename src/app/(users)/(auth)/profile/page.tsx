@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Pencil, Save, Plus, X } from "lucide-react";
+import { Pencil, Save, Plus, X, Trash } from "lucide-react";
 import { useAuth } from "hooks/useAuth";
 
 const Page = () => {
   const [edit, setEdit] = useState(false);
   const [user, setUser] = useState<any>(null);
 
-  const { getSingleUser, updateProfile } = useAuth();
+  const { getSingleUser, updateProfile, deleteAddress } = useAuth();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -54,17 +54,22 @@ const Page = () => {
     }));
   };
 
-  // 🔥 DELETE ADDRESS
-  const handleDeleteAddress = (index: number) => {
-    const updatedAddress = user.address.filter(
-      (_: any, i: number) => i !== index
-    );
+  // DELETE ADDRESS
+const handleDeleteAddress = async (addressId: string) => {
+  try {
+    await deleteAddress(addressId);
 
     setUser((prev: any) => ({
       ...prev,
-      address: updatedAddress,
+      address: prev.address.filter(
+        (addr: any) => addr._id !== addressId
+      ),
     }));
-  };
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   if (!user) {
     return (
@@ -117,7 +122,7 @@ const Page = () => {
 
             {edit && (
               <button
-                onClick={handleAddAddress}
+                onClick={() => handleAddAddress()}
                 className="flex items-center gap-1 text-sm border px-3 py-1.5 rounded-lg hover:text-[#00ff00]"
               >
                 <Plus size={14} /> Add Address
@@ -136,10 +141,10 @@ const Page = () => {
                 {/* ❌ Delete Button */}
                 {edit && (
                   <button
-                    onClick={() => handleDeleteAddress(index)}
-                    className="absolute top-2 right-2 p-1 rounded-full hover:bg-red-500/20 text-red-400"
+                    onClick={() => handleDeleteAddress(addr._id)}
+                    className="absolute top-2 right-2 p-1 cursor-pointer rounded-full hover:bg-red-500/20 text-red-400"
                   >
-                    <X size={16} />
+                    <Trash size={16} />
                   </button>
                 )}
 

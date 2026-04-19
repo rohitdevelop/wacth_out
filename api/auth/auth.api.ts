@@ -34,6 +34,11 @@ export const addAddress = async (data: Address) => {
   return res.data;
 };
 
+export const deleteAddAddress = async (addressId: string) => {
+  const res = await api.delete(`/auth/address/${addressId}`);
+  return res.data;
+};
+
 export const editeProfile = async (data: User) => {
   const res = await api.patch("/auth/editProfile", data);
   return res.data;

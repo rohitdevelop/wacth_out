@@ -9,6 +9,7 @@ import {
   editeProfile,
   getAllUsers,
   deleteUser,
+  deleteAddAddress,
 } from "../api/auth/auth.api";
 import { User, Login, SafeUser } from "../types/auth";
 import { toast } from "react-toastify";
@@ -25,6 +26,7 @@ interface AuthContextType {
   AllUserAdmin: () => Promise<void>;
   deleteUserAdmin: (id: string) => Promise<void>;
   allUsers: SafeUser[];
+  deleteAddress: (addressId: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -110,7 +112,7 @@ export function AuthProvider({ children }: Props) {
   const getSingleUser = async () => {
     try {
       const res = await getMeApi();
-      console.log(res.user);
+     
       return res.user;
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -126,6 +128,19 @@ export function AuthProvider({ children }: Props) {
     } catch (error) {
       console.error("Error editing profile:", error);
       toast.error("Failed to update profile");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteAddress = async (addressId: string) => {
+    setLoading(true);
+    try {
+      await deleteAddAddress(addressId);
+      toast.success("Address deleted successfully");
+    } catch (error) {
+      console.error("Error deleting address:", error);
+      toast.error("Failed to delete address");
     } finally {
       setLoading(false);
     }
@@ -156,6 +171,8 @@ export function AuthProvider({ children }: Props) {
       setLoading(false);
     }
   };
+
+
   const handleLogout = async () => {
     setLoading(true);
     try {
@@ -181,6 +198,7 @@ export function AuthProvider({ children }: Props) {
         AllUserAdmin,
         deleteUserAdmin,
         allUsers,
+        deleteAddress
       }}
     >
       {children}
