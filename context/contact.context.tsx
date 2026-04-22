@@ -51,7 +51,8 @@ export function ContactProvider({ children }: Props) {
     setLoading(true);
     try {
       const res = await AllUserQuiry();
-
+            console.log(res.allmessage);
+            
       setAllMessage(res.allmessage);
 
       return res.allmessage; // ✅ IMPORTANT
