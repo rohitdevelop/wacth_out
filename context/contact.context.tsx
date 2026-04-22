@@ -2,15 +2,15 @@
 
 import React, { createContext, useState, ReactNode } from "react";
 import { UserQuiry, AllUserQuiry } from "../api/contact/contact.api";
-import { ContactMessage } from "../types/contact";
+import { ContactMessage , CreateContactMessage} from "../types/contact";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 interface ContactContextType {
-  quirycreated: (data: ContactMessage) => Promise<void>;
+  quirycreated: (data: CreateContactMessage) => Promise<void>;
   getAllMessages: () => Promise<void>;
   loading: boolean;
-  message: ContactMessage | null;
+  message: CreateContactMessage | null;
   allmessage: ContactMessage[];
 }
 
@@ -23,13 +23,13 @@ interface Props {
 }
 
 export function ContactProvider({ children }: Props) {
-  const [message, setMessage] = useState<ContactMessage | null>(null);
+  const [message, setMessage] = useState<CreateContactMessage | null>(null);
   const [allmessage, setAllMessage] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
-  const quirycreated = async (data: ContactMessage) => {
+  const quirycreated = async (data: CreateContactMessage) => {
     setLoading(true);
     try {
       const res = await UserQuiry(data);
@@ -51,7 +51,7 @@ export function ContactProvider({ children }: Props) {
     setLoading(true);
     try {
       const res = await AllUserQuiry();
-            console.log(res.allmessage);
+            console.log(res.allmessages);
             
       setAllMessage(res.allmessage);
 

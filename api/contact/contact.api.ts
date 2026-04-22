@@ -1,8 +1,8 @@
 import api from "../../lib/axios";
-import { ContactMessage } from "../../types/contact";
+import { ContactMessage, CreateContactMessage } from "../../types/contact";
 
 // submit query.................................
-export const UserQuiry = async (data: ContactMessage) => {
+export const UserQuiry = async (data: CreateContactMessage) => {
   const res = await api.post("contact/createMessage", data);
   return res.data;
 };

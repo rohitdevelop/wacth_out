@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Mail, MapPinned, Phone } from "lucide-react";
 import { useContact } from "../../../../hooks/useContact";
-const Page = () => {
+ const Page = () => {
   const [quiry, setQuiry] = useState({
     name: "",
     email: "",
@@ -95,6 +95,7 @@ const Page = () => {
           <h2 className="text-2xl mb-6 font-light">Send us a message</h2>
 
           <form onSubmit={handlesubmit} className="space-y-2">
+           
             <div>
               <label className="text-sm text-neutral-400">Full Name</label>
               <input

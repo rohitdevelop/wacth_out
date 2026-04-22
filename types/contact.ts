@@ -6,4 +6,12 @@ export interface ContactMessage {
   message: string;
   createdAt: string;
   updatedAt: string;
+
+}
+
+export interface CreateContactMessage {
+  name: string;
+  email: string;
+  topic: string;
+  message: string;
 }
