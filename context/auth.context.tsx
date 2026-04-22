@@ -14,13 +14,14 @@ import {
 import { User, Login, SafeUser } from "../types/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { log } from "console";
 
 interface AuthContextType {
   user: SafeUser | null;
   loading: boolean;
   handleSignup: (data: User) => Promise<void>;
   handleSignin: (data: Login) => Promise<void>;
-  getSingleUser: () => Promise<void>;
+  getSingleUser: () => Promise<SafeUser | undefined>;
   handleLogout: () => Promise<void>;
   updateProfile: (data: User) => Promise<void>;
   AllUserAdmin: () => Promise<void>;
@@ -109,15 +110,15 @@ export function AuthProvider({ children }: Props) {
     }
   };
 
-  const getSingleUser = async () => {
-    try {
-      const res = await getMeApi();
+const getSingleUser = async (): Promise<SafeUser | undefined> => {
+  try {
+    const res = await getMeApi();
      
-      return res.user;
-    } catch (error) {
-      console.error("Error fetching user:", error);
-    }
-  };
+    return res.user;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+  }
+};
 
   const updateProfile = async (data: User) => {
     setLoading(true);
@@ -151,7 +152,7 @@ export function AuthProvider({ children }: Props) {
       setLoading(true);
       const res = await getAllUsers();
       setAllUsers(res.users);
-      return res.users; 
+      return res.users;
     } catch (error) {
       console.error("Error fetching users:", error);
     } finally {
@@ -160,7 +161,7 @@ export function AuthProvider({ children }: Props) {
   };
 
   const deleteUserAdmin = async (id: string) => {
-    try {      
+    try {
       setLoading(true);
       await deleteUser(id);
       toast.success("User deleted successfully");
@@ -171,7 +172,6 @@ export function AuthProvider({ children }: Props) {
       setLoading(false);
     }
   };
-
 
   const handleLogout = async () => {
     setLoading(true);
@@ -198,7 +198,7 @@ export function AuthProvider({ children }: Props) {
         AllUserAdmin,
         deleteUserAdmin,
         allUsers,
-        deleteAddress
+        deleteAddress,
       }}
     >
       {children}

@@ -31,14 +31,15 @@ const AdminProfile = () => {
 
   const { getSingleUser, updateProfile, deleteAddress } = useAuth();
 
-  // ✅ FETCH USER
   useEffect(() => {
     const fetchAdmin = async () => {
       const data = await getSingleUser();
-      setAdmin(data);
+      if (data) {
+        setAdmin(data);
+      }
     };
     fetchAdmin();
-  }, []);
+  }, [getSingleUser]);
 
   // ✅ HANDLE CHANGE
   const handleChange = (field: string, value: string) => {
