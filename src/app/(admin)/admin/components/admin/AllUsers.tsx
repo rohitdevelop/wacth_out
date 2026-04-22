@@ -4,23 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Eye, Search, Trash2 } from "lucide-react";
 import UsersEye from "../ui/UsersEye";
 import { useAuth } from "hooks/useAuth";
-
-type User = {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-  isActive: boolean;
-  isEmailVerified: boolean;
-  age: number;
-  gender: string;
-  createdAt: string;
-};
-
+ import { SafeUser } from "types/auth";
 const AllUsers = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [users, setUsers] = useState<SafeUser[]>([]);
+  const [selectedUser, setSelectedUser] = useState<SafeUser | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { AllUserAdmin, deleteUserAdmin ,allUsers} = useAuth();

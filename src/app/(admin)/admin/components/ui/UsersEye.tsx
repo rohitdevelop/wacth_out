@@ -2,33 +2,11 @@
 
 import React from "react";
 import { X, MapPin, User as UserIcon } from "lucide-react";
-
-// ✅ User Type
-type Address = {
-  street: string;
-  city: string;
-  state: string;
-  country: string;
-  zipCode: string;
-};
-
-type User = {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-  isActive: boolean;
-  isEmailVerified: boolean;
-  age: number;
-  gender: string;
-  createdAt: string;
-  address?: Address[]; // optional
-};
+import { SafeUser } from "types/auth";
 
 // ✅ Props
 type UsersEyeProps = {
-  selectedUser: User;
+  selectedUser: SafeUser;
   setIsOpen: (isOpen: boolean) => void;
 };
 
