@@ -4,6 +4,7 @@ import { Playfair_Display, Montserrat } from "next/font/google";
 import ToastProvider from "./providers/toastprovider";
 import { ContactProvider } from "context/contact.context";
 import { SellProvider } from "context/sell.context";
+import { ProductProvider } from "context/product.context";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -25,10 +26,12 @@ export default function RootLayout({
       <body className="font-(--font-playfair)">
         <ToastProvider />
         <SellProvider>
+        <ProductProvider>
 
         <ContactProvider>
           <AuthProvider>{children}</AuthProvider>
         </ContactProvider>
+        </ProductProvider>
         </SellProvider>
       </body>
     </html>
