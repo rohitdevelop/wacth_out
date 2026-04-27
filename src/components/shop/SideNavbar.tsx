@@ -14,7 +14,7 @@ export default function FilterSidebar() {
       className={`hidden md:block
      left-64  
      backdrop-blur-xl bg-black/60 
-    border-b border-green-500/20 
+    border-r border-gray-600 
     px-4 md:px-8 py-3 
     flex flex-col gap-3
     transition-all duration-300

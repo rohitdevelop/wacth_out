@@ -13,7 +13,7 @@ type TopNavbarProps = {
 
 const TopNavbar = ({ open, setOpen, view, setView }: TopNavbarProps) => {
   return (
-    <div className="w-full border-b border-green-500/20 bg-black/60 backdrop-blur-xl">
+    <div className="w-full border-b border-gray-600 bg-black/60 backdrop-blur-xl">
       {/* 🔝 MAIN NAV */}
       <div className="h-16 flex items-center justify-between px-6">
         {/* Left */}

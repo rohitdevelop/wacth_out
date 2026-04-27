@@ -1,6 +1,7 @@
 export type Category = "men" | "women" | "kid" | "sports";
 
 export interface Product {
+  _id?: string;
   name: string;
   description: string;
   productImage: string[];

@@ -5,6 +5,8 @@ import SideNavbar from "@/components/shop/SideNavbar";
 import TopNav from "@/components/shop/TopNav";
 import Footer from "@/components/Home/Footer";
 import Image from "next/image";
+import Product from "@/components/Home/Product";
+import ProductsShow from "@/components/shop/ProductsShow";
 
 type ViewType = "grid" | "list";
 
@@ -79,34 +81,8 @@ export default function SellPage() {
           <TopNav open={open} setOpen={togglenav} view={view} setView={setView} />
 
           {/* 📦 CONTENT */}
-          <main className="flex-1 p-4 md:p-6">
-            <h1 className="text-2xl mb-4">Products</h1>
-
-            <div
-              className={`
-                grid gap-6
-                ${
-                  view === "grid"
-                    ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                    : "grid-cols-1"
-                }
-              `}
-            >
-              <div className="bg-[#111] p-4 rounded-xl">Product 1</div>
-              <div className="bg-[#111] p-4 rounded-xl">Product 2</div>
-              <div className="bg-[#111] p-4 rounded-xl">Product 3</div>
-            </div>
-          </main>
-
-          {view === "list" && (
-            <div className="flex gap-4 bg-[#111] p-4 rounded-xl">
-              <div className="w-32 h-24 bg-gray-700"></div>
-              <div>
-                <h2>Product Name</h2>
-                <p>₹999</p>
-              </div>
-            </div>
-          )}
+          <ProductsShow view={view} />
+ 
         </div>
       </div>
 
