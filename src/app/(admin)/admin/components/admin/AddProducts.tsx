@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Pencil, Trash2, Eye, Search, X } from "lucide-react";
+import { Plus, Search, X } from "lucide-react";
 import AddProductForm from "../ui/AddProductForm";
-
+import AllProductsTable from "../ui/AllProductsTable";
 // ✅ Types
 type Product = {
   id: number;
@@ -199,109 +199,7 @@ const AddProducts = () => {
         </div>
 
         {/* Table */}
-        <div className="overflow-hidden rounded-3xl border border-neutral-700 bg-neutral-900/20 backdrop-blur-md">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[900px]">
-              <thead>
-                <tr className="bg-neutral-800/40 border-b border-neutral-700">
-                  {[
-                    "Product",
-                    "Name",
-                    "Category",
-                    "Price",
-                    "Stock",
-                    "Status",
-                    "Actions",
-                  ].map((h) => (
-                    <th
-                      key={h}
-                      className="px-6 py-5 text-[11px] font-black text-neutral-300 uppercase tracking-widest"
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-800">
-                {filteredProducts.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="group hover:bg-[#00ff00]/[0.02] transition-colors"
-                  >
-                    <td className="px-6 py-5">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden border border-neutral-700">
-                        <img
-                          src={item.image}
-                          className="w-full h-full object-cover"
-                          alt={item.name}
-                        />
-                      </div>
-                    </td>
-                    <td className="px-6 py-5">
-                      <p className="text-sm font-bold text-white group-hover:text-[#00ff00] transition-colors">
-                        {item.name}
-                      </p>
-                      <p className="text-[10px] text-neutral-500 font-mono mt-1">
-                        ID: #000{item.id}
-                      </p>
-                    </td>
-                    <td className="px-6 py-5">
-                      <span
-                        style={{
-                          backgroundColor:
-                            (categoryStyles[item.category.toUpperCase()] || {})
-                              .bg || "#404040",
-                          color:
-                            (categoryStyles[item.category.toUpperCase()] || {})
-                              .color || "#fff",
-                          border: `1px solid ${(categoryStyles[item.category.toUpperCase()] || {}).border || "#525252"}`,
-                        }}
-                        className="text-[10px] px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider"
-                      >
-                        {item.category}
-                      </span>
-                    </td>
-                    <td className="px-6 py-5 text-sm font-mono font-bold text-neutral-200">
-                      ₹{item.price}
-                    </td>
-                    <td className="px-6 py-5 text-sm font-semibold text-neutral-300">
-                      {item.stock}{" "}
-                      <span className="text-[10px] text-neutral-600 uppercase ml-1">
-                        units
-                      </span>
-                    </td>
-                    <td className="px-6 py-5">
-                      <div
-                        className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border ${item.status === "Active" ? "bg-green-500/5 text-green-400 border-green-500/20" : "bg-red-500/5 text-red-400 border-red-500/20"}`}
-                      >
-                        <div
-                          className={`w-1.5 h-1.5 rounded-full ${item.status === "Active" ? "bg-green-400" : "bg-red-400"}`}
-                        />
-                        <span className="text-[10px] font-black uppercase tracking-widest">
-                          {item.status}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 flex gap-3">
-                      <ActionButton
-                        icon={<Eye size={16} />}
-                        color="hover:text-green-400 hover:border-green-400"
-                      />
-                      <ActionButton
-                        icon={<Pencil size={16} />}
-                        color="hover:text-blue-400 hover:border-blue-400"
-                      />
-                      <ActionButton
-                        icon={<Trash2 size={16} />}
-                        color="hover:text-red-400 hover:border-red-400"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <AllProductsTable/>
       </div>
               {isOpen && <AddProductForm setIsOpen={setIsOpen} />}
 

@@ -4,8 +4,7 @@ import React, { createContext, useState, ReactNode } from "react";
 import { Product } from "types/product";
 import { addProduct, getAllProducts } from "../api/products/product.api";
 import { toast } from "react-toastify";
-import { tr } from "framer-motion/client";
-
+ 
 interface ProductContextType {
   addNewProduct: (data: Product) => Promise<any>;
   loading: boolean;
@@ -52,9 +51,9 @@ export function ProductProvider({ children }: Props) {
     setLoading(true);
     try {
       const res = await getAllProducts();
-      console.log(res.data);
+      console.log(res.ourproducts);
       
-      setAllProducts(res.data);
+      setAllProducts(res.ourproducts);
     } catch (err: any) {
       console.error("Error fetching products:", err);
         toast.error( err?.response?.data?.message || "Failed to fetch products");
