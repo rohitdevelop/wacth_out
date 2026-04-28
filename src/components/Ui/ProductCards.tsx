@@ -8,7 +8,7 @@ const ProductCards = ({ item, view }: { item: any; view: "grid" | "list" }) => {
 
   return (
     <div
-      className={`bg-neutral-900 border border-neutral-700 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${
+      className={`bg-neutral-900 border border-neutral-700  overflow-hidden transition-all duration-300 hover:scale-[1.02] ${
         view === "list" ? "flex gap-5 p-4 items-center" : ""
       }`}
     >
@@ -45,7 +45,7 @@ const ProductCards = ({ item, view }: { item: any; view: "grid" | "list" }) => {
         {/* Actions */}
         <div className="flex items-center justify-between pt-3">
           <button
-            className="flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-lg bg-[#00ff00] text-black hover:scale-105 transition-all"
+            className="flex items-center gap-2 px-3 py-2 text-xs font-bold  bg-[#00ff00] text-black hover:scale-105 transition-all"
             onClick={() => console.log("Add to cart", item)}
           >
             <ShoppingCart size={16} />
@@ -54,7 +54,7 @@ const ProductCards = ({ item, view }: { item: any; view: "grid" | "list" }) => {
 
           <button
             onClick={() => setLiked(!liked)}
-            className={`p-2 rounded-lg border transition-all ${
+            className={`p-2 border transition-all ${
               liked
                 ? "text-pink-500 border-pink-500"
                 : "border-neutral-700 hover:border-pink-500 hover:text-pink-400"
