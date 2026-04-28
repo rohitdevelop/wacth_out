@@ -3,7 +3,7 @@ import { Product } from "../../types/product";
 // Admin--------------------------------------------------------------
 
 // add products...............................................
-export const addProduct = async (data: Product) => {
+export const addProduct = async (data: FormData) => {
   const res = await api.post("/products/createproduct", data);
   return res.data;
 };

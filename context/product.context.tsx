@@ -6,7 +6,7 @@ import { addProduct, getAllProducts, deleteProduct, editProduct } from "../api/p
 import { toast } from "react-toastify";
  
 interface ProductContextType {
-  addNewProduct: (data: Product) => Promise<any>;
+  addNewProduct: (data: FormData) => Promise<any>;
   loading: boolean;
   allProducts: Product[];
   AllProducts: () => Promise<void>;
@@ -29,7 +29,7 @@ export function ProductProvider({ children }: Props) {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   // added new product
-  const addNewProduct = async (data: Product) => {
+  const addNewProduct = async (data: FormData) => {
     setLoading(true);
     try {
       const res = await addProduct(data);
