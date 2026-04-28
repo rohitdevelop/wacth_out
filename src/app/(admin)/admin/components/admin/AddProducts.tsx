@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Plus, Search, X } from "lucide-react";
 import AddProductForm from "../ui/AddProductForm";
 import AllProductsTable from "../ui/AllProductsTable";
+import ProductEditPop from "../ui/ProductEditPop";
+import ProductEyePop from "../ui/ProductEyePop";
 // ✅ Types
 type Product = {
   id: number;
@@ -20,38 +22,6 @@ type Stat = {
   value: number;
   color?: string;
 };
-
-// ✅ Style Mapper for Categories
-const categoryStyles: Record<
-  string,
-  { bg: string; color: string; border: string }
-> = {
-  MEN: { bg: "#16a34a", color: "#fff", border: "#15803d" },
-  WOMEN: { bg: "#db2777", color: "#fff", border: "#be185d" },
-  KIDS: { bg: "#eab308", color: "#000", border: "#ca8a04" },
-  SPORTS: { bg: "#2563eb", color: "#fff", border: "#1d4ed8" },
-};
-// ✅ Dummy Data
-const productsData: Product[] = [
-  {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    name: "Rolex Submariner",
-    category: "Men",
-    price: "8,50,000",
-    stock: 10,
-    status: "Active",
-  },
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    name: "Omega Speedmaster",
-    category: "Women",
-    price: "5,20,000",
-    stock: 5,
-    status: "Inactive",
-  },
-];
 
 // ✅ Sub-Components
 const StatCard = ({ label, value, color = "#00ff50" }: Stat) => (
@@ -97,29 +67,33 @@ const CategoryBar = ({
   );
 };
 
-const ActionButton = ({
-  icon,
-  color,
-}: {
-  icon: React.ReactNode;
-  color: string;
-}) => (
-  <button
-    className={`p-2 rounded-lg border border-neutral-700 bg-neutral-900/50 transition-all hover:scale-110 ${color}`}
-  >
-    {icon}
-  </button>
-);
+// const ActionButton = ({
+//   icon,
+//   color,
+// }: {
+//   icon: React.ReactNode;
+//   color: string;
+// }) => (
+//   <button
+//     className={`p-2 rounded-lg border border-neutral-700 bg-neutral-900/50 transition-all hover:scale-110 ${color}`}
+//   >
+//     {icon}
+//   </button>
+// );
 const AddProducts = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+  const [viewProduct, setViewProduct] = useState(null);
 
   // Logic: Filter products based on search
-  const filteredProducts = productsData.filter(
-    (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.category.toLowerCase().includes(search.toLowerCase()),
-  );
+  // const filteredProducts = productsData.filter(
+  //   (item) =>
+  //     item.name.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.category.toLowerCase().includes(search.toLowerCase()),
+  // );
 
   const mainStats: Stat[] = [
     { label: "Total Products", value: 10 },
@@ -137,7 +111,6 @@ const AddProducts = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden font-sans pb-20">
- 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-10">
         <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
           <div>
@@ -199,10 +172,24 @@ const AddProducts = () => {
         </div>
 
         {/* Table */}
-        <AllProductsTable/>
+        <AllProductsTable
+          onEdit={(product: any) => {
+            setSelectedProduct(product);
+            setIsEditOpen(true);
+          }}
+          onView={(product: any) => {
+            setViewProduct(product);
+            setIsViewOpen(true);
+          }}
+        />
       </div>
-              {isOpen && <AddProductForm setIsOpen={setIsOpen} />}
-
+      {isOpen && <AddProductForm setIsOpen={setIsOpen} />}
+      {isEditOpen && (
+        <ProductEditPop product={selectedProduct} setIsOpen={setIsEditOpen} />
+      )}
+      {isViewOpen && (
+        <ProductEyePop product={viewProduct} setIsOpen={setIsViewOpen} />
+      )}
     </div>
   );
 };

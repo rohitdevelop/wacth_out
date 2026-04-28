@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, ReactNode } from "react";
 import { Product } from "types/product";
-import { addProduct, getAllProducts } from "../api/products/product.api";
+import { addProduct, getAllProducts, deleteProduct, editProduct } from "../api/products/product.api";
 import { toast } from "react-toastify";
  
 interface ProductContextType {
@@ -11,6 +11,8 @@ interface ProductContextType {
   allProducts: Product[];
   AllProducts: () => Promise<void>;
   product: Product | null;
+  DeleteProducts: (id: string) => Promise<void>;
+  EditeProducts: (id: string, data: Partial<Product>) => Promise<void>;
 }
 
 export const ProductContext = createContext<ProductContextType | undefined>(
@@ -62,9 +64,22 @@ export function ProductProvider({ children }: Props) {
     }
   };
 
+  const DeleteProducts = async (id: string) =>{
+      await deleteProduct(id);
+       toast.success("Product deleted successfully ");
+       AllProducts();
+
+  }
+
+  const EditeProducts =  async (id: string, data: Partial<Product>) =>{
+    await editProduct(id, data);
+     toast.success("Product edite successfully ");
+     AllProducts();
+  }
+
   return (
     <ProductContext.Provider
-      value={{ addNewProduct, loading, allProducts, AllProducts, product }}
+      value={{ addNewProduct, loading, allProducts, AllProducts, product, DeleteProducts, EditeProducts }}
     >
       {children}
     </ProductContext.Provider>
