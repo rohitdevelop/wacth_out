@@ -41,8 +41,8 @@ const ProductEditPop = ({
     });
   };
 
-  // ✅ Submit
-  const handleSubmit = async (e) => {
+  // ✅ Submit;
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
