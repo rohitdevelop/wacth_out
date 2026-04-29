@@ -3,7 +3,7 @@
 import React from "react";
 import { X } from "lucide-react";
 
-const ProductEyePop = ({ product, setIsOpen }) => {
+const ProductEyePop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOpen: boolean) => void }) => {
   if (!product) return null;
 
   return (
