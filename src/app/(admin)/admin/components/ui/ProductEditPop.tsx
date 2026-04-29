@@ -4,7 +4,13 @@ import { X } from "lucide-react";
 import React, { useState } from "react";
 import { useProduct } from "../../../../../../hooks/useProduct";
 
-const ProductEditPop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOpen: boolean) => void }) => {
+const ProductEditPop = ({
+  product,
+  setIsOpen,
+}: {
+  product: any;
+  setIsOpen: (isOpen: boolean) => void;
+}) => {
   const { EditeProducts, loading } = useProduct();
 
   const [formData, setFormData] = useState({
@@ -17,12 +23,21 @@ const ProductEditPop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOp
   });
 
   // ✅ Handle change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { name, value } = e.target;
+
+    const newValue =
+      e.target instanceof HTMLInputElement && e.target.type === "checkbox"
+        ? e.target.checked
+        : value;
 
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: newValue,
     });
   };
 
@@ -39,11 +54,9 @@ const ProductEditPop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOp
   };
 
   return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm ">
-
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm ">
       {/* Modal */}
       <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-neutral-800 rounded-2xl shadow-xl">
-
         {/* Close */}
         <button
           onClick={() => setIsOpen(false)}
@@ -54,7 +67,6 @@ const ProductEditPop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOp
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4">
-
           {/* Heading */}
           <h2 className="text-2xl sm:text-3xl font-semibold text-center">
             Edit <span className="text-[#00ff00]">Product</span>
@@ -146,7 +158,6 @@ const ProductEditPop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOp
               Cancel
             </button>
           </div>
-
         </form>
       </div>
     </div>
