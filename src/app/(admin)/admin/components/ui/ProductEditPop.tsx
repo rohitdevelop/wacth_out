@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import React, { useState } from "react";
 import { useProduct } from "../../../../../../hooks/useProduct";
 
-const ProductEditPop = ({ product, setIsOpen }) => {
+const ProductEditPop = ({ product, setIsOpen }: { product: any; setIsOpen: (isOpen: boolean) => void }) => {
   const { EditeProducts, loading } = useProduct();
 
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const ProductEditPop = ({ product, setIsOpen }) => {
   });
 
   // ✅ Handle change
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type, checked } = e.target;
 
     setFormData({
